@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFINOVA STUDIO — Creative Works</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            accent: '#e8d3ae', // Primary accent color
+                            accentHover: '#d5b98a',
+                            text: '#333333',   // Dark text
+                            bg: '#ffffff',     // White background
+                            card: '#fcfcfc',
+                            border: '#eeeeee',
+                            muted: '#666666'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Accent Elements */
+        .accent-border {
+            border: 1px solid #e8d3ae;
+        }
+        
+        .accent-text {
+            color: #e8d3ae;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cccccc;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e8d3ae;
+        }
+
+        /* Image Hover */
+        .card-img-wrapper img {
+            transition: transform 0.5s ease;
+        }
+        .card-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-accent selection:text-brand-text">
+
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-white transition-opacity duration-700">
+        <div class="relative flex flex-col items-center p-6 text-center">
+            <div class="relative mb-6">
+                <img src="INFI.png" alt="INFINOVA STUDIO" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/120x120/ffffff/e8d3ae?text=INFI';" 
+                     class="relative w-32 h-32 object-contain p-2">
+            </div>
+            <div class="w-48 h-1 bg-gray-200 rounded-full overflow-hidden relative">
+                <div class="h-full bg-brand-accent rounded-full w-full animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Left Side: Hamburger & Brand -->
+            <div class="flex items-center space-x-4">
+                <button id="hamburger-btn" aria-label="Menu" 
+                        class="p-2.5 rounded-lg border border-gray-200 bg-gray-50 text-brand-text hover:bg-brand-accent hover:border-brand-accent hover:text-white transition-all focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchSection('our-work')">
+                    <img src="INFI.png" alt="INFI" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/80x80/ffffff/e8d3ae?text=INFI';" 
+                         class="w-10 h-10 object-contain rounded-lg">
+                    <div>
+                        <span class="font-display font-bold text-lg md:text-xl tracking-wider uppercase text-brand-text block leading-none">
+                            INFINOVA
+                        </span>
+                        <span class="text-[10px] tracking-widest font-semibold text-gray-500 uppercase">STUDIO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SIDE DRAWER NAVIGATION -->
+    <div id="side-drawer-backdrop" class="fixed inset-0 z-[45] bg-black/20 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    <aside id="side-drawer" class="fixed top-0 left-0 z-50 h-full w-72 max-w-[80vw] bg-white border-r border-gray-200 -translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between p-6 shadow-2xl">
+        <div>
+            <!-- Drawer Header -->
+            <div class="flex items-center justify-between pb-6 border-b border-gray-100">
+                <div class="flex items-center space-x-3">
+                    <img src="INFI.png" alt="INFI" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/80x80/ffffff/e8d3ae?text=INFI';" 
+                         class="w-8 h-8 object-contain">
+                    <span class="font-display font-bold text-lg tracking-wider text-brand-text">INFINOVA</span>
+                </div>
+                <button id="close-drawer-btn" class="p-2 rounded-lg text-gray-400 hover:text-brand-text hover:bg-gray-100 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="mt-8 space-y-2">
+                <button onclick="switchSection('our-work')" class="w-full flex items-center space-x-4 px-4 py-3 rounded-lg text-brand-text hover:bg-brand-accent/20 transition font-medium group">
+                    <i class="fa-solid fa-layer-group text-gray-400 group-hover:text-brand-text"></i>
+                    <span>Our Work</span>
+                </button>
+                
+                <button onclick="switchSection('customer-support')" class="w-full flex items-center space-x-4 px-4 py-3 rounded-lg text-brand-text hover:bg-brand-accent/20 transition font-medium group">
+                    <i class="fa-brands fa-whatsapp text-gray-400 group-hover:text-emerald-500"></i>
+                    <span>Customer Support</span>
+                </button>
+
+                <button onclick="switchSection('admin')" class="w-full flex items-center space-x-4 px-4 py-3 rounded-lg text-brand-text hover:bg-brand-accent/20 transition font-medium group">
+                    <i class="fa-solid fa-lock text-gray-400 group-hover:text-brand-text"></i>
+                    <span>Admin Panel</span>
+                </button>
+            </nav>
+        </div>
+    </aside>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ========================================== -->
+        <!-- SECTION 1: OUR WORK (PORTFOLIO GALLERY)    -->
+        <!-- ========================================== -->
+        <section id="sec-our-work" class="section-view space-y-8">
+            
+            <div class="text-center space-y-3 py-6">
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-brand-text">
+                    OUR <span class="text-brand-accentHover">WORK</span>
+                </h2>
+                <p class="text-brand-muted max-w-xl mx-auto text-sm sm:text-base">
+                    Explore our curated collection of professional graphics and items.
+                </p>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Javascript populates cards here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-portfolio-state" class="hidden flex-col items-center justify-center py-16 px-4 text-center bg-gray-50 border border-gray-200 rounded-2xl max-w-md mx-auto">
+                <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-4"></i>
+                <h3 class="text-lg font-bold text-brand-text mb-2">No Items Found</h3>
+                <p class="text-sm text-brand-muted mb-6">Admin can add new items via the Admin Panel.</p>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 2: ADMIN PANEL                     -->
+        <!-- ========================================== -->
+        <section id="sec-admin" class="section-view hidden max-w-4xl mx-auto py-6">
+            
+            <!-- ADMIN LOGIN -->
+            <div id="admin-login-card" class="bg-white p-8 rounded-2xl max-w-md mx-auto border border-gray-200 shadow-lg">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 rounded-full bg-brand-accent/20 flex items-center justify-center mx-auto mb-4 text-brand-text text-xl">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h2 class="font-display text-2xl font-bold text-brand-text uppercase">Admin Login</h2>
+                </div>
+
+                <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-5">
+                    <div>
+                        <input type="password" id="admin-password-input" required placeholder="Enter master password" 
+                               class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-brand-text focus:outline-none focus:border-brand-accent transition text-sm">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-lg bg-brand-accent text-white font-bold uppercase tracking-wider text-sm hover:bg-brand-accentHover transition shadow-md">
+                        Login
+                    </button>
+                </form>
+            </div>
+
+            <!-- ADMIN DASHBOARD -->
+            <div id="admin-dashboard" class="hidden space-y-6">
+                
+                <div class="bg-white p-6 rounded-2xl flex items-center justify-between border border-gray-200 shadow-sm">
+                    <div>
+                        <h3 class="font-display font-bold text-xl text-brand-text uppercase">Admin Dashboard</h3>
+                    </div>
+                    <button onclick="handleAdminLogout()" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 text-xs font-bold transition flex items-center space-x-2">
+                        <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap border-b border-gray-200 gap-2">
+                    <button onclick="switchAdminTab('tab-upload')" id="tab-btn-upload" class="admin-tab-btn px-4 py-3 rounded-t-lg text-sm font-semibold text-brand-text border-b-2 border-brand-accent bg-gray-50 transition">
+                        Add New Item
+                    </button>
+                    <button onclick="switchAdminTab('tab-manage')" id="tab-btn-manage" class="admin-tab-btn px-4 py-3 rounded-t-lg text-sm font-semibold text-gray-400 hover:text-brand-text transition">
+                        Manage Items
+                    </button>
+                    <button onclick="switchAdminTab('tab-support')" id="tab-btn-support" class="admin-tab-btn px-4 py-3 rounded-t-lg text-sm font-semibold text-gray-400 hover:text-brand-text transition">
+                        General Support
+                    </button>
+                </div>
+
+                <!-- TAB 1: ADD ITEM -->
+                <div id="tab-upload" class="admin-tab-content bg-white p-6 border border-t-0 border-gray-200 rounded-b-2xl rounded-tr-2xl shadow-sm">
+                    <form id="add-item-form" onsubmit="handleAddItem(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 mb-1">Photo URL *</label>
+                            <input type="url" id="item-url" required placeholder="https://example.com/image.jpg" 
+                                   class="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-accent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 mb-1">Title *</label>
+                            <input type="text" id="item-title" required placeholder="e.g. Graphic Pack" 
+                                   class="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-accent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 mb-1">Description *</label>
+                            <textarea id="item-desc" required rows="2" placeholder="Brief details about the item..." 
+                                      class="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-accent text-sm"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">Price (PKR) *</label>
+                                <input type="number" id="item-price" required placeholder="e.g. 1500" 
+                                       class="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-accent text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">Item WhatsApp Number *</label>
+                                <input type="text" id="item-wa" required placeholder="e.g. 923001234567" 
+                                       class="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-accent text-sm">
+                            </div>
+                        </div>
+                        <button type="submit" class="px-6 py-2.5 rounded-lg bg-brand-accent text-white font-bold text-sm hover:bg-brand-accentHover transition shadow-md">
+                            Save Item
+                        </button>
+                    </form>
+                </div>
+
+                <!-- TAB 2: MANAGE ITEMS -->
+                <div id="tab-manage" class="admin-tab-content hidden bg-white p-6 border border-t-0 border-gray-200 rounded-b-2xl rounded-tr-2xl shadow-sm space-y-4">
+                    <div id="admin-item-list" class="space-y-3">
+                        <!-- Javascript populates management cards -->
+                    </div>
+                </div>
+
+                <!-- TAB 3: SUPPORT -->
+                <div id="tab-support" class="admin-tab-content hidden bg-white p-6 border border-t-0 border-gray-200 rounded-b-2xl rounded-tr-2xl shadow-sm space-y-4">
+                    <form id="support-number-form" onsubmit="handleSaveGeneralWA(event)" class="space-y-4 max-w-md">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 mb-1">General Support WhatsApp</label>
+                            <input type="text" id="general-wa-input" placeholder="e.g. 923001234567" 
+                                   class="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-accent text-sm">
+                        </div>
+                        <button type="submit" class="px-6 py-2.5 rounded-lg bg-emerald-500 text-white font-bold text-sm hover:bg-emerald-600 transition shadow-md">
+                            Save Support Number
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 3: CUSTOMER SUPPORT                -->
+        <!-- ========================================== -->
+        <section id="sec-customer-support" class="section-view hidden max-w-2xl mx-auto py-12">
+            <div class="bg-white p-8 sm:p-10 rounded-2xl text-center border border-gray-200 shadow-lg">
+                <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto text-emerald-500 text-3xl mb-6">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h2 class="font-display text-2xl font-bold text-brand-text uppercase mb-2">
+                    Customer Support
+                </h2>
+                <p class="text-brand-muted text-sm mb-8">
+                    Have general inquiries or need help with a custom order? Reach out to our main support line.
+                </p>
+                <div id="general-wa-container">
+                    <a id="general-whatsapp-btn" href="#" target="_blank" 
+                       class="inline-flex items-center justify-center space-x-2 px-8 py-3 rounded-full bg-emerald-500 text-white font-bold uppercase text-sm hover:bg-emerald-600 transition shadow-md">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Chat on WhatsApp</span>
+                    </a>
+                    <p id="general-wa-error" class="hidden text-sm text-red-500 font-medium">Support number not configured.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CUSTOM CONFIRMATION MODAL -->
+    <div id="confirm-modal" class="fixed inset-0 z-[70] bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl max-w-sm w-full shadow-2xl text-center space-y-4">
+            <h3 id="confirm-modal-title" class="font-bold text-lg text-brand-text">Confirm Action</h3>
+            <p id="confirm-modal-msg" class="text-sm text-gray-500">Are you sure?</p>
+            <div class="flex items-center justify-center space-x-3 pt-2">
+                <button id="confirm-cancel-btn" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm font-semibold hover:bg-gray-200 transition">
+                    Cancel
+                </button>
+                <button id="confirm-action-btn" class="px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-bold hover:bg-red-600 transition">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[80] flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-white border-t border-gray-100 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-xs text-brand-muted font-medium">
+                &copy; 2026 INFINOVA STUDIO. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Storage Keys
+        const STORAGE_ITEMS_KEY = "infinova_items";
+        const STORAGE_SUPPORT_KEY = "infinova_general_wa";
+        const ADMIN_PASS = "infinova23";
+
+        // State
+        let itemsData = [];
+        let isAdminLoggedIn = false;
+
+        window.addEventListener("DOMContentLoaded", () => {
+            initData();
+            renderPortfolioGrid();
+            updateSupportLink();
+
+            setTimeout(() => {
+                const loader = document.getElementById("loading-screen");
+                if (loader) {
+                    loader.classList.add("opacity-0", "pointer-events-none");
+                    setTimeout(() => loader.remove(), 700);
+                }
+            }, 1000);
+
+            document.getElementById("hamburger-btn").addEventListener("click", openDrawer);
+            document.getElementById("close-drawer-btn").addEventListener("click", closeDrawer);
+            document.getElementById("side-drawer-backdrop").addEventListener("click", closeDrawer);
+        });
+
+        /* --- DATA MANAGEMENT --- */
+        function initData() {
+            const storedItems = localStorage.getItem(STORAGE_ITEMS_KEY);
+            if (storedItems) {
+                try {
+                    itemsData = JSON.parse(storedItems);
+                } catch (e) {
+                    itemsData = [];
+                }
+            } else {
+                // Initial sample data if empty
+                itemsData = [
+                    {
+                        id: "item_1",
+                        url: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80",
+                        title: "Graphic Pack Volume 1",
+                        desc: "High quality vector elements and backgrounds.",
+                        wa: "923001234567",
+                        price: "1500"
+                    }
+                ];
+                saveData();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem(STORAGE_ITEMS_KEY, JSON.stringify(itemsData));
+        }
+
+        /* --- NAVIGATION --- */
+        function openDrawer() {
+            document.getElementById("side-drawer").classList.remove("-translate-x-full");
+            const backdrop = document.getElementById("side-drawer-backdrop");
+            backdrop.classList.remove("opacity-0", "pointer-events-none");
+            backdrop.classList.add("opacity-100");
+        }
+
+        function closeDrawer() {
+            document.getElementById("side-drawer").classList.add("-translate-x-full");
+            const backdrop = document.getElementById("side-drawer-backdrop");
+            backdrop.classList.remove("opacity-100");
+            backdrop.classList.add("opacity-0", "pointer-events-none");
+        }
+
+        function switchSection(sectionId) {
+            closeDrawer();
+            document.querySelectorAll(".section-view").forEach(sec => sec.classList.add("hidden"));
+            const targetSec = document.getElementById(`sec-${sectionId}`);
+            if (targetSec) targetSec.classList.remove("hidden");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (sectionId === 'customer-support') updateSupportLink();
+        }
+
+        /* --- PORTFOLIO (OUR WORK) --- */
+        function renderPortfolioGrid() {
+            const grid = document.getElementById("portfolio-grid");
+            const emptyState = document.getElementById("empty-portfolio-state");
+            
+            if (itemsData.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                emptyState.classList.add("flex");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            emptyState.classList.remove("flex");
+
+            grid.innerHTML = itemsData.map(item => {
+                const cleanWA = item.wa.replace(/[^0-9]/g, '');
+                const waLink = `https://wa.me/${cleanWA}?text=${encodeURIComponent('Hi! I am interested in: ' + item.title)}`;
+                
+                return `
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col">
+                    <div class="card-img-wrapper h-48 bg-gray-100 overflow-hidden relative">
+                        <img src="${item.url}" alt="${item.title}" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/eeeeee/cccccc?text=No+Image';"
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="font-bold text-lg text-brand-text truncate" title="${item.title}">${item.title}</h3>
+                        <p class="text-sm text-gray-500 mt-1 line-clamp-2 flex-grow" title="${item.desc}">${item.desc}</p>
+                        
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <p class="font-bold text-brand-text text-lg mb-3">Rs. ${item.price} PKR</p>
+                            <a href="${waLink}" target="_blank" 
+                               class="w-full block text-center bg-[#25D366] text-white py-2.5 rounded-lg font-bold text-sm hover:bg-[#1ebe57] transition shadow-sm">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Chat on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `}).join("");
+        }
+
+        /* --- ADMIN PANEL --- */
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById("admin-password-input").value;
+            if (pass === ADMIN_PASS) {
+                isAdminLoggedIn = true;
+                document.getElementById("admin-login-card").classList.add("hidden");
+                document.getElementById("admin-dashboard").classList.remove("hidden");
+                document.getElementById("general-wa-input").value = localStorage.getItem(STORAGE_SUPPORT_KEY) || "";
+                renderAdminList();
+                showToast("Access granted.", "success");
+            } else {
+                showToast("Invalid password.", "error");
+            }
+        }
+
+        function handleAdminLogout() {
+            isAdminLoggedIn = false;
+            document.getElementById("admin-password-input").value = "";
+            document.getElementById("admin-dashboard").classList.add("hidden");
+            document.getElementById("admin-login-card").classList.remove("hidden");
+            showToast("Logged out.", "info");
+        }
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll(".admin-tab-content").forEach(el => el.classList.add("hidden"));
+            document.querySelectorAll(".admin-tab-btn").forEach(btn => {
+                btn.classList.remove("text-brand-text", "border-b-2", "border-brand-accent", "bg-gray-50");
+                btn.classList.add("text-gray-400", "bg-transparent");
+            });
+
+            document.getElementById(tabId).classList.remove("hidden");
+            const activeBtn = document.getElementById(`tab-btn-${tabId.replace("tab-", "")}`);
+            if (activeBtn) {
+                activeBtn.classList.remove("text-gray-400", "bg-transparent");
+                activeBtn.classList.add("text-brand-text", "border-b-2", "border-brand-accent", "bg-gray-50");
+            }
+
+            if (tabId === "tab-manage") renderAdminList();
+        }
+
+        function handleAddItem(e) {
+            e.preventDefault();
+            const newItem = {
+                id: "item_" + Date.now(),
+                url: document.getElementById("item-url").value.trim(),
+                title: document.getElementById("item-title").value.trim(),
+                desc: document.getElementById("item-desc").value.trim(),
+                price: document.getElementById("item-price").value.trim(),
+                wa: document.getElementById("item-wa").value.trim()
+            };
+
+            itemsData.unshift(newItem);
+            saveData();
+            document.getElementById("add-item-form").reset();
+            renderPortfolioGrid();
+            showToast("Item added successfully!", "success");
+        }
+
+        function renderAdminList() {
+            const container = document.getElementById("admin-item-list");
+            if (itemsData.length === 0) {
+                container.innerHTML = `<p class="text-sm text-gray-500 italic">No items found.</p>`;
+                return;
+            }
+
+            container.innerHTML = itemsData.map(item => `
+                <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg bg-gray-50">
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <img src="${item.url}" class="w-12 h-12 object-cover rounded bg-gray-200 flex-shrink-0" onerror="this.src='https://placehold.co/50x50/eee/ccc';">
+                        <div class="truncate">
+                            <p class="font-bold text-sm text-brand-text truncate">${item.title}</p>
+                            <p class="text-xs text-gray-500">Rs. ${item.price}</p>
+                        </div>
+                    </div>
+                    <button onclick="promptDelete('${item.id}')" class="ml-2 px-3 py-1.5 bg-red-100 text-red-600 rounded text-xs font-bold hover:bg-red-200 transition flex-shrink-0">
+                        Delete
+                    </button>
+                </div>
+            `).join("");
+        }
+
+        function promptDelete(id) {
+            showConfirm("Delete Item", "This will permanently remove the item from the portfolio.", () => {
+                itemsData = itemsData.filter(i => i.id !== id);
+                saveData();
+                renderAdminList();
+                renderPortfolioGrid();
+                showToast("Item deleted.", "info");
+            });
+        }
+
+        /* --- CUSTOMER SUPPORT --- */
+        function handleSaveGeneralWA(e) {
+            e.preventDefault();
+            const val = document.getElementById("general-wa-input").value.trim();
+            localStorage.setItem(STORAGE_SUPPORT_KEY, val);
+            updateSupportLink();
+            showToast("Support number updated.", "success");
+        }
+
+        function updateSupportLink() {
+            const num = localStorage.getItem(STORAGE_SUPPORT_KEY);
+            const btn = document.getElementById("general-whatsapp-btn");
+            const err = document.getElementById("general-wa-error");
+            
+            if (num) {
+                const clean = num.replace(/[^0-9]/g, '');
+                btn.href = `https://wa.me/${clean}`;
+                btn.classList.remove("hidden");
+                btn.classList.add("inline-flex");
+                err.classList.add("hidden");
+            } else {
+                btn.classList.add("hidden");
+                btn.classList.remove("inline-flex");
+                err.classList.remove("hidden");
+            }
+        }
+
+        /* --- UI HELPERS --- */
+        let confirmCb = null;
+        function showConfirm(title, msg, onConfirm) {
+            document.getElementById("confirm-modal-title").textContent = title;
+            document.getElementById("confirm-modal-msg").textContent = msg;
+            confirmCb = onConfirm;
+            const m = document.getElementById("confirm-modal");
+            m.classList.remove("opacity-0", "pointer-events-none");
+            m.classList.add("opacity-100");
+        }
+
+        document.getElementById("confirm-cancel-btn").addEventListener("click", closeConfirm);
+        document.getElementById("confirm-action-btn").addEventListener("click", () => {
+            if (confirmCb) confirmCb();
+            closeConfirm();
+        });
+
+        function closeConfirm() {
+            const m = document.getElementById("confirm-modal");
+            m.classList.remove("opacity-100");
+            m.classList.add("opacity-0", "pointer-events-none");
+            confirmCb = null;
+        }
+
+        function showToast(msg, type = "info") {
+            const c = document.getElementById("toast-container");
+            const t = document.createElement("div");
+            let style = type === "success" ? "bg-emerald-50 text-emerald-600 border-emerald-200" :
+                        type === "error" ? "bg-red-50 text-red-600 border-red-200" :
+                        "bg-white text-gray-700 border-gray-200";
+            
+            t.className = `pointer-events-auto px-4 py-3 rounded-lg border shadow-lg ${style} text-sm font-semibold transition transform translate-y-4 opacity-0`;
+            t.textContent = msg;
+            c.appendChild(t);
+
+            requestAnimationFrame(() => t.classList.remove("translate-y-4", "opacity-0"));
+            setTimeout(() => {
+                t.classList.add("opacity-0", "translate-y-2");
+                setTimeout(() => t.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
