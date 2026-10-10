@@ -95,7 +95,7 @@
 
     <header id="navbar-section" class="sticky top-0 z-50 backdrop-blur-md bg-[#0B0B08]/90 border-b border-[#39371C] transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo (Admin icon removed from top-left) -->
+            <!-- Brand Logo -->
             <div class="flex items-center gap-3">
                 <a href="#" class="flex items-center gap-3 group">
                     <img src="INFI.png" alt="Infinova Studio Logo" class="w-10 h-10 object-contain rounded-xl shadow-lg group-hover:scale-105 transition-transform" onerror="this.src='https://placehold.co/40x40/191A0B/F5D85E?text=IS'">
@@ -349,7 +349,6 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION (X removed) -->
     <section id="contact" class="py-24 bg-[#191A0B]/30 relative">
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#F5D85E]/10 rounded-full blur-[160px] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -357,7 +356,6 @@
             <h2 class="text-3xl sm:text-5xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">Ready to make your next project impossible to ignore?</h2>
             <p class="text-[#B8B8AE] text-base mt-3 max-w-xl mx-auto">Get in touch directly through our channels below to discuss your brief and start working together.</p>
 
-            <!-- Direct Contact Buttons (Email, WhatsApp, Instagram) -->
             <div id="direct-contact-buttons" class="flex flex-wrap justify-center gap-4 mt-10">
                 <a id="btn-email-link" href="mailto:contact@infinovastudio.com" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-sm border border-[#39371C] hover:border-[#F5D85E] flex items-center gap-3 transition-all shadow-lg">
                     <i class="fa-solid fa-envelope text-[#F5D85E] text-lg"></i> Email Us
@@ -470,17 +468,17 @@
                     <i class="fa-solid fa-lock"></i>
                 </div>
                 <h3 class="text-xl font-bold text-[#FFFFFF]">Admin Control Center</h3>
-                <p class="text-xs text-[#B8B8AE] mt-1">Enter password (infi0000)</p>
+                <p class="text-xs text-[#B8B8AE] mt-1">Enter password</p>
             </div>
             <form id="admin-login-form" class="space-y-4">
                 <div>
-                    <input type="password" id="admin-password-input" required placeholder="Enter password (infi0000)" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm focus:outline-none focus:border-[#F5D85E]">
+                    <input type="password" id="admin-password-input" required placeholder="Enter password" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm focus:outline-none focus:border-[#F5D85E]">
                 </div>
                 <button type="submit" class="w-full bg-[#F5D85E] hover:bg-[#D4B943] text-[#080906] py-3 rounded-custom font-bold text-sm shadow-lg">
                     Login to Control Center
                 </button>
                 <div id="admin-login-error" class="hidden text-red-400 text-xs text-center font-semibold">
-                    Incorrect password. Hint: infi0000
+                    Incorrect password.
                 </div>
             </form>
         </div>
@@ -825,7 +823,7 @@
                 showToast('Portfolio item saved successfully!');
             });
 
-            // Contact & Social Settings Form (Functional)
+            // Contact & Social Settings Form
             document.getElementById('contact-settings-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 settings.email = document.getElementById('setting-email').value;
