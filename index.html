@@ -1,909 +1,2367 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinova Studio — Premium Creative & Design Agency</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#080906',
-                        navbarBg: '#0B0B08',
-                        surface: '#191A0B',
-                        surfaceHover: '#23250F',
-                        accent: '#F5D85E',
-                        accentHover: '#D4B943',
-                        textMain: '#FFFFFF',
-                        textMuted: '#B8B8AE',
-                        customBorder: '#39371C',
-                        buttonText: '#080906'
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
-                    },
-                    borderRadius: {
-                        'custom': '1rem'
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Thumbrush — Modern Creative Agency & Poster Showcase</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #0b0f19;
+            --surface-color: #131b2e;
+            --surface-card: #1a253f;
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent-color: #06b6d4;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --danger-color: #ef4444;
+            --success-color: #22c55e;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+            --btn-radius: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+        }
+
         body {
-            background-color: #080906;
-            color: #FFFFFF;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.6;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        /* Utility classes */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
-        ::-webkit-scrollbar-track {
-            background: #080906;
+
+        /* Top Navigation & Hamburger */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #39371C;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #F5D85E;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
+
+        .header-inner {
             display: flex;
-            width: max-content;
-            animation: marquee 35s linear infinite;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
         }
-        .animate-marquee:hover {
-            animation-play-state: paused;
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
+
+        .hamburger-btn {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            width: 45px;
+            height: 45px;
+            border-radius: var(--btn-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1001;
         }
-        .floating-badge {
-            animation: float 4s ease-in-out infinite;
+
+        .hamburger-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: var(--transition);
         }
-        .glow-accent {
-            box-shadow: 0 0 30px rgba(245, 216, 94, 0.15);
+
+        .hamburger-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--surface-color);
         }
-        .glow-border {
-            border: 1px solid #39371C;
-            transition: all 0.3s ease;
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.5px;
         }
-        .glow-border:hover {
-            border-color: #F5D85E;
-            box-shadow: 0 0 20px rgba(245, 216, 94, 0.15);
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .desktop-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .desktop-nav a:hover, .desktop-nav a.active {
+            color: var(--text-color);
+        }
+
+        /* Slide-out Menu Drawer */
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100vh;
+            background: var(--surface-color);
+            border-right: 1px solid var(--border-color);
+            z-index: 1005;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .nav-drawer.open {
+            transform: translateX(320px);
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close-drawer {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-drawer:hover {
+            color: var(--text-color);
+        }
+
+        .drawer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .drawer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: var(--btn-radius);
+            transition: var(--transition);
+        }
+
+        .drawer-links a:hover, .drawer-links a.active {
+            background: var(--surface-card);
+            color: var(--text-color);
+            color: var(--primary-color);
+        }
+
+        .drawer-links a i {
+            width: 20px;
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1004;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main View Containers */
+        .view-section {
+            display: none;
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .view-section.active-view {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--btn-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--surface-card);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-color);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        /* Gallery Filter & Section */
+        .gallery-section {
+            padding: 4rem 0 6rem;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--btn-radius);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .search-container {
+            max-width: 450px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border-radius: var(--btn-radius);
+            color: var(--text-color);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* Poster Grid */
+        .poster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .poster-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poster-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .poster-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background: var(--surface-color);
+            overflow: hidden;
+        }
+
+        .poster-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .poster-card:hover .poster-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .poster-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .poster-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .poster-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .poster-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .poster-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .poster-action-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+        }
+
+        .poster-action-btn:hover {
+            color: var(--text-color);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 0 6rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        @media(max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+        }
+
+        .contact-info h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 0.9rem 1rem;
+            border-radius: var(--btn-radius);
+            color: var(--text-color);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        @media(max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .footer-col p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Admin Login Modal / View */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(16px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .login-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 440px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .login-overlay.active .login-card {
+            transform: translateY(0);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .login-header h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .login-error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 0.8rem 1rem;
+            border-radius: var(--btn-radius);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .login-error.show {
+            display: flex;
+        }
+
+        /* Admin Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+            margin-top: 80px;
+        }
+
+        .dashboard-sidebar {
+            width: 280px;
+            background: var(--surface-color);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        @media(max-width: 1024px) {
+            .dashboard-sidebar {
+                width: 240px;
+            }
+        }
+
+        @media(max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            .dashboard-sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 1rem;
+                gap: 1rem;
+            }
+        }
+
+        .dash-nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border-radius: var(--btn-radius);
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        @media(max-width: 768px) {
+            .dash-nav-btn {
+                width: auto;
+                white-space: nowrap;
+            }
+        }
+
+        .dash-nav-btn:hover, .dash-nav-btn.active {
+            background: var(--surface-card);
+            color: var(--text-color);
+            color: var(--primary-color);
+        }
+
+        .dashboard-content {
+            flex-grow: 1;
+            padding: 2.5rem;
+            background: var(--bg-color);
+            overflow-y: auto;
+        }
+
+        @media(max-width: 768px) {
+            .dashboard-content {
+                padding: 1.5rem;
+            }
+        }
+
+        .dash-tab-pane {
+            display: none;
+        }
+
+        .dash-tab-pane.active-pane {
+            display: block;
+        }
+
+        .dash-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dash-desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Overview Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stat-card h4 {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .stat-card .stat-value {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        /* Dashboard Tables & Cards */
+        .card-box {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-box h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Poster Manager Table */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .admin-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            background: var(--surface-color);
+        }
+
+        .admin-table img {
+            width: 50px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.published {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success-color);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-badge.draft {
+            background: rgba(234, 179, 8, 0.15);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            width: 35px;
+            height: 35px;
+            border-radius: var(--btn-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-icon.delete:hover {
+            border-color: var(--danger-color);
+            color: var(--danger-color);
+        }
+
+        /* Upload Preview Box */
+        .upload-dropzone {
+            border: 2px dashed var(--border-color);
+            border-radius: 14px;
+            padding: 2.5rem;
+            text-align: center;
+            background: var(--surface-color);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-dropzone:hover {
+            border-color: var(--primary-color);
+        }
+
+        .upload-dropzone i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .preview-img-container {
+            margin-top: 1rem;
+            max-width: 200px;
+            max-height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .preview-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .toast {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 380px;
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Custom Confirmation Modal */
+        .confirm-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .confirm-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .confirm-modal {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .confirm-modal i {
+            font-size: 3rem;
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+        }
+
+        .confirm-modal h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .confirm-modal p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .confirm-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Grid settings layout for Design Settings */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
-<body class="bg-[#080906] text-[#FFFFFF] antialiased selection:bg-[#F5D85E] selection:text-[#080906]">
+<body>
 
-    <header id="navbar-section" class="sticky top-0 z-50 backdrop-blur-md bg-[#0B0B08]/90 border-b border-[#39371C] transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo (Admin icon removed from top-left) -->
-            <div class="flex items-center gap-3">
-                <a href="#" class="flex items-center gap-3 group">
-                    <img src="INFI.png" alt="Infinova Studio Logo" class="w-10 h-10 object-contain rounded-xl shadow-lg group-hover:scale-105 transition-transform" onerror="this.src='https://placehold.co/40x40/191A0B/F5D85E?text=IS'">
-                    <span class="text-2xl font-extrabold tracking-tight text-[#FFFFFF]">
-                        INFINOVA<span class="text-[#F5D85E]">STUDIO</span>
-                    </span>
-                </a>
+    <!-- Header & Navigation -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="nav-left">
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a href="#" class="logo" id="brandLogoText">Thumb<span>rush</span></a>
             </div>
-
-            <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-[#B8B8AE]">
-                <a href="#home" class="text-[#FFFFFF] hover:text-[#F5D85E] transition-colors nav-link">Home</a>
-                <a href="#process" class="hover:text-[#F5D85E] transition-colors nav-link">Process</a>
-                <a href="#portfolio" class="hover:text-[#F5D85E] transition-colors nav-link">Portfolio</a>
-                <a href="#services" class="hover:text-[#F5D85E] transition-colors nav-link">Services</a>
-                <a href="#faqs" class="hover:text-[#F5D85E] transition-colors nav-link">FAQs</a>
-                <a href="#contact" class="hover:text-[#F5D85E] transition-colors nav-link">Contact</a>
+            <nav class="desktop-nav">
+                <a href="#" class="nav-link-home active" onclick="switchView('public'); return false;">Home</a>
+                <a href="#gallery" onclick="switchView('public'); scrollToSection('gallery'); return false;">Gallery</a>
+                <a href="#contact" onclick="switchView('public'); scrollToSection('contact'); return false;">Contact</a>
+                <a href="#" id="adminNavLink" onclick="openAdminModal(); return false;"><i class="fa-solid fa-lock"></i> Admin Panel</a>
             </nav>
-
-            <!-- Mobile Menu Toggle -->
-            <button id="mobile-menu-btn" class="md:hidden text-[#FFFFFF] text-2xl p-2 focus:outline-none" aria-label="Toggle Navigation">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#191A0B] border-b border-[#39371C] px-6 py-6 space-y-4">
-            <a href="#home" class="block text-lg font-medium text-[#FFFFFF] mobile-link">Home</a>
-            <a href="#process" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Process</a>
-            <a href="#portfolio" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Portfolio</a>
-            <a href="#services" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Services</a>
-            <a href="#faqs" class="block text-lg font-medium text-[#B8B8AE] mobile-link">FAQs</a>
-            <a href="#contact" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Contact</a>
         </div>
     </header>
 
-    <section id="home" class="relative pt-20 pb-28 lg:pt-32 lg:pb-40 overflow-hidden">
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#F5D85E]/10 rounded-full blur-[140px] pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#191A0B] border border-[#39371C] text-xs font-semibold uppercase tracking-wider text-[#F5D85E] glow-border">
-                        <i class="fa-solid fa-fire text-[#F5D85E] animate-bounce"></i> #1 Creative & Thumbnail Design Studio
-                    </div>
-                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-[#FFFFFF]">
-                        Make Every Scroll Stop With <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#F5D85E] to-[#D4B943]">Stunning Visuals</span>
-                    </h1>
-                    <p class="text-lg sm:text-xl text-[#B8B8AE] max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        We create scroll-stopping thumbnails, posters, social media posts, logos, and brand visuals that help creators and businesses stand out online.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#portfolio" class="w-full sm:w-auto bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-base transition-all border border-[#39371C] hover:border-[#F5D85E] text-center">
-                            View Portfolio
-                        </a>
-                    </div>
-                    <div class="pt-6 flex items-center justify-center lg:justify-start gap-8 border-t border-[#39371C]">
-                        <div>
-                            <div class="text-2xl font-bold text-[#FFFFFF]">99.8%</div>
-                            <div class="text-xs text-[#B8B8AE]">Click-Through Boost</div>
-                        </div>
-                        <div class="w-px h-8 bg-[#39371C]"></div>
-                        <div>
-                            <div class="text-2xl font-bold text-[#FFFFFF]">48h</div>
-                            <div class="text-xs text-[#B8B8AE]">Avg. Turnaround</div>
-                        </div>
-                        <div class="w-px h-8 bg-[#39371C]"></div>
-                        <div>
-                            <div class="text-2xl font-bold text-[#FFFFFF]">5.0★</div>
-                            <div class="text-xs text-[#B8B8AE]">Creator Rating</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 relative">
-                    <div class="relative w-full aspect-square max-w-md mx-auto">
-                        <div class="absolute inset-0 bg-[#191A0B] rounded-3xl p-4 border border-[#39371C] shadow-2xl glow-accent overflow-hidden transform lg:rotate-2 hover:rotate-0 transition-transform duration-500">
-                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Design showcase" class="w-full h-full object-cover rounded-2xl">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#080906]/90 via-transparent to-transparent flex flex-col justify-end p-6">
-                                <span class="bg-[#F5D85E] text-[#080906] text-xs font-bold px-3 py-1 rounded-full w-max mb-2">FEATURED HIT</span>
-                                <h3 class="text-xl font-bold text-[#FFFFFF]">High CTR Masterpiece</h3>
-                                <p class="text-xs text-[#B8B8AE]">Generated +340K views in 48 hours</p>
-                            </div>
-                        </div>
-                        <div class="absolute -top-6 -left-6 bg-[#191A0B] border border-[#39371C] px-5 py-3 rounded-2xl shadow-2xl floating-badge flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-[#F5D85E]/20 text-[#F5D85E] flex items-center justify-center font-bold">
-                                <i class="fa-solid fa-eye"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs text-[#B8B8AE]">Metric</div>
-                                <div class="text-sm font-bold text-[#FFFFFF]">12.4% CTR</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Navigation Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+    <div class="nav-drawer" id="navDrawer">
+        <div class="drawer-header">
+            <a href="#" class="logo" style="font-size: 1.3rem;">Thumb<span>rush</span></a>
+            <button class="close-drawer" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-    </section>
-
-    <section id="live-showcase-section" class="py-12 bg-[#191A0B]/50 border-y border-[#39371C] overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 mb-6 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#FFFFFF]">Work That Feels Clickable</h2>
-            <p class="text-[#B8B8AE] text-sm mt-1">A live window of thumbnails, posters, and brand visuals.</p>
-        </div>
-        <div class="relative w-full overflow-hidden">
-            <div id="live-marquee-container" class="animate-marquee flex gap-6 py-2"></div>
-        </div>
-    </section>
-
-    <section id="process" class="py-24 bg-[#191A0B]/30 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">How We Work</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">The process of creating high-converting visuals.</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] relative group hover:border-[#F5D85E] transition-all">
-                    <div class="text-5xl font-black text-[#F5D85E]/10 absolute top-6 right-6 group-hover:text-[#F5D85E]/20 transition-colors">01</div>
-                    <div class="w-14 h-14 rounded-2xl bg-[#F5D85E] text-[#080906] flex items-center justify-center text-xl font-bold mb-6 shadow-lg shadow-[#F5D85E]/20">
-                        <i class="fa-solid fa-comments"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">Contact Us</h3>
-                    <p class="text-[#B8B8AE] text-sm leading-relaxed">Get in touch via email, WhatsApp, or socials. We discuss your project topic and direction.</p>
-                </div>
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] relative group hover:border-[#F5D85E] transition-all">
-                    <div class="text-5xl font-black text-[#F5D85E]/10 absolute top-6 right-6 group-hover:text-[#F5D85E]/20 transition-colors">02</div>
-                    <div class="w-14 h-14 rounded-2xl bg-[#F5D85E] text-[#080906] flex items-center justify-center text-xl font-bold mb-6 shadow-lg shadow-[#F5D85E]/20">
-                        <i class="fa-solid fa-lightbulb"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">Generating a Concept</h3>
-                    <p class="text-[#B8B8AE] text-sm leading-relaxed">We research the topic and build a visual concept centered on high attention and clarity.</p>
-                </div>
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] relative group hover:border-[#F5D85E] transition-all">
-                    <div class="text-5xl font-black text-[#F5D85E]/10 absolute top-6 right-6 group-hover:text-[#F5D85E]/20 transition-colors">03</div>
-                    <div class="w-14 h-14 rounded-2xl bg-[#F5D85E] text-[#080906] flex items-center justify-center text-xl font-bold mb-6 shadow-lg shadow-[#F5D85E]/20">
-                        <i class="fa-solid fa-rocket"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">Final Polish</h3>
-                    <p class="text-[#B8B8AE] text-sm leading-relaxed">We polish the artwork with strong composition, typography, and export files ready for upload.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio" class="py-24 bg-[#080906]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">Our Portfolio</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">A gallery built for clicks, views, and visual trust.</h2>
-                <p class="text-[#B8B8AE] text-sm mt-2">Browse published Infinova Studio designs by category.</p>
-            </div>
-
-            <!-- Category Filters & Search -->
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
-                <div id="portfolio-filters" class="flex flex-wrap justify-center gap-2">
-                    <button data-filter="all" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-bold bg-[#F5D85E] text-[#080906] transition-all shadow-md">All</button>
-                    <button data-filter="Thumbnails" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-[#191A0B] text-[#B8B8AE] hover:text-[#FFFFFF] border border-[#39371C] transition-all">Thumbnails</button>
-                    <button data-filter="Posters" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-[#191A0B] text-[#B8B8AE] hover:text-[#FFFFFF] border border-[#39371C] transition-all">Posters</button>
-                    <button data-filter="Logos" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-[#191A0B] text-[#B8B8AE] hover:text-[#FFFFFF] border border-[#39371C] transition-all">Logos</button>
-                    <button data-filter="Branding" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-[#191A0B] text-[#B8B8AE] hover:text-[#FFFFFF] border border-[#39371C] transition-all">Branding</button>
-                </div>
-                <div class="w-full md:w-72 relative">
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#B8B8AE]">
-                        <i class="fa-solid fa-search"></i>
-                    </span>
-                    <input type="text" id="portfolio-search" placeholder="Search portfolio..." class="w-full pl-10 pr-4 py-2.5 bg-[#191A0B] border border-[#39371C] rounded-custom text-sm text-[#FFFFFF] focus:outline-none focus:border-[#F5D85E]">
-                </div>
-            </div>
-
-            <!-- Portfolio Grid -->
-            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-
-            <div id="portfolio-empty" class="hidden text-center py-16 bg-[#191A0B]/50 rounded-custom border border-[#39371C] mt-6">
-                <i class="fa-solid fa-folder-open text-4xl text-[#B8B8AE] mb-3"></i>
-                <h3 class="text-lg font-bold text-[#FFFFFF]">No portfolio items found</h3>
-                <p class="text-sm text-[#B8B8AE] mt-1">Try selecting another category or add items via the admin panel.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-24 bg-[#191A0B]/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">What We Offer</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">Creative support for creators and businesses.</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between hover:border-[#F5D85E] transition-all group">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-[#F5D85E]/10 text-[#F5D85E] flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-image"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">YouTube Thumbnails</h3>
-                        <p class="text-[#B8B8AE] text-sm leading-relaxed mb-6">Readable, dramatic thumbnails crafted for maximum click-through rates.</p>
-                    </div>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Contact Us <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                </div>
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between hover:border-[#F5D85E] transition-all group">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-[#F5D85E]/10 text-[#F5D85E] flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-panorama"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">Poster Design</h3>
-                        <p class="text-[#B8B8AE] text-sm leading-relaxed mb-6">Event, promo, and campaign posters featuring clean visual hierarchy.</p>
-                    </div>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Contact Us <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                </div>
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between hover:border-[#F5D85E] transition-all group">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-[#F5D85E]/10 text-[#F5D85E] flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-pen-nib"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">Logo Design</h3>
-                        <p class="text-[#B8B8AE] text-sm leading-relaxed mb-6">Memorable marks and identity starters that make brands instantly recognizable.</p>
-                    </div>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Contact Us <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faqs" class="py-24 bg-[#080906]">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">Got Questions?</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">Frequently asked questions.</h2>
-            </div>
-
-            <div class="space-y-4">
-                <div class="bg-[#191A0B] rounded-custom border border-[#39371C] overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-base sm:text-lg flex justify-between items-center focus:outline-none text-[#FFFFFF]">
-                        <span>How long does it take to create a project?</span>
-                        <i class="fa-solid fa-chevron-down text-[#F5D85E] transition-transform"></i>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-5 text-[#B8B8AE] text-sm leading-relaxed border-t border-[#39371C] pt-4">
-                        Most designs are delivered within 24–48 hours. Rush delivery is available for urgent requests.
-                    </div>
-                </div>
-                <div class="bg-[#191A0B] rounded-custom border border-[#39371C] overflow-hidden">
-                    <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-base sm:text-lg flex justify-between items-center focus:outline-none text-[#FFFFFF]">
-                        <span>Do you offer discounts for bulk orders?</span>
-                        <i class="fa-solid fa-chevron-down text-[#F5D85E] transition-transform"></i>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-5 text-[#B8B8AE] text-sm leading-relaxed border-t border-[#39371C] pt-4">
-                        Yes! We offer customized monthly creator packages and bulk discount rates for regular channel uploads and brand campaigns.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION (X removed) -->
-    <section id="contact" class="py-24 bg-[#191A0B]/30 relative">
-        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#F5D85E]/10 rounded-full blur-[160px] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">Let's Connect</span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">Ready to make your next project impossible to ignore?</h2>
-            <p class="text-[#B8B8AE] text-base mt-3 max-w-xl mx-auto">Get in touch directly through our channels below to discuss your brief and start working together.</p>
-
-            <!-- Direct Contact Buttons (Email, WhatsApp, Instagram) -->
-            <div id="direct-contact-buttons" class="flex flex-wrap justify-center gap-4 mt-10">
-                <a id="btn-email-link" href="mailto:contact@infinovastudio.com" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-sm border border-[#39371C] hover:border-[#F5D85E] flex items-center gap-3 transition-all shadow-lg">
-                    <i class="fa-solid fa-envelope text-[#F5D85E] text-lg"></i> Email Us
-                </a>
-                <a id="btn-whatsapp-link" href="https://wa.me/923710221411" target="_blank" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-sm border border-[#39371C] hover:border-[#F5D85E] flex items-center gap-3 transition-all shadow-lg">
-                    <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i> WhatsApp Now
-                </a>
-                <a id="btn-insta-link" href="https://instagram.com" target="_blank" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-sm border border-[#39371C] hover:border-[#F5D85E] flex items-center gap-3 transition-all shadow-lg">
-                    <i class="fa-brands fa-instagram text-pink-400 text-lg"></i> Instagram
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-[#191A0B] border-t border-[#39371C] py-16 text-[#B8B8AE] text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <img src="INFI.png" alt="Infinova Studio Logo" class="w-8 h-8 object-contain rounded-lg">
-                    <span class="text-xl font-extrabold text-[#FFFFFF]">INFINOVA<span class="text-[#F5D85E]">STUDIO</span></span>
-                </div>
-                <p class="text-xs leading-relaxed">Scroll-stopping graphics for creators, brands, and businesses that want to look premium online.</p>
-            </div>
-
-            <div>
-                <h4 class="text-[#FFFFFF] font-bold mb-4 uppercase text-xs tracking-wider">Quick Links</h4>
-                <ul class="space-y-2 text-xs">
-                    <li><a href="#home" class="hover:text-[#F5D85E] transition-colors">Home</a></li>
-                    <li><a href="#process" class="hover:text-[#F5D85E] transition-colors">Process</a></li>
-                    <li><a href="#portfolio" class="hover:text-[#F5D85E] transition-colors">Portfolio</a></li>
-                    <li><a href="#services" class="hover:text-[#F5D85E] transition-colors">Services</a></li>
-                    <li><a href="#contact" class="hover:text-[#F5D85E] transition-colors">Contact</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-[#FFFFFF] font-bold mb-4 uppercase text-xs tracking-wider">Services</h4>
-                <ul class="space-y-2 text-xs">
-                    <li><a href="#services" class="hover:text-[#F5D85E] transition-colors">YouTube Thumbnails</a></li>
-                    <li><a href="#services" class="hover:text-[#F5D85E] transition-colors">Poster Design</a></li>
-                    <li><a href="#services" class="hover:text-[#F5D85E] transition-colors">Logo Design</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-[#FFFFFF] font-bold mb-4 uppercase text-xs tracking-wider">Socials</h4>
-                <div class="flex gap-4 text-lg text-[#FFFFFF] pt-2">
-                    <a href="#" id="footer-insta-url" class="hover:text-[#F5D85E] transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" id="footer-wa-url" class="hover:text-[#F5D85E] transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-[#39371C] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-            <div>© 2026 Infinova Studio. All rights reserved.</div>
-            <div class="flex items-center gap-4">
-                <button id="terms-modal-btn" class="text-[#B8B8AE] hover:text-[#F5D85E] text-xs underline transition-colors">Terms & Conditions</button>
-                <button id="admin-access-btn" class="text-[#B8B8AE]/40 hover:text-[#F5D85E] text-[11px] underline tracking-wider transition-colors">Admin Access</button>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-        <button id="lightbox-close" class="absolute top-6 right-6 text-[#FFFFFF] text-3xl p-2 hover:text-[#F5D85E] focus:outline-none">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <div class="max-w-4xl w-full bg-[#191A0B] rounded-custom overflow-hidden border border-[#39371C] shadow-2xl">
-            <div class="max-h-[60vh] overflow-hidden bg-black flex items-center justify-center">
-                <img id="lightbox-img" src="" alt="Preview" class="max-h-[60vh] object-contain">
-            </div>
-            <div class="p-6 space-y-3">
-                <span id="lightbox-cat" class="bg-[#F5D85E] text-[#080906] text-xs font-bold px-3 py-1 rounded-full">Category</span>
-                <h3 id="lightbox-title" class="text-2xl font-bold text-[#FFFFFF]">Title</h3>
-                <p id="lightbox-desc" class="text-[#B8B8AE] text-sm">Description</p>
-            </div>
-        </div>
+        <ul class="drawer-links">
+            <li><a href="#" class="active" onclick="switchView('public'); closeDrawer(); return false;"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#gallery" onclick="switchView('public'); closeDrawer(); scrollToSection('gallery'); return false;"><i class="fa-solid fa-images"></i> Gallery</a></li>
+            <li><a href="#contact" onclick="switchView('public'); closeDrawer(); scrollToSection('contact'); return false;"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+            <li><a href="#" onclick="openAdminModal(); closeDrawer(); return false;"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a></li>
+        </ul>
     </div>
 
-    <!-- Terms & Conditions Modal -->
-    <div id="terms-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#191A0B] w-full max-w-2xl p-8 rounded-custom border border-[#39371C] shadow-2xl relative max-h-[85vh] overflow-y-auto">
-            <button id="terms-close" class="absolute top-4 right-4 text-[#B8B8AE] hover:text-[#FFFFFF] text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="text-2xl font-bold text-[#FFFFFF] mb-4">Terms & Conditions</h3>
-            <div class="space-y-4 text-sm text-[#B8B8AE] leading-relaxed">
-                <p>Welcome to Infinova Studio. By using our services, you agree to comply with and be bound by the following terms and conditions.</p>
-                <h4 class="text-white font-bold">1. Services & Deliverables</h4>
-                <p>Infinova Studio provides digital design services including YouTube thumbnails, posters, logos, and branding graphics. Deliverables will be provided in high-resolution formats as agreed upon.</p>
-                <h4 class="text-white font-bold">2. Revisions & Payments</h4>
-                <p>Project details and timelines are established upon direct contact. Revisions are handled collaboratively to ensure satisfaction before final delivery.</p>
-                <h4 class="text-white font-bold">3. Intellectual Property</h4>
-                <p>Upon full payment, clients receive full usage rights for their delivered graphics. Infinova Studio reserves the right to showcase completed works in our public portfolio.</p>
+    <!-- PUBLIC WEBSITE VIEW -->
+    <div id="publicView" class="view-section active-view">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Modern Creative Agency & Poster Showcase
+                </div>
+                <h1 class="hero-title" id="heroTitle">Crafting Digital Excellence & <span>Visual Artistry</span></h1>
+                <p class="hero-desc" id="heroDesc">Explore our curated collection of high-impact posters, brand identities, and immersive digital design experiences built for forward-thinking brands.</p>
+                <div class="hero-btns">
+                    <a href="#gallery" class="btn btn-primary" onclick="scrollToSection('gallery'); return false;">Explore Gallery <i class="fa-solid fa-arrow-down"></i></a>
+                    <a href="#contact" class="btn btn-secondary" onclick="scrollToSection('contact'); return false;">Get in Touch</a>
+                </div>
             </div>
-            <div class="mt-6 text-right">
-                <button id="terms-close-btn" class="bg-[#F5D85E] text-[#080906] px-6 py-2.5 rounded-custom text-xs font-bold hover:bg-[#D4B943]">Close</button>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section" id="gallery">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Curated Poster Showcase</h2>
+                    <p class="section-subtitle">Discover premium graphic works, 3D concepts, and brand identities</p>
+                </div>
+
+                <!-- Search Input -->
+                <div class="search-container">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="publicSearchInput" placeholder="Search posters by title or description..." oninput="filterPosters()">
+                </div>
+
+                <!-- Filter Category Buttons -->
+                <div class="filter-bar" id="publicFilterBar">
+                    <button class="filter-btn active" onclick="setCategoryFilter('All', this)">All Works</button>
+                    <button class="filter-btn" onclick="setCategoryFilter('Poster', this)">Posters</button>
+                    <button class="filter-btn" onclick="setCategoryFilter('Design', this)">Design</button>
+                    <button class="filter-btn" onclick="setCategoryFilter('3D', this)">3D Art</button>
+                    <button class="filter-btn" onclick="setCategoryFilter('Branding', this)">Branding</button>
+                </div>
+
+                <!-- Poster Grid -->
+                <div class="poster-grid" id="publicPosterGrid">
+                    <!-- Dynamically populated -->
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2>Let's Create Something Extraordinary Together</h2>
+                        <p id="contactSubText">Have a project in mind or want to collaborate? Reach out to our creative studio and let's bring your vision to life.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span id="displayEmail">contact@thumbrush.studio</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span id="displayPhone">+1 (555) 839-2041</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span id="displayAddress">San Francisco, CA & Global Remote</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" onsubmit="handleContactSubmit(event)">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" class="form-control" placeholder="Alex Morgan" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" placeholder="alex@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Project Details</label>
+                            <textarea class="form-control" placeholder="Tell us about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <a href="#" class="logo" style="margin-bottom: 1rem; display: inline-flex;">Thumb<span>rush</span></a>
+                        <p id="footerAboutText">A premier creative agency and poster showcase platform pushing the boundaries of digital aesthetics and visual storytelling.</p>
+                        <div class="social-icons" id="footerSocialIcons">
+                            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" aria-label="Dribbble"><i class="fa-brands fa-dribbble"></i></a>
+                            <a href="#" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Navigation</h3>
+                        <ul class="footer-links">
+                            <li><a href="#" onclick="switchView('public'); return false;">Home</a></li>
+                            <li><a href="#gallery" onclick="switchView('public'); scrollToSection('gallery'); return false;">Gallery</a></li>
+                            <li><a href="#contact" onclick="switchView('public'); scrollToSection('contact'); return false;">Contact</a></li>
+                            <li><a href="#" onclick="openAdminModal(); return false;">Admin Panel</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Categories</h3>
+                        <ul class="footer-links">
+                            <li><a href="#gallery" onclick="setCategoryFilter('Poster', document.querySelector('.filter-btn')); scrollToSection('gallery'); return false;">Posters</a></li>
+                            <li><a href="#gallery" onclick="setCategoryFilter('Design', document.querySelector('.filter-btn')); scrollToSection('gallery'); return false;">UI/UX Design</a></li>
+                            <li><a href="#gallery" onclick="setCategoryFilter('3D', document.querySelector('.filter-btn')); scrollToSection('gallery'); return false;">3D Artworks</a></li>
+                            <li><a href="#gallery" onclick="setCategoryFilter('Branding', document.querySelector('.filter-btn')); scrollToSection('gallery'); return false;">Branding Kits</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Legal</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p id="footerCopyText">&copy; 2026 Thumbrush Studio. All rights reserved.</p>
+                    <p>Designed with precision & innovation.</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Admin Password Modal (Password: infi0000) -->
-    <div id="admin-login-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#191A0B] w-full max-w-md p-8 rounded-custom border border-[#39371C] shadow-2xl relative">
-            <button id="admin-login-close" class="absolute top-4 right-4 text-[#B8B8AE] hover:text-[#FFFFFF] text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 rounded-xl bg-[#F5D85E] text-[#080906] flex items-center justify-center text-xl font-black mx-auto mb-3 shadow-lg">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <h3 class="text-xl font-bold text-[#FFFFFF]">Admin Control Center</h3>
-                <p class="text-xs text-[#B8B8AE] mt-1">Enter password </p>
+    <!-- ADMIN LOGIN MODAL -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>Admin Login</h2>
+                <p>Enter the admin password to access the management dashboard.</p>
             </div>
-            <form id="admin-login-form" class="space-y-4">
-                <div>
-                    <input type="password" id="admin-password-input" required placeholder="Enter password (infi0000)" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm focus:outline-none focus:border-[#F5D85E]">
+            <div class="login-error" id="loginErrorMsg">
+                <i class="fa-solid fa-circle-exclamation"></i> Incorrect password. Please try again.
+            </div>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label>Admin Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="adminPasswordInput" class="form-control" placeholder="Enter password" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility()"><i class="fa-solid fa-eye" id="eyeIcon"></i></button>
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-[#F5D85E] hover:bg-[#D4B943] text-[#080906] py-3 rounded-custom font-bold text-sm shadow-lg">
-                    Login to Control Center
-                </button>
-                <div id="admin-login-error" class="hidden text-red-400 text-xs text-center font-semibold">
-                    Incorrect password. Hint: infi0000
-                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Login to Dashboard</button>
+                <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="closeAdminModal()">Back to Website</button>
             </form>
         </div>
     </div>
 
-    <!-- Admin Dashboard -->
-    <div id="admin-dashboard" class="hidden fixed inset-0 z-50 bg-[#080906] flex flex-col overflow-hidden">
-        <header class="bg-[#191A0B] border-b border-[#39371C] px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl bg-[#F5D85E] text-[#080906] flex items-center justify-center font-black">
-                    <i class="fa-solid fa-sliders"></i>
-                </div>
-                <div>
-                    <h2 class="text-lg font-extrabold text-[#FFFFFF]">INFINOVA STUDIO ADMIN</h2>
-                    <p class="text-[11px] text-[#B8B8AE]">Manage Social Links, Contacts & Portfolio Items</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <button id="admin-preview-btn" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] border border-[#39371C] px-4 py-2 rounded-custom text-xs font-bold transition-all">
-                    <i class="fa-solid fa-eye mr-2"></i> Exit to Website
-                </button>
-            </div>
-        </header>
-
-        <div class="flex-1 flex overflow-hidden">
-            <aside class="w-64 bg-[#191A0B]/50 border-r border-[#39371C] p-4 space-y-1 overflow-y-auto hidden md:block">
-                <button data-tab="portfolio-mgr" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-bold bg-[#F5D85E] text-[#080906] transition-all flex items-center gap-3">
-                    <i class="fa-solid fa-images w-5"></i> Portfolio Manager
-                </button>
-                <button data-tab="contact-settings" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-[#B8B8AE] hover:text-[#FFFFFF] hover:bg-[#191A0B] transition-all flex items-center gap-3">
-                    <i class="fa-solid fa-address-book w-5"></i> Contact & Socials
-                </button>
+    <!-- ADMIN DASHBOARD VIEW -->
+    <div id="adminDashboardView" class="view-section">
+        <div class="dashboard-container">
+            <!-- Dashboard Sidebar -->
+            <aside class="dashboard-sidebar">
+                <button class="dash-nav-btn active" onclick="switchDashTab('overview', this)"><i class="fa-solid fa-chart-pie"></i> Overview</button>
+                <button class="dash-nav-btn" onclick="switchDashTab('posters', this)"><i class="fa-solid fa-images"></i> Poster Manager</button>
+                <button class="dash-nav-btn" onclick="switchDashTab('content', this)"><i class="fa-solid fa-file-pen"></i> Website Content</button>
+                <button class="dash-nav-btn" onclick="switchDashTab('design', this)"><i class="fa-solid fa-palette"></i> Design Settings</button>
+                <button class="dash-nav-btn" onclick="switchDashTab('security', this)"><i class="fa-solid fa-key"></i> Security / Password</button>
+                <hr style="border-color: var(--border-color); margin: 0.5rem 0;">
+                <button class="dash-nav-btn" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                <button class="dash-nav-btn" onclick="switchView('public')"><i class="fa-solid fa-globe"></i> View Website</button>
             </aside>
 
-            <main class="flex-1 p-6 md:p-8 overflow-y-auto bg-[#080906]">
-                <!-- Portfolio Manager Tab -->
-                <div id="tab-portfolio-mgr" class="admin-tab-content space-y-6">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-2xl font-extrabold text-[#FFFFFF]">Portfolio Manager (Thumbnails, Posters, Logos)</h3>
-                        <button onclick="openNewPortfolioModal()" class="bg-[#F5D85E] text-[#080906] px-4 py-2.5 rounded-custom text-xs font-bold hover:bg-[#D4B943]">
-                            <i class="fa-solid fa-plus mr-2"></i> Add Item via URL
-                        </button>
+            <!-- Dashboard Content Area -->
+            <div class="dashboard-content">
+                <!-- TAB 1: OVERVIEW -->
+                <div id="dashOverviewPane" class="dash-tab-pane active-pane">
+                    <h2 class="dash-title">Dashboard Overview</h2>
+                    <p class="dash-desc">Welcome back, Administrator. Here is a summary of your website metrics.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Total Posters</h4>
+                            <div class="stat-value" id="statTotalPosters">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Published Posters</h4>
+                            <div class="stat-value" id="statPublishedPosters">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Draft Posters</h4>
+                            <div class="stat-value" id="statDraftPosters">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Recent Updates</h4>
+                            <div class="stat-value" id="statRecentUpdates">Live</div>
+                        </div>
                     </div>
-                    <div class="bg-[#191A0B] rounded-custom border border-[#39371C] overflow-hidden">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm">
-                                <thead class="bg-[#080906] border-b border-[#39371C] text-xs text-[#B8B8AE] uppercase">
-                                    <tr>
-                                        <th class="p-4">Image</th>
-                                        <th class="p-4">Title</th>
-                                        <th class="p-4">Category</th>
-                                        <th class="p-4 text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="admin-portfolio-table-body" class="divide-y divide-[#39371C]"></tbody>
+
+                    <div class="card-box">
+                        <h3>Quick Actions</h3>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="switchDashTab('posters', document.querySelectorAll('.dash-nav-btn')[1])"><i class="fa-solid fa-plus"></i> Upload New Poster</button>
+                            <button class="btn btn-secondary" onclick="switchDashTab('content', document.querySelectorAll('.dash-nav-btn')[2])"><i class="fa-solid fa-pen"></i> Edit Website Content</button>
+                            <button class="btn btn-secondary" onclick="switchDashTab('design', document.querySelectorAll('.dash-nav-btn')[3])"><i class="fa-solid fa-palette"></i> Customize Theme</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: POSTER MANAGER -->
+                <div id="dashPostersPane" class="dash-tab-pane">
+                    <h2 class="dash-title">Poster Manager</h2>
+                    <p class="dash-desc">Upload, edit, publish, hide, and organize your gallery posters.</p>
+
+                    <!-- Upload Form Card -->
+                    <div class="card-box">
+                        <h3 id="posterFormTitle">Upload New Poster</h3>
+                        <form id="posterForm" onsubmit="handlePosterFormSubmit(event)">
+                            <input type="hidden" id="editPosterId">
+                            
+                            <div class="upload-dropzone" onclick="document.getElementById('posterFileInput').click()">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <p style="font-weight: 600; margin-bottom: 0.3rem;">Click to upload image or drag & drop</p>
+                                <p style="color: var(--text-muted); font-size: 0.85rem;">Supports JPG, PNG, JPEG, WebP</p>
+                                <input type="file" id="posterFileInput" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;" onchange="previewUploadImage(event)">
+                            </div>
+
+                            <div class="preview-img-container" id="previewImgContainer">
+                                <img id="imagePreview" src="" alt="Preview">
+                            </div>
+
+                            <div class="settings-grid" style="margin-top: 1.5rem;">
+                                <div class="form-group">
+                                    <label>Poster Title</label>
+                                    <input type="text" id="posterTitleInput" class="form-control" placeholder="e.g. Cyberpunk Nexus" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select id="posterCategoryInput" class="form-control">
+                                        <option value="Poster">Poster</option>
+                                        <option value="Design">Design</option>
+                                        <option value="3D">3D Art</option>
+                                        <option value="Branding">Branding</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 1.5rem;">
+                                <label>Description</label>
+                                <textarea id="posterDescInput" class="form-control" placeholder="Short description of the artwork..." required></textarea>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 1.5rem;">
+                                <label>Status</label>
+                                <select id="posterStatusInput" class="form-control">
+                                    <option value="published">Published</option>
+                                    <option value="draft">Draft</option>
+                                </select>
+                            </div>
+
+                            <div style="display: flex; gap: 1rem;">
+                                <button type="submit" class="btn btn-primary" id="posterSubmitBtn">Upload Poster</button>
+                                <button type="button" class="btn btn-secondary" id="posterCancelBtn" style="display: none;" onclick="resetPosterForm()">Cancel Edit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Existing Posters List Table -->
+                    <div class="card-box">
+                        <h3>Existing Posters</h3>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                               <thead>
+                                   <tr>
+                                       <th>Image</th>
+                                       <th>Title</th>
+                                       <th>Category</th>
+                                       <th>Status</th>
+                                       <th>Actions</th>
+                                   </tr>
+                               </thead>
+                               <tbody id="adminPostersTableBody">
+                                   <!-- Dynamically loaded -->
+                               </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact & Socials Settings Tab -->
-                <div id="tab-contact-settings" class="admin-tab-content hidden space-y-6">
-                    <h3 class="text-2xl font-extrabold text-[#FFFFFF]">Contact & Social Settings</h3>
-                    <form id="contact-settings-form" class="space-y-6 bg-[#191A0B] p-8 rounded-custom border border-[#39371C]">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">Gmail Address</label>
-                                <input type="email" id="setting-email" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm">
+                <!-- TAB 3: WEBSITE CONTENT MANAGER -->
+                <div id="dashContentPane" class="dash-tab-pane">
+                    <h2 class="dash-title">Website Content Manager</h2>
+                    <p class="dash-desc">Customize headings, agency details, contact information, and social links.</p>
+
+                    <form onsubmit="saveWebsiteContent(event)">
+                        <div class="card-box">
+                            <h3>Branding & Hero Content</h3>
+                            <div class="settings-grid">
+                                <div class="form-group">
+                                    <label>Website / Brand Name</label>
+                                    <input type="text" id="settingBrandName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hero Badge Text</label>
+                                    <input type="text" id="settingHeroBadge" class="form-control" required>
+                                </div>
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">WhatsApp Number (with country code)</label>
-                                <input type="text" id="setting-whatsapp" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="923710221411">
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label>Hero Main Title (HTML supported for span)</label>
+                                <input type="text" id="settingHeroTitle" class="form-control" required>
+                            </div>
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label>Hero Description</label>
+                                <textarea id="settingHeroDesc" class="form-control" required></textarea>
                             </div>
                         </div>
-                        <div>
-                            <div>
-                                <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">Instagram Profile URL</label>
-                                <input type="url" id="setting-insta" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://instagram.com/...">
+
+                        <div class="card-box">
+                            <h3>Contact Details</h3>
+                            <div class="settings-grid">
+                                <div class="form-group">
+                                    <label>Contact Email</label>
+                                    <input type="email" id="settingEmail" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact Phone</label>
+                                    <input type="text" id="settingPhone" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label>Office Address / Location</label>
+                                <input type="text" id="settingAddress" class="form-control" required>
                             </div>
                         </div>
-                        <button type="submit" class="bg-[#F5D85E] text-[#080906] px-8 py-3 rounded-custom font-bold text-sm hover:bg-[#D4B943]">Save Settings</button>
+
+                        <div class="card-box">
+                            <h3>Footer & Social Links</h3>
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label>Footer About Text</label>
+                                <textarea id="settingFooterAbout" class="form-control" required></textarea>
+                            </div>
+                            <div class="settings-grid">
+                                <div class="form-group">
+                                    <label>Twitter / X URL</label>
+                                    <input type="text" id="settingSocialTwitter" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Instagram URL</label>
+                                    <input type="text" id="settingSocialInstagram" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Dribbble URL</label>
+                                    <input type="text" id="settingSocialDribbble" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Behance URL</label>
+                                    <input type="text" id="settingSocialBehance" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save Content Changes</button>
                     </form>
                 </div>
-            </main>
+
+                <!-- TAB 4: DESIGN SETTINGS -->
+                <div id="dashDesignPane" class="dash-tab-pane">
+                    <h2 class="dash-title">Design Settings & Theme</h2>
+                    <p class="dash-desc">Personalize theme colors, backgrounds, and typography styles with live preview.</p>
+
+                    <form onsubmit="saveDesignSettings(event)">
+                        <div class="card-box">
+                            <h3>Theme Colors</h3>
+                            <div class="settings-grid">
+                                <div class="form-group">
+                                    <label>Primary Brand Color</label>
+                                    <input type="color" id="settingColorPrimary" class="form-control" style="height: 50px; cursor: pointer;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Accent Color</label>
+                                    <input type="color" id="settingColorAccent" class="form-control" style="height: 50px; cursor: pointer;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Background Color</label>
+                                    <input type="color" id="settingColorBg" class="form-control" style="height: 50px; cursor: pointer;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Surface Card Color</label>
+                                    <input type="color" id="settingColorSurface" class="form-control" style="height: 50px; cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-box">
+                            <h3>Typography & Button Styling</h3>
+                            <div class="settings-grid">
+                                <div class="form-group">
+                                    <label>Heading Font Family</label>
+                                    <select id="settingFontHeading" class="form-control">
+                                        <option value="'Outfit', sans-serif">Outfit</option>
+                                        <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
+                                        <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Button Border Radius</label>
+                                    <select id="settingButtonRadius" class="form-control">
+                                        <option value="6px">Subtle (6px)</option>
+                                        <option value="10px">Standard (10px)</option>
+                                        <option value="25px">Pill (25px)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem;">
+                            <button type="submit" class="btn btn-primary">Save Design Settings</button>
+                            <button type="button" class="btn btn-secondary" onclick="resetDesignSettings()">Reset to Default</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- TAB 5: SECURITY / PASSWORD -->
+                <div id="dashSecurityPane" class="dash-tab-pane">
+                    <h2 class="dash-title">Security Settings</h2>
+                    <p class="dash-desc">Update your admin password for accessing the dashboard.</p>
+
+                    <div class="card-box" style="max-width: 500px;">
+                        <h3>Change Admin Password</h3>
+                        <form onsubmit="handleChangePassword(event)">
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label>Current Password</label>
+                                <input type="password" id="currentPassInput" class="form-control" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label>New Password</label>
+                                <input type="password" id="newPassInput" class="form-control" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.5rem;">
+                                <label>Confirm New Password</label>
+                                <input type="password" id="confirmPassInput" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Add/Edit Portfolio Modal -->
-    <div id="admin-portfolio-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#191A0B] w-full max-w-lg p-8 rounded-custom border border-[#39371C] shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeAdminPortfolioModal()" class="absolute top-4 right-4 text-[#B8B8AE] hover:text-[#FFFFFF] text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 id="admin-modal-title" class="text-xl font-bold text-[#FFFFFF] mb-6">Add Portfolio Item</h3>
-            <form id="admin-portfolio-form" class="space-y-4">
-                <input type="hidden" id="modal-item-id">
-                <div>
-                    <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-1">Title</label>
-                    <input type="text" id="modal-item-title" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-1">Category</label>
-                    <select id="modal-item-cat" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm">
-                        <option value="Thumbnails">Thumbnails</option>
-                        <option value="Posters">Posters</option>
-                        <option value="Logos">Logos</option>
-                        <option value="Branding">Branding</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-1">Image URL</label>
-                    <input type="url" id="modal-item-img" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://images.unsplash.com/...">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-1">Description</label>
-                    <textarea id="modal-item-desc" rows="3" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm"></textarea>
-                </div>
-                <div class="flex justify-end gap-3 pt-4">
-                    <button type="button" onclick="closeAdminPortfolioModal()" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-5 py-2.5 rounded-custom text-xs font-bold border border-[#39371C]">Cancel</button>
-                    <button type="submit" class="bg-[#F5D85E] text-[#080906] px-6 py-2.5 rounded-custom font-bold text-xs hover:bg-[#D4B943]">Save Item</button>
-                </div>
-            </form>
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Custom Confirmation Modal -->
+    <div class="confirm-modal-overlay" id="confirmModalOverlay">
+        <div class="confirm-modal">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h3 id="confirmTitle">Are you sure?</h3>
+            <p id="confirmDesc">This action cannot be undone.</p>
+            <div class="confirm-btns">
+                <button class="btn btn-secondary" id="confirmCancelBtn" onclick="closeConfirmModal()">Cancel</button>
+                <button class="btn btn-primary" id="confirmOkBtn" style="background: var(--danger-color);">Confirm</button>
+            </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast-notification" class="hidden fixed bottom-6 right-6 z-50 bg-[#191A0B] border border-[#F5D85E] text-[#FFFFFF] px-6 py-3 rounded-custom shadow-2xl flex items-center gap-3">
-        <i class="fa-solid fa-circle-check text-[#F5D85E]"></i>
-        <span id="toast-message" class="text-sm font-bold">Success!</span>
-    </div>
-
+    <!-- JavaScript Application Logic -->
     <script>
-        const defaultPortfolio = [
-            { id: '1', title: 'High CTR Gaming Masterpiece', category: 'Thumbnails', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80', description: 'Crafted for a top gaming channel.' },
-            { id: '2', title: 'Tech Podcast Viral Thumbnail', category: 'Thumbnails', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', description: 'Bold expressive visuals and high contrast typography.' },
-            { id: '3', title: 'Cyberpunk Music Festival Poster', category: 'Posters', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80', description: 'Futuristic event poster with neon accents.' }
+        /* -------------------------------------------------------------
+           INDEXEDDB & STORAGE INITIALIZATION
+        ------------------------------------------------------------- */
+        const DB_NAME = 'ThumbrushDB';
+        const DB_VERSION = 1;
+        let db = null;
+
+        function initIndexedDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onerror = (e) => reject(e);
+                request.onsuccess = (e) => {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                request.onupgradeneeded = (e) => {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains('posters')) {
+                        database.createObjectStore('posters', { keyPath: 'id', autoIncrement: true });
+                    }
+                };
+            });
+        }
+
+        // Default Seed Posters if DB is empty
+        const defaultPosters = [
+            {
+                title: "Cyberpunk Nexus",
+                category: "Poster",
+                description: "Futuristic cyberpunk art print with glowing neon typography and atmospheric lighting.",
+                status: "published",
+                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                title: "Minimalist Bauhaus",
+                category: "Design",
+                description: "Clean geometric composition exploring modern Bauhaus typography and grid structures.",
+                status: "published",
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                title: "Abstract Fluidity 3D",
+                category: "3D",
+                description: "Soft iridescent gradients and organic 3D shapes rendered in high fidelity.",
+                status: "published",
+                image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                title: "Verve Brand Identity",
+                category: "Branding",
+                description: "Comprehensive modern corporate identity suite designed for forward-thinking tech ventures.",
+                status: "published",
+                image: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=800&q=80"
+            }
         ];
 
+        async function seedDatabaseIfNeeded() {
+            const posters = await getAllPosters();
+            if (posters.length === 0) {
+                for (const p of defaultPosters) {
+                    await addPosterToDB(p);
+                }
+            }
+        }
+
+        // IndexedDB CRUD wrappers
+        function addPosterToDB(poster) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['posters'], 'readwrite');
+                const store = transaction.objectStore('posters');
+                const request = store.add(poster);
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        function getAllPosters() {
+            return new Promise((resolve, reject) => {
+                if (!db) return resolve([]);
+                const transaction = db.transaction(['posters'], 'readonly');
+                const store = transaction.objectStore('posters');
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        function updatePosterInDB(poster) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['posters'], 'readwrite');
+                const store = transaction.objectStore('posters');
+                const request = store.put(poster);
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        function deletePosterFromDB(id) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(['posters'], 'readwrite');
+                const store = transaction.objectStore('posters');
+                const request = store.delete(Number(id));
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        /* -------------------------------------------------------------
+           DEFAULT WEBSITE SETTINGS & LOCALSTORAGE
+        ------------------------------------------------------------- */
         const defaultSettings = {
-            email: 'contact@infinovastudio.com',
-            whatsapp: '923710221411',
-            insta: 'https://instagram.com'
+            brandName: "Thumbrush",
+            heroBadge: "Modern Creative Agency & Poster Showcase",
+            heroTitle: "Crafting Digital Excellence & <span>Visual Artistry</span>",
+            heroDesc: "Explore our curated collection of high-impact posters, brand identities, and immersive digital design experiences built for forward-thinking brands.",
+            email: "contact@thumbrush.studio",
+            phone: "+1 (555) 839-2041",
+            address: "San Francisco, CA & Global Remote",
+            footerAboutText: "A premier creative agency and poster showcase platform pushing the boundaries of digital aesthetics and visual storytelling.",
+            socialTwitter: "#",
+            socialInstagram: "#",
+            socialDribbble: "#",
+            socialBehance: "#",
+            colorPrimary: "#6366f1",
+            colorAccent: "#06b6d4",
+            colorBg: "#0b0f19",
+            colorSurface: "#131b2e",
+            fontHeading: "'Outfit', sans-serif",
+            buttonRadius: "10px",
+            adminPassword: "INFINOVA"
         };
 
-        let portfolio = JSON.parse(localStorage.getItem('infinova_portfolio')) || defaultPortfolio;
-        let settings = JSON.parse(localStorage.getItem('infinova_settings')) || defaultSettings;
-
-        function saveState() {
-            localStorage.setItem('infinova_portfolio', JSON.stringify(portfolio));
-            localStorage.setItem('infinova_settings', JSON.stringify(settings));
+        function getSettings() {
+            const saved = localStorage.getItem('thumbrush_settings');
+            return saved ? { ...defaultSettings, ...JSON.parse(saved) } : defaultSettings;
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            applySettings();
-            renderPortfolioGrid('all');
-            renderLiveMarquee();
-            renderAdminTable();
-            initListeners();
+        function saveSettingsToStorage(newSettings) {
+            localStorage.setItem('thumbrush_settings', JSON.stringify(newSettings));
+            applySettingsToUI();
+        }
+
+        function applySettingsToUI() {
+            const s = getSettings();
+            // Branding
+            document.getElementById('brandLogoText').innerHTML = `${s.brandName.replace('brush','<span>brush</span>')}`;
+            document.querySelectorAll('.logo').forEach(el => {
+                if(el.id !== 'brandLogoText') {
+                    el.innerHTML = `${s.brandName.replace('brush','<span>brush</span>')}`;
+                }
+            });
+            document.getElementById('heroTitle').innerHTML = s.heroTitle;
+            document.getElementById('heroDesc').textContent = s.heroDesc;
+            document.getElementById('displayEmail').textContent = s.email;
+            document.getElementById('displayPhone').textContent = s.phone;
+            document.getElementById('displayAddress').textContent = s.address;
+            document.getElementById('footerAboutText').textContent = s.footerAboutText;
+            document.getElementById('footerCopyText').innerHTML = `&copy; 2026 ${s.brandName} Studio. All rights reserved.`;
+
+            // Theme colors & fonts
+            document.documentElement.style.setProperty('--primary-color', s.colorPrimary);
+            document.documentElement.style.setProperty('--accent-color', s.colorAccent);
+            document.documentElement.style.setProperty('--bg-color', s.colorBg);
+            document.documentElement.style.setProperty('--surface-color', s.colorSurface);
+            document.documentElement.style.setProperty('--font-heading', s.fontHeading);
+            document.documentElement.style.setProperty('--btn-radius', s.buttonRadius);
+        }
+
+        /* -------------------------------------------------------------
+           NAVIGATION & VIEW SWITCHING
+        ------------------------------------------------------------- */
+        let currentCategory = 'All';
+
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active-view'));
+            if (viewName === 'public') {
+                document.getElementById('publicView').classList.add('active-view');
+                window.scrollTo(0, 0);
+                renderPublicGallery();
+            } else if (viewName === 'admin') {
+                document.getElementById('adminDashboardView').classList.add('active-view');
+                window.scrollTo(0, 0);
+                renderDashboardOverview();
+                renderAdminPostersTable();
+                populateContentForm();
+                populateDesignForm();
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Hamburger Drawer Control
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navDrawer = document.getElementById('navDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navDrawer.classList.add('open');
+            drawerOverlay.classList.add('active');
         });
 
-        function applySettings() {
-            document.getElementById('btn-email-link').href = `mailto:${settings.email}`;
-            document.getElementById('btn-whatsapp-link').href = `https://wa.me/${settings.whatsapp}`;
-            document.getElementById('btn-insta-link').href = settings.insta;
-            document.getElementById('footer-insta-url').href = settings.insta;
-            document.getElementById('footer-wa-url').href = `https://wa.me/${settings.whatsapp}`;
+        function closeDrawer() {
+            navDrawer.classList.remove('open');
+            drawerOverlay.classList.remove('active');
         }
 
-        function renderPortfolioGrid(filter = 'all', searchQuery = '') {
-            const grid = document.getElementById('portfolio-grid');
-            const empty = document.getElementById('portfolio-empty');
-            grid.innerHTML = '';
+        /* -------------------------------------------------------------
+           ADMIN MODAL & LOGIN FLOW
+        ------------------------------------------------------------- */
+        function openAdminModal() {
+            const isLoggedIn = sessionStorage.getItem('thumbrush_logged_in') === 'true';
+            if (isLoggedIn) {
+                switchView('admin');
+            } else {
+                document.getElementById('loginOverlay').classList.add('active');
+                document.getElementById('adminPasswordInput').value = '';
+                document.getElementById('loginErrorMsg').classList.remove('show');
+            }
+        }
 
-            const filtered = portfolio.filter(item => {
-                const matchesCat = filter === 'all' || item.category === filter;
-                const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.description.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchesCat && matchesSearch;
+        function closeAdminModal() {
+            document.getElementById('loginOverlay').classList.remove('active');
+        }
+
+        function togglePasswordVisibility() {
+            const passInput = document.getElementById('adminPasswordInput');
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passInput.type = 'password';
+                eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const entered = document.getElementById('adminPasswordInput').value;
+            const settings = getSettings();
+            if (entered === settings.adminPassword) {
+                sessionStorage.setItem('thumbrush_logged_in', 'true');
+                closeAdminModal();
+                switchView('admin');
+                showToast('Successfully logged into Admin Dashboard!', 'success');
+            } else {
+                document.getElementById('loginErrorMsg').classList.add('show');
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('thumbrush_logged_in');
+            switchView('public');
+            showToast('Logged out from Admin Dashboard successfully.', 'success');
+        }
+
+        /* -------------------------------------------------------------
+           DASHBOARD TABS SWITCHING
+        ------------------------------------------------------------- */
+        function switchDashTab(tabName, btnElement) {
+            document.querySelectorAll('.dash-tab-pane').forEach(el => el.classList.remove('active-pane'));
+            document.querySelectorAll('.dashboard-sidebar .dash-nav-btn').forEach(el => {
+                if(!el.getAttribute('onclick')?.includes('logout') && !el.getAttribute('onclick')?.includes('switchView')) {
+                    el.classList.remove('active');
+                }
+            });
+
+            if (btnElement) btnElement.classList.add('active');
+
+            if (tabName === 'overview') {
+                document.getElementById('dashOverviewPane').classList.add('active-pane');
+                renderDashboardOverview();
+            } else if (tabName === 'posters') {
+                document.getElementById('dashPostersPane').classList.add('active-pane');
+                renderAdminPostersTable();
+            } else if (tabName === 'content') {
+                document.getElementById('dashContentPane').classList.add('active-pane');
+                populateContentForm();
+            } else if (tabName === 'design') {
+                document.getElementById('dashDesignPane').classList.add('active-pane');
+                populateDesignForm();
+            } else if (tabName === 'security') {
+                document.getElementById('dashSecurityPane').classList.add('active-pane');
+            }
+        }
+
+        /* -------------------------------------------------------------
+           PUBLIC GALLERY & RENDERING
+        ------------------------------------------------------------- */
+        async function renderPublicGallery() {
+            const posters = await getAllPosters();
+            const grid = document.getElementById('publicPosterGrid');
+            const searchVal = document.getElementById('publicSearchInput').value.toLowerCase();
+
+            // Filter by published status, category, and search query
+            const filtered = posters.filter(p => {
+                const isPublished = p.status === 'published';
+                const matchCat = currentCategory === 'All' || p.category === currentCategory;
+                const matchSearch = p.title.toLowerCase().includes(searchVal) || p.description.toLowerCase().includes(searchVal);
+                return isPublished && matchCat && matchSearch;
             });
 
             if (filtered.length === 0) {
-                empty.classList.remove('hidden');
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--text-muted);">
+                        <i class="fa-solid fa-face-grimace" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <p style="font-size: 1.1rem;">No posters found matching your criteria.</p>
+                    </div>
+                `;
                 return;
-            } else {
-                empty.classList.add('hidden');
             }
 
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'bg-[#191A0B] rounded-custom overflow-hidden border border-[#39371C] group hover:border-[#F5D85E] transition-all shadow-xl';
-                card.innerHTML = `
-                    <div class="relative aspect-video overflow-hidden cursor-pointer" onclick="openLightbox('${item.id}')">
-                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/191A0B/F5D85E?text=Infinova'">
-                        <div class="absolute top-3 left-3 bg-[#080906]/80 backdrop-blur border border-[#39371C] text-[#FFFFFF] text-xs font-bold px-3 py-1 rounded-full">
-                            ${item.category}
+            grid.innerHTML = filtered.map(p => `
+                <div class="poster-card">
+                    <div class="poster-img-wrapper">
+                        <img src="${p.image}" alt="${p.title}" loading="lazy">
+                        <span class="poster-badge">${p.category}</span>
+                    </div>
+                    <div class="poster-info">
+                        <div>
+                            <h3 class="poster-title">${p.title}</h3>
+                            <p class="poster-desc">${p.description}</p>
+                        </div>
+                        <div class="poster-footer">
+                            <button class="poster-action-btn" onclick="viewPosterDetails('${p.id}')">View Details <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </div>
-                    <div class="p-6 space-y-3">
-                        <h3 class="text-xl font-bold text-[#FFFFFF] group-hover:text-[#F5D85E] transition-colors cursor-pointer" onclick="openLightbox('${item.id}')">${item.title}</h3>
-                        <p class="text-[#B8B8AE] text-sm line-clamp-2">${item.description}</p>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
+                </div>
+            `).join('');
         }
 
-        function renderLiveMarquee() {
-            const container = document.getElementById('live-marquee-container');
-            container.innerHTML = '';
-            const itemsToDisplay = [...portfolio, ...portfolio];
-
-            itemsToDisplay.forEach(item => {
-                const el = document.createElement('div');
-                el.className = 'w-72 sm:w-80 h-44 sm:h-48 rounded-2xl overflow-hidden border border-[#39371C] flex-shrink-0 relative group shadow-lg cursor-pointer';
-                el.onclick = () => openLightbox(item.id);
-                el.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/191A0B/F5D85E?text=Infinova'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#080906]/90 via-transparent to-transparent flex flex-col justify-end p-4">
-                        <span class="text-xs font-bold text-[#F5D85E]">${item.category}</span>
-                        <h4 class="text-sm font-bold text-[#FFFFFF] truncate">${item.title}</h4>
-                    </div>
-                `;
-                container.appendChild(el);
-            });
+        function setCategoryFilter(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            renderPublicGallery();
         }
 
-        function openLightbox(id) {
-            const item = portfolio.find(p => p.id === id);
-            if (!item) return;
-            document.getElementById('lightbox-img').src = item.image;
-            document.getElementById('lightbox-cat').textContent = item.category;
-            document.getElementById('lightbox-title').textContent = item.title;
-            document.getElementById('lightbox-desc').textContent = item.description;
-            document.getElementById('lightbox-modal').classList.remove('hidden');
+        function filterPosters() {
+            renderPublicGallery();
         }
 
-        function initListeners() {
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.toggle('hidden');
-            });
-
-            document.querySelectorAll('.portfolio-filter-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    document.querySelectorAll('.portfolio-filter-btn').forEach(b => {
-                        b.classList.remove('bg-[#F5D85E]', 'text-[#080906]', 'shadow-md');
-                        b.classList.add('bg-[#191A0B]', 'text-[#B8B8AE]');
-                    });
-                    e.target.classList.add('bg-[#F5D85E]', 'text-[#080906]', 'shadow-md');
-                    e.target.classList.remove('bg-[#191A0B]', 'text-[#B8B8AE]');
-                    renderPortfolioGrid(e.target.getAttribute('data-filter'), document.getElementById('portfolio-search').value);
-                });
-            });
-
-            document.getElementById('portfolio-search').addEventListener('input', (e) => {
-                const activeFilter = document.querySelector('.portfolio-filter-btn.bg-\\[\\#F5D85E\\]').getAttribute('data-filter');
-                renderPortfolioGrid(activeFilter, e.target.value);
-            });
-
-            document.getElementById('lightbox-close').addEventListener('click', () => {
-                document.getElementById('lightbox-modal').classList.add('hidden');
-            });
-
-            // Terms & Conditions Modal Triggers
-            const termsModal = document.getElementById('terms-modal');
-            document.getElementById('terms-modal-btn').addEventListener('click', () => termsModal.classList.remove('hidden'));
-            document.getElementById('terms-close').addEventListener('click', () => termsModal.classList.add('hidden'));
-            document.getElementById('terms-close-btn').addEventListener('click', () => termsModal.classList.add('hidden'));
-
-            document.querySelectorAll('.faq-toggle').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const content = btn.nextElementSibling;
-                    const icon = btn.querySelector('i');
-                    content.classList.toggle('hidden');
-                    icon.classList.toggle('rotate-180');
-                });
-            });
-
-            // Admin sidebar tabs switching
-            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const tabName = btn.getAttribute('data-tab');
-                    document.querySelectorAll('.admin-tab-btn').forEach(b => {
-                        b.classList.remove('bg-[#F5D85E]', 'text-[#080906]', 'font-bold');
-                        b.classList.add('text-[#B8B8AE]', 'font-medium');
-                    });
-                    btn.classList.add('bg-[#F5D85E]', 'text-[#080906]', 'font-bold');
-                    btn.classList.remove('text-[#B8B8AE]', 'font-medium');
-
-                    document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
-                    document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-                });
-            });
-
-            // Admin footer link trigger
-            const openAdminModal = () => document.getElementById('admin-login-modal').classList.remove('hidden');
-            document.getElementById('admin-access-btn').addEventListener('click', openAdminModal);
-
-            document.getElementById('admin-login-close').addEventListener('click', () => {
-                document.getElementById('admin-login-modal').classList.add('hidden');
-            });
-
-            // Admin Login Form (Password: infi0000)
-            document.getElementById('admin-login-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const pass = document.getElementById('admin-password-input').value;
-                if (pass === 'infi0000') {
-                    document.getElementById('admin-login-modal').classList.add('hidden');
-                    document.getElementById('admin-dashboard').classList.remove('hidden');
-                    document.getElementById('admin-password-input').value = '';
-                    document.getElementById('admin-login-error').classList.add('hidden');
-                    renderAdminTable();
-                    populateSettingsForm();
-                } else {
-                    document.getElementById('admin-login-error').classList.remove('hidden');
-                }
-            });
-
-            document.getElementById('admin-preview-btn').addEventListener('click', () => {
-                document.getElementById('admin-dashboard').classList.add('hidden');
-            });
-
-            // Portfolio Form Submission
-            document.getElementById('admin-portfolio-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const id = document.getElementById('modal-item-id').value;
-                const title = document.getElementById('modal-item-title').value;
-                const category = document.getElementById('modal-item-cat').value;
-                const image = document.getElementById('modal-item-img').value;
-                const description = document.getElementById('modal-item-desc').value;
-
-                if (id) {
-                    const item = portfolio.find(p => p.id === id);
-                    if (item) { item.title = title; item.category = category; item.image = image; item.description = description; }
-                } else {
-                    portfolio.unshift({ id: Date.now().toString(), title, category, image, description });
-                }
-
-                saveState();
-                renderPortfolioGrid();
-                renderLiveMarquee();
-                renderAdminTable();
-                closeAdminPortfolioModal();
-                showToast('Portfolio item saved successfully!');
-            });
-
-            // Contact & Social Settings Form (Functional)
-            document.getElementById('contact-settings-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                settings.email = document.getElementById('setting-email').value;
-                settings.whatsapp = document.getElementById('setting-whatsapp').value;
-                settings.insta = document.getElementById('setting-insta').value;
-                saveState();
-                applySettings();
-                showToast('Contact & social settings updated successfully!');
-            });
-        }
-
-        function renderAdminTable() {
-            const tbody = document.getElementById('admin-portfolio-table-body');
-            tbody.innerHTML = '';
-            portfolio.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-[#39371C] hover:bg-[#191A0B]/50';
-                tr.innerHTML = `
-                    <td class="p-4"><img src="${item.image}" class="w-16 h-10 object-cover rounded" onerror="this.src='https://placehold.co/100x60/191A0B/F5D85E?text=Img'"></td>
-                    <td class="p-4 font-bold text-[#FFFFFF]">${item.title}</td>
-                    <td class="p-4"><span class="bg-[#080906] px-2.5 py-1 rounded text-xs">${item.category}</span></td>
-                    <td class="p-4 text-right space-x-2">
-                        <button onclick="editPortfolioItem('${item.id}')" class="text-[#B8B8AE] hover:text-[#FFFFFF] px-2 py-1"><i class="fa-solid fa-pen"></i></button>
-                        <button onclick="deletePortfolioItem('${item.id}')" class="text-red-400 hover:text-red-300 px-2 py-1"><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function openNewPortfolioModal() {
-            document.getElementById('admin-modal-title').textContent = 'Add Portfolio Item';
-            document.getElementById('modal-item-id').value = '';
-            document.getElementById('modal-item-title').value = '';
-            document.getElementById('modal-item-img').value = '';
-            document.getElementById('modal-item-desc').value = '';
-            document.getElementById('admin-portfolio-modal').classList.remove('hidden');
-        }
-
-        function editPortfolioItem(id) {
-            const item = portfolio.find(p => p.id === id);
-            if (!item) return;
-            document.getElementById('admin-modal-title').textContent = 'Edit Portfolio Item';
-            document.getElementById('modal-item-id').value = item.id;
-            document.getElementById('modal-item-title').value = item.title;
-            document.getElementById('modal-item-cat').value = item.category;
-            document.getElementById('modal-item-img').value = item.image;
-            document.getElementById('modal-item-desc').value = item.description;
-            document.getElementById('admin-portfolio-modal').classList.remove('hidden');
-        }
-
-        function closeAdminPortfolioModal() {
-            document.getElementById('admin-portfolio-modal').classList.add('hidden');
-        }
-
-        function deletePortfolioItem(id) {
-            if (confirm('Are you sure you want to delete this portfolio item?')) {
-                portfolio = portfolio.filter(p => p.id !== id);
-                saveState();
-                renderPortfolioGrid();
-                renderLiveMarquee();
-                renderAdminTable();
-                showToast('Portfolio item deleted.');
+        async function viewPosterDetails(id) {
+            const posters = await getAllPosters();
+            const p = posters.find(item => item.id == id);
+            if (p) {
+                showToast(`Viewing artwork: "${p.title}"`, 'success');
             }
         }
 
-        function populateSettingsForm() {
-            document.getElementById('setting-email').value = settings.email;
-            document.getElementById('setting-whatsapp').value = settings.whatsapp;
-            document.getElementById('setting-insta').value = settings.insta;
+        /* -------------------------------------------------------------
+           POSTER MANAGER FUNCTIONALITY
+        ------------------------------------------------------------- */
+        let uploadedImageBase64 = '';
+
+        function previewUploadImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageBase64 = e.target.result;
+                    document.getElementById('imagePreview').src = uploadedImageBase64;
+                    document.getElementById('previewImgContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
         }
 
-        function showToast(message) {
-            const toast = document.getElementById('toast-notification');
-            document.getElementById('toast-message').textContent = message;
-            toast.classList.remove('hidden');
-            setTimeout(() => { toast.classList.add('hidden'); }, 3500);
+        async function handlePosterFormSubmit(event) {
+            event.preventDefault();
+            const editId = document.getElementById('editPosterId').value;
+            const title = document.getElementById('posterTitleInput').value;
+            const category = document.getElementById('posterCategoryInput').value;
+            const description = document.getElementById('posterDescInput').value;
+            const status = document.getElementById('posterStatusInput').value;
+
+            const posters = await getAllPosters();
+
+            if (!editId && !uploadedImageBase64) {
+                showToast('Please select an image file to upload.', 'error');
+                return;
+            }
+
+            if (editId) {
+                const existing = posters.find(p => p.id == editId);
+                const updatedPoster = {
+                    id: Number(editId),
+                    title,
+                    category,
+                    description,
+                    status,
+                    image: uploadedImageBase64 || existing.image
+                };
+                await updatePosterInDB(updatedPoster);
+                showToast('Poster updated successfully!', 'success');
+            } else {
+                const newPoster = {
+                    title,
+                    category,
+                    description,
+                    status,
+                    image: uploadedImageBase64
+                };
+                await addPosterToDB(newPoster);
+                showToast('New poster uploaded successfully!', 'success');
+            }
+
+            resetPosterForm();
+            renderAdminPostersTable();
+            renderDashboardOverview();
         }
+
+        function resetPosterForm() {
+            document.getElementById('posterForm').reset();
+            document.getElementById('editPosterId').value = '';
+            document.getElementById('posterFormTitle').textContent = 'Upload New Poster';
+            document.getElementById('posterSubmitBtn').textContent = 'Upload Poster';
+            document.getElementById('posterCancelBtn').style.display = 'none';
+            document.getElementById('previewImgContainer').style.display = 'none';
+            document.getElementById('imagePreview').src = '';
+            uploadedImageBase64 = '';
+        }
+
+        async function renderAdminPostersTable() {
+            const posters = await getAllPosters();
+            const tbody = document.getElementById('adminPostersTableBody');
+
+            if (posters.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No posters found.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = posters.map(p => `
+                <tr>
+                    <td><img src="${p.image}" alt="${p.title}"></td>
+                    <td><strong>${p.title}</strong></td>
+                    <td>${p.category}</td>
+                    <td><span class="status-badge ${p.status}">${p.status}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-icon" title="Edit Poster" onclick="editPoster(${p.id})"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-icon" title="Toggle Publish Status" onclick="togglePosterStatus(${p.id})"><i class="fa-solid fa-eye-slash"></i></button>
+                            <button class="btn-icon delete" title="Delete Poster" onclick="confirmDeletePoster(${p.id})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function editPoster(id) {
+            const posters = await getAllPosters();
+            const p = posters.find(item => item.id == id);
+            if (p) {
+                document.getElementById('editPosterId').value = p.id;
+                document.getElementById('posterTitleInput').value = p.title;
+                document.getElementById('posterCategoryInput').value = p.category;
+                document.getElementById('posterDescInput').value = p.description;
+                document.getElementById('posterStatusInput').value = p.status;
+                document.getElementById('imagePreview').src = p.image;
+                document.getElementById('previewImgContainer').style.display = 'block';
+                uploadedImageBase64 = p.image;
+
+                document.getElementById('posterFormTitle').textContent = 'Edit Poster';
+                document.getElementById('posterSubmitBtn').textContent = 'Save Changes';
+                document.getElementById('posterCancelBtn').style.display = 'inline-flex';
+
+                // Scroll to form
+                document.getElementById('posterForm').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        async function togglePosterStatus(id) {
+            const posters = await getAllPosters();
+            const p = posters.find(item => item.id == id);
+            if (p) {
+                p.status = p.status === 'published' ? 'draft' : 'published';
+                await updatePosterInDB(p);
+                renderAdminPostersTable();
+                renderDashboardOverview();
+                showToast(`Poster status changed to ${p.status}`, 'success');
+            }
+        }
+
+        function confirmDeletePoster(id) {
+            showConfirmModal('Delete Poster', 'Are you sure you want to delete this poster? This action cannot be undone.', async () => {
+                await deletePosterFromDB(id);
+                renderAdminPostersTable();
+                renderDashboardOverview();
+                showToast('Poster deleted successfully.', 'success');
+            });
+        }
+
+        /* -------------------------------------------------------------
+           WEBSITE CONTENT MANAGER
+        ------------------------------------------------------------- */
+        function populateContentForm() {
+            const s = getSettings();
+            document.getElementById('settingBrandName').value = s.brandName;
+            document.getElementById('settingHeroBadge').value = s.heroBadge;
+            document.getElementById('settingHeroTitle').value = s.heroTitle;
+            document.getElementById('settingHeroDesc').value = s.heroDesc;
+            document.getElementById('settingEmail').value = s.email;
+            document.getElementById('settingPhone').value = s.phone;
+            document.getElementById('settingAddress').value = s.address;
+            document.getElementById('settingFooterAbout').value = s.footerAboutText;
+            document.getElementById('settingSocialTwitter').value = s.socialTwitter;
+            document.getElementById('settingSocialInstagram').value = s.socialInstagram;
+            document.getElementById('settingSocialDribbble').value = s.socialDribbble;
+            document.getElementById('settingSocialBehance').value = s.socialBehance;
+        }
+
+        function saveWebsiteContent(event) {
+            event.preventDefault();
+            const s = getSettings();
+            s.brandName = document.getElementById('settingBrandName').value;
+            s.heroBadge = document.getElementById('settingHeroBadge').value;
+            s.heroTitle = document.getElementById('settingHeroTitle').value;
+            s.heroDesc = document.getElementById('settingHeroDesc').value;
+            s.email = document.getElementById('settingEmail').value;
+            s.phone = document.getElementById('settingPhone').value;
+            s.address = document.getElementById('settingAddress').value;
+            s.footerAboutText = document.getElementById('settingFooterAbout').value;
+            s.socialTwitter = document.getElementById('settingSocialTwitter').value;
+            s.socialInstagram = document.getElementById('settingSocialInstagram').value;
+            s.socialDribbble = document.getElementById('settingSocialDribbble').value;
+            s.socialBehance = document.getElementById('settingSocialBehance').value;
+
+            saveSettingsToStorage(s);
+            showToast('Website content updated successfully!', 'success');
+        }
+
+        /* -------------------------------------------------------------
+           DESIGN SETTINGS & THEME
+        ------------------------------------------------------------- */
+        function populateDesignForm() {
+            const s = getSettings();
+            document.getElementById('settingColorPrimary').value = s.colorPrimary;
+            document.getElementById('settingColorAccent').value = s.colorAccent;
+            document.getElementById('settingColorBg').value = s.colorBg;
+            document.getElementById('settingColorSurface').value = s.colorSurface;
+            document.getElementById('settingFontHeading').value = s.fontHeading;
+            document.getElementById('settingButtonRadius').value = s.buttonRadius;
+        }
+
+        function saveDesignSettings(event) {
+            event.preventDefault();
+            const s = getSettings();
+            s.colorPrimary = document.getElementById('settingColorPrimary').value;
+            s.colorAccent = document.getElementById('settingColorAccent').value;
+            s.colorBg = document.getElementById('settingColorBg').value;
+            s.colorSurface = document.getElementById('settingColorSurface').value;
+            s.fontHeading = document.getElementById('settingFontHeading').value;
+            s.buttonRadius = document.getElementById('settingButtonRadius').value;
+
+            saveSettingsToStorage(s);
+            showToast('Design settings saved successfully!', 'success');
+        }
+
+        function resetDesignSettings() {
+            const s = getSettings();
+            s.colorPrimary = defaultSettings.colorPrimary;
+            s.colorAccent = defaultSettings.colorAccent;
+            s.colorBg = defaultSettings.colorBg;
+            s.colorSurface = defaultSettings.colorSurface;
+            s.fontHeading = defaultSettings.fontHeading;
+            s.buttonRadius = defaultSettings.buttonRadius;
+
+            saveSettingsToStorage(s);
+            populateDesignForm();
+            showToast('Design settings reset to default.', 'success');
+        }
+
+        /* -------------------------------------------------------------
+           SECURITY / PASSWORD
+        ------------------------------------------------------------- */
+        function handleChangePassword(event) {
+            event.preventDefault();
+            const current = document.getElementById('currentPassInput').value;
+            const newPass = document.getElementById('newPassInput').value;
+            const confirmPass = document.getElementById('confirmPassInput').value;
+
+            const s = getSettings();
+            if (current !== s.adminPassword) {
+                showToast('Current password is incorrect.', 'error');
+                return;
+            }
+
+            if (newPass !== confirmPass) {
+                showToast('New passwords do not match.', 'error');
+                return;
+            }
+
+            s.adminPassword = newPass;
+            saveSettingsToStorage(s);
+            document.getElementById('currentPassInput').value = '';
+            document.getElementById('newPassInput').value = '';
+            document.getElementById('confirmPassInput').value = '';
+            showToast('Admin password updated successfully!', 'success');
+        }
+
+        /* -------------------------------------------------------------
+           DASHBOARD OVERVIEW STATS
+        ------------------------------------------------------------- */
+        async function renderDashboardOverview() {
+            const posters = await getAllPosters();
+            const total = posters.length;
+            const published = posters.filter(p => p.status === 'published').length;
+            const draft = posters.filter(p => p.status === 'draft').length;
+
+            document.getElementById('statTotalPosters').textContent = total;
+            document.getElementById('statPublishedPosters').textContent = published;
+            document.getElementById('statDraftPosters').textContent = draft;
+        }
+
+        /* -------------------------------------------------------------
+           CONTACT FORM SUBMISSION
+        ------------------------------------------------------------- */
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            showToast('Thank you! Your message has been sent successfully.', 'success');
+            event.target.reset();
+        }
+
+        /* -------------------------------------------------------------
+           TOAST NOTIFICATIONS
+        ------------------------------------------------------------- */
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+            toast.innerHTML = `
+                <i class="fa-solid ${icon}" style="color: var(--${type === 'success' ? 'success' : 'danger'}-color);"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        /* -------------------------------------------------------------
+           CUSTOM CONFIRMATION MODAL
+        ------------------------------------------------------------- */
+        let confirmCallback = null;
+
+        function showConfirmModal(title, desc, callback) {
+            document.getElementById('confirmTitle').textContent = title;
+            document.getElementById('confirmDesc').textContent = desc;
+            confirmCallback = callback;
+            document.getElementById('confirmModalOverlay').classList.add('active');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModalOverlay').classList.remove('active');
+            confirmCallback = null;
+        }
+
+        document.getElementById('confirmOkBtn').addEventListener('click', () => {
+            if (confirmCallback) confirmCallback();
+            closeConfirmModal();
+        });
+
+        /* -------------------------------------------------------------
+           INITIALIZATION ON PAGE LOAD
+        ------------------------------------------------------------- */
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await initIndexedDB();
+                await seedDatabaseIfNeeded();
+                applySettingsToUI();
+                renderPublicGallery();
+            } catch (err) {
+                console.error("Initialization error:", err);
+                showToast("Error initializing application database.", "error");
+            }
+        });
     </script>
 </body>
 </html>
