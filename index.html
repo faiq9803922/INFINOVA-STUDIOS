@@ -95,11 +95,8 @@
 
     <header id="navbar-section" class="sticky top-0 z-50 backdrop-blur-md bg-[#0B0B08]/90 border-b border-[#39371C] transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo & Admin Top-Left Trigger (Shifted further left) -->
+            <!-- Brand Logo (Admin icon removed from top-left) -->
             <div class="flex items-center gap-3">
-                <button id="top-admin-trigger" title="Admin Control Center" class="w-8 h-8 rounded-lg bg-[#191A0B] border border-[#39371C] flex items-center justify-center text-[#F5D85E] hover:bg-[#23250F] hover:border-[#F5D85E] transition-all -ml-3 sm:-ml-4">
-                    <i class="fa-solid fa-lock text-xs"></i>
-                </button>
                 <a href="#" class="flex items-center gap-3 group">
                     <img src="INFI.png" alt="Infinova Studio Logo" class="w-10 h-10 object-contain rounded-xl shadow-lg group-hover:scale-105 transition-transform" onerror="this.src='https://placehold.co/40x40/191A0B/F5D85E?text=IS'">
                     <span class="text-2xl font-extrabold tracking-tight text-[#FFFFFF]">
@@ -352,7 +349,7 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION (Form completely removed) -->
+    <!-- CONTACT SECTION (X removed) -->
     <section id="contact" class="py-24 bg-[#191A0B]/30 relative">
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#F5D85E]/10 rounded-full blur-[160px] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -360,7 +357,7 @@
             <h2 class="text-3xl sm:text-5xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">Ready to make your next project impossible to ignore?</h2>
             <p class="text-[#B8B8AE] text-base mt-3 max-w-xl mx-auto">Get in touch directly through our channels below to discuss your brief and start working together.</p>
 
-            <!-- Direct Contact Buttons -->
+            <!-- Direct Contact Buttons (Email, WhatsApp, Instagram) -->
             <div id="direct-contact-buttons" class="flex flex-wrap justify-center gap-4 mt-10">
                 <a id="btn-email-link" href="mailto:contact@infinovastudio.com" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-sm border border-[#39371C] hover:border-[#F5D85E] flex items-center gap-3 transition-all shadow-lg">
                     <i class="fa-solid fa-envelope text-[#F5D85E] text-lg"></i> Email Us
@@ -370,9 +367,6 @@
                 </a>
                 <a id="btn-insta-link" href="https://instagram.com" target="_blank" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-sm border border-[#39371C] hover:border-[#F5D85E] flex items-center gap-3 transition-all shadow-lg">
                     <i class="fa-brands fa-instagram text-pink-400 text-lg"></i> Instagram
-                </a>
-                <a id="btn-x-link" href="https://twitter.com" target="_blank" class="bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-sm border border-[#39371C] hover:border-[#F5D85E] flex items-center gap-3 transition-all shadow-lg">
-                    <i class="fa-brands fa-x-twitter text-[#F5D85E] text-lg"></i> X (Twitter)
                 </a>
             </div>
         </div>
@@ -411,7 +405,6 @@
             <div>
                 <h4 class="text-[#FFFFFF] font-bold mb-4 uppercase text-xs tracking-wider">Socials</h4>
                 <div class="flex gap-4 text-lg text-[#FFFFFF] pt-2">
-                    <a href="#" id="footer-x-url" class="hover:text-[#F5D85E] transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="#" id="footer-insta-url" class="hover:text-[#F5D85E] transition-colors"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#" id="footer-wa-url" class="hover:text-[#F5D85E] transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
@@ -420,7 +413,8 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-[#39371C] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
             <div>© 2026 Infinova Studio. All rights reserved.</div>
-            <div>
+            <div class="flex items-center gap-4">
+                <button id="terms-modal-btn" class="text-[#B8B8AE] hover:text-[#F5D85E] text-xs underline transition-colors">Terms & Conditions</button>
                 <button id="admin-access-btn" class="text-[#B8B8AE]/40 hover:text-[#F5D85E] text-[11px] underline tracking-wider transition-colors">Admin Access</button>
             </div>
         </div>
@@ -439,6 +433,28 @@
                 <span id="lightbox-cat" class="bg-[#F5D85E] text-[#080906] text-xs font-bold px-3 py-1 rounded-full">Category</span>
                 <h3 id="lightbox-title" class="text-2xl font-bold text-[#FFFFFF]">Title</h3>
                 <p id="lightbox-desc" class="text-[#B8B8AE] text-sm">Description</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="terms-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-[#191A0B] w-full max-w-2xl p-8 rounded-custom border border-[#39371C] shadow-2xl relative max-h-[85vh] overflow-y-auto">
+            <button id="terms-close" class="absolute top-4 right-4 text-[#B8B8AE] hover:text-[#FFFFFF] text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-[#FFFFFF] mb-4">Terms & Conditions</h3>
+            <div class="space-y-4 text-sm text-[#B8B8AE] leading-relaxed">
+                <p>Welcome to Infinova Studio. By using our services, you agree to comply with and be bound by the following terms and conditions.</p>
+                <h4 class="text-white font-bold">1. Services & Deliverables</h4>
+                <p>Infinova Studio provides digital design services including YouTube thumbnails, posters, logos, and branding graphics. Deliverables will be provided in high-resolution formats as agreed upon.</p>
+                <h4 class="text-white font-bold">2. Revisions & Payments</h4>
+                <p>Project details and timelines are established upon direct contact. Revisions are handled collaboratively to ensure satisfaction before final delivery.</p>
+                <h4 class="text-white font-bold">3. Intellectual Property</h4>
+                <p>Upon full payment, clients receive full usage rights for their delivered graphics. Infinova Studio reserves the right to showcase completed works in our public portfolio.</p>
+            </div>
+            <div class="mt-6 text-right">
+                <button id="terms-close-btn" class="bg-[#F5D85E] text-[#080906] px-6 py-2.5 rounded-custom text-xs font-bold hover:bg-[#D4B943]">Close</button>
             </div>
         </div>
     </div>
@@ -525,7 +541,7 @@
                     </div>
                 </div>
 
-                <!-- Contact & Socials Settings Tab (Fully Fixed & Functional) -->
+                <!-- Contact & Socials Settings Tab -->
                 <div id="tab-contact-settings" class="admin-tab-content hidden space-y-6">
                     <h3 class="text-2xl font-extrabold text-[#FFFFFF]">Contact & Social Settings</h3>
                     <form id="contact-settings-form" class="space-y-6 bg-[#191A0B] p-8 rounded-custom border border-[#39371C]">
@@ -539,14 +555,10 @@
                                 <input type="text" id="setting-whatsapp" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="923710221411">
                             </div>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
                             <div>
                                 <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">Instagram Profile URL</label>
                                 <input type="url" id="setting-insta" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://instagram.com/...">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">X (Twitter) Profile URL</label>
-                                <input type="url" id="setting-x" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://twitter.com/...">
                             </div>
                         </div>
                         <button type="submit" class="bg-[#F5D85E] text-[#080906] px-8 py-3 rounded-custom font-bold text-sm hover:bg-[#D4B943]">Save Settings</button>
@@ -610,8 +622,7 @@
         const defaultSettings = {
             email: 'contact@infinovastudio.com',
             whatsapp: '923710221411',
-            insta: 'https://instagram.com',
-            x: 'https://twitter.com'
+            insta: 'https://instagram.com'
         };
 
         let portfolio = JSON.parse(localStorage.getItem('infinova_portfolio')) || defaultPortfolio;
@@ -634,8 +645,6 @@
             document.getElementById('btn-email-link').href = `mailto:${settings.email}`;
             document.getElementById('btn-whatsapp-link').href = `https://wa.me/${settings.whatsapp}`;
             document.getElementById('btn-insta-link').href = settings.insta;
-            document.getElementById('btn-x-link').href = settings.x;
-            document.getElementById('footer-x-url').href = settings.x;
             document.getElementById('footer-insta-url').href = settings.insta;
             document.getElementById('footer-wa-url').href = `https://wa.me/${settings.whatsapp}`;
         }
@@ -733,6 +742,12 @@
                 document.getElementById('lightbox-modal').classList.add('hidden');
             });
 
+            // Terms & Conditions Modal Triggers
+            const termsModal = document.getElementById('terms-modal');
+            document.getElementById('terms-modal-btn').addEventListener('click', () => termsModal.classList.remove('hidden'));
+            document.getElementById('terms-close').addEventListener('click', () => termsModal.classList.add('hidden'));
+            document.getElementById('terms-close-btn').addEventListener('click', () => termsModal.classList.add('hidden'));
+
             document.querySelectorAll('.faq-toggle').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const content = btn.nextElementSibling;
@@ -758,9 +773,8 @@
                 });
             });
 
-            // Admin top-left icon and footer link triggers
+            // Admin footer link trigger
             const openAdminModal = () => document.getElementById('admin-login-modal').classList.remove('hidden');
-            document.getElementById('top-admin-trigger').addEventListener('click', openAdminModal);
             document.getElementById('admin-access-btn').addEventListener('click', openAdminModal);
 
             document.getElementById('admin-login-close').addEventListener('click', () => {
@@ -811,13 +825,12 @@
                 showToast('Portfolio item saved successfully!');
             });
 
-            // Contact & Social Settings Form (Fixed & Working)
+            // Contact & Social Settings Form (Functional)
             document.getElementById('contact-settings-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 settings.email = document.getElementById('setting-email').value;
                 settings.whatsapp = document.getElementById('setting-whatsapp').value;
                 settings.insta = document.getElementById('setting-insta').value;
-                settings.x = document.getElementById('setting-x').value;
                 saveState();
                 applySettings();
                 showToast('Contact & social settings updated successfully!');
@@ -883,7 +896,6 @@
             document.getElementById('setting-email').value = settings.email;
             document.getElementById('setting-whatsapp').value = settings.whatsapp;
             document.getElementById('setting-insta').value = settings.insta;
-            document.getElementById('setting-x').value = settings.x;
         }
 
         function showToast(message) {
