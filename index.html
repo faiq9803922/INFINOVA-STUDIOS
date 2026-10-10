@@ -1,67 +1,1797 @@
-Create a complete website based on this reference: https://thumbrush-gilt.vercel.app/
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumbrush — Premium YouTube Thumbnail Design Agency</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: 'var(--bg-color, #0A0A0A)',
+                        surface: 'var(--surface-color, #141414)',
+                        surfaceHover: 'var(--surface-hover, #1F1F1F)',
+                        accent: 'var(--accent-color, #FF5500)',
+                        accentHover: 'var(--accent-hover, #FF7733)',
+                        textMain: 'var(--text-color, #FFFFFF)',
+                        textMuted: '#9CA3AF'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                    },
+                    borderRadius: {
+                        'custom': 'var(--border-radius, 1rem)'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0A0A0A;
+            --surface-color: #141414;
+            --surface-hover: #1F1F1F;
+            --accent-color: #FF5500;
+            --accent-hover: #FF7733;
+            --text-color: #FFFFFF;
+            --border-radius: 1rem;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272A;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF5500;
+        }
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 35s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+        /* Floating badge keyframes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .floating-badge {
+            animation: float 4s ease-in-out infinite;
+        }
+        .floating-badge-delayed {
+            animation: float 5s ease-in-out 2s infinite;
+        }
+        /* Glow effect */
+        .glow-accent {
+            box-shadow: 0 0 30px rgba(255, 85, 0, 0.25);
+        }
+        .glow-border {
+            border: 1px solid rgba(255, 85, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .glow-border:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(255, 85, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-textMain antialiased selection:bg-accent selection:text-white">
 
-**STRICT REQUIREMENT: ONLY HTML.** Deliver everything in one single `index.html` file. Put all CSS inside a `<style>` tag and all JavaScript inside a `<script>` tag within the same HTML file. Do not create separate CSS, JS, PHP, Python, or other files. Do not use React, Vue, or other frameworks.
+    <header id="navbar-section" class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/80 border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-white font-black text-xl shadow-lg shadow-accent/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight">
+                    THUMB<span class="text-accent">BRUSH</span>
+                </span>
+            </a>
 
-### 1. Recreate the Website
-First inspect the reference website and recreate its design as closely as possible, including its colors, layout, typography, navigation, image gallery, poster cards, buttons, animations, backgrounds, and footer. Make it responsive for mobile and desktop.
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-textMuted">
+                <a href="#home" class="text-white hover:text-accent transition-colors nav-link">Home</a>
+                <a href="#process" class="hover:text-accent transition-colors nav-link">Process</a>
+                <a href="#portfolio" class="hover:text-accent transition-colors nav-link">Portfolio</a>
+                <a href="#services" class="hover:text-accent transition-colors nav-link">Services</a>
+                <a href="#testimonials" class="hover:text-accent transition-colors nav-link">Testimonials</a>
+                <a href="#faqs" class="hover:text-accent transition-colors nav-link">FAQs</a>
+                <a href="#contact" class="hover:text-accent transition-colors nav-link">Contact</a>
+            </nav>
 
-### 2. Admin Login
-Add a three-line hamburger menu in the top-left corner containing Home, Gallery, Contact, and Admin Panel.
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#contact" class="bg-accent hover:bg-accentHover text-white px-6 py-2.5 rounded-custom font-semibold text-sm transition-all shadow-lg shadow-accent/20 hover:shadow-accent/40 hover:-translate-y-0.5">
+                    Get Started
+                </a>
+            </div>
 
-- Admin password: `INFINOVA`
-- Create a professional login screen with password visibility toggle.
-- Show an error for incorrect passwords.
-- Provide login and logout functionality.
-- Hide the admin dashboard until login.
-- Allow the admin to change the password.
-- Keep the admin dashboard separate from the public website.
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl p-2 focus:outline-none" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
 
-### 3. Admin Dashboard
-Create a complete dashboard with the following features:
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surface border-b border-white/10 px-6 py-6 space-y-4">
+            <a href="#home" class="block text-lg font-medium text-white mobile-link">Home</a>
+            <a href="#process" class="block text-lg font-medium text-textMuted mobile-link">Process</a>
+            <a href="#portfolio" class="block text-lg font-medium text-textMuted mobile-link">Portfolio</a>
+            <a href="#services" class="block text-lg font-medium text-textMuted mobile-link">Services</a>
+            <a href="#testimonials" class="block text-lg font-medium text-textMuted mobile-link">Testimonials</a>
+            <a href="#faqs" class="block text-lg font-medium text-textMuted mobile-link">FAQs</a>
+            <a href="#contact" class="block text-lg font-medium text-textMuted mobile-link">Contact</a>
+            <div class="pt-4">
+                <a href="#contact" class="block text-center bg-accent text-white py-3 rounded-custom font-semibold mobile-link">Get Started</a>
+            </div>
+        </div>
+    </header>
 
-**Poster Manager**
-- Upload posters and images from the device.
-- Preview images before uploading.
-- Add titles, descriptions, and categories.
-- Edit, replace, reorder, publish, hide, and delete posters.
-- Display uploaded posters on the public website.
-- Support JPG, PNG, JPEG, and WebP.
+    <section id="hero-section" class="relative pt-20 pb-28 lg:pt-32 lg:pb-40 overflow-hidden">
+        <!-- Background Gradient Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/15 rounded-full blur-[140px] pointer-events-none"></div>
 
-**Website Content Manager**
-- Edit the website name, logo, headings, descriptions, and footer.
-- Change homepage banners and background images.
-- Edit contact details and social media links.
-- Add, edit, hide, and reorder website sections.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                <!-- Left Content -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10 text-xs font-semibold uppercase tracking-wider text-accent glow-border">
+                        <i class="fa-solid fa-fire text-accent animate-bounce"></i> #1 YouTube Thumbnail Design Agency
+                    </div>
+                    <h1 id="hero-heading" class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                        Make Every Scroll Stop With <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-orange-400">Stunning Thumbnails</span>
+                    </h1>
+                    <p id="hero-description" class="text-lg sm:text-xl text-textMuted max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        We create scroll-stopping thumbnails, posters, social media posts, logos, and brand visuals that help creators and businesses stand out online.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#contact" id="hero-btn-1" class="w-full sm:w-auto bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-custom font-bold text-base transition-all shadow-xl shadow-accent/30 hover:shadow-accent/50 hover:-translate-y-1 text-center">
+                            Get Started
+                        </a>
+                        <a href="#portfolio" id="hero-btn-2" class="w-full sm:w-auto bg-surface hover:bg-surfaceHover text-white px-8 py-4 rounded-custom font-bold text-base transition-all border border-white/10 hover:border-white/30 text-center">
+                            View Portfolio
+                        </a>
+                    </div>
+                    <!-- Trust metrics -->
+                    <div class="pt-6 flex items-center justify-center lg:justify-start gap-8 border-t border-white/10">
+                        <div>
+                            <div class="text-2xl font-bold text-white">99.8%</div>
+                            <div class="text-xs text-textMuted">Click-Through Boost</div>
+                        </div>
+                        <div class="w-px h-8 bg-white/10"></div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">48h</div>
+                            <div class="text-xs text-textMuted">Avg. Turnaround</div>
+                        </div>
+                        <div class="w-px h-8 bg-white/10"></div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">5.0★</div>
+                            <div class="text-xs text-textMuted">Creator Rating</div>
+                        </div>
+                    </div>
+                </div>
 
-**Design Settings**
-- Change theme colors, fonts, backgrounds, button styles, and layout settings.
-- Add a live preview.
-- Provide Save Changes and Reset buttons.
+                <!-- Right Showcase Artwork -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative w-full aspect-square max-w-md mx-auto">
+                        <!-- Main Card -->
+                        <div class="absolute inset-0 bg-surface rounded-3xl p-4 border border-white/15 shadow-2xl glow-accent overflow-hidden transform lg:rotate-2 hover:rotate-0 transition-transform duration-500">
+                            <img id="hero-showcase-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Thumbnail Design" class="w-full h-full object-cover rounded-2xl">
+                            <div class="absolute inset-0 bg-gradient-to-t from-darkBg/90 via-transparent to-transparent flex flex-col justify-end p-6">
+                                <span class="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full w-max mb-2">FEATURED HIT</span>
+                                <h3 class="text-xl font-bold text-white">High CTR Gaming Masterpiece</h3>
+                                <p class="text-xs text-textMuted">Generated +340K views in 48 hours</p>
+                            </div>
+                        </div>
 
-**Dashboard Overview**
-- Total posters.
-- Published posters.
-- Draft posters.
-- Recent changes.
+                        <!-- Floating Badge 1 -->
+                        <div class="absolute -top-6 -left-6 bg-surface border border-white/20 px-5 py-3 rounded-2xl shadow-2xl floating-badge flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-accent/20 text-accent flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-textMuted">Metric</div>
+                                <div class="text-sm font-bold text-white">12.4% CTR</div>
+                            </div>
+                        </div>
 
-### 4. Storage and Functionality
-Since the entire project must be one HTML file:
+                        <!-- Floating Badge 2 -->
+                        <div class="absolute -bottom-6 -right-6 bg-surface border border-white/20 px-5 py-3 rounded-2xl shadow-2xl floating-badge-delayed flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-green-500/20 text-green-400 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-textMuted">Status</div>
+                                <div class="text-sm font-bold text-white">Viral Growth</div>
+                            </div>
+                        </div>
 
-- Use JavaScript for all interactions.
-- Use localStorage to save text, settings, poster metadata, and the admin's changes across page refreshes on the same browser.
-- Use IndexedDB for uploaded image files when appropriate, since localStorage has limited storage capacity.
-- Load saved posters and website settings automatically when the page opens.
-- Make every button functional.
-- Add confirmation dialogs before deleting content.
-- Provide success and error messages.
-- Make the website usable on phones and computers.
+                        <!-- Pill Tags -->
+                        <div class="absolute top-1/2 -right-8 -translate-y-1/2 flex flex-col gap-2">
+                            <span class="bg-darkBg/90 border border-accent/40 text-accent text-xs font-black px-3 py-1.5 rounded-lg shadow-lg backdrop-blur">THUMB</span>
+                            <span class="bg-darkBg/90 border border-accent/40 text-accent text-xs font-black px-3 py-1.5 rounded-lg shadow-lg backdrop-blur">CTR</span>
+                            <span class="bg-darkBg/90 border border-accent/40 text-accent text-xs font-black px-3 py-1.5 rounded-lg shadow-lg backdrop-blur">CLICK</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-### 5. Important Limitations
-Do not claim that localStorage or IndexedDB synchronizes data across devices. Since this is a single HTML file with no backend, uploads and settings will be stored locally in that browser.
+    <section id="live-showcase-section" class="py-12 bg-surface/50 border-y border-white/10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 mb-6 text-center">
+            <h2 id="live-showcase-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Work That Feels Clickable</h2>
+            <p id="live-showcase-desc" class="text-textMuted text-sm mt-1">A live window of thumbnails, posters, and brand visuals.</p>
+        </div>
+        <div class="relative w-full overflow-hidden">
+            <div id="live-marquee-container" class="animate-marquee flex gap-6 py-2">
+                <!-- Dynamically populated portfolio marquee images -->
+            </div>
+        </div>
+    </section>
 
-Implement the admin password as a simple prototype gate, and clearly understand that a password embedded in frontend code is not secure for a public production website.
+    <section id="stats-section" class="py-20 bg-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Stat Card 1 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 text-center glow-border">
+                    <div class="text-3xl sm:text-5xl font-black text-accent mb-2" id="stat-1-val">0+</div>
+                    <div class="text-sm font-semibold text-white uppercase tracking-wider" id="stat-1-label">Thumbnails Created</div>
+                </div>
+                <!-- Stat Card 2 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 text-center glow-border">
+                    <div class="text-3xl sm:text-5xl font-black text-accent mb-2" id="stat-2-val">0+</div>
+                    <div class="text-sm font-semibold text-white uppercase tracking-wider" id="stat-2-label">Happy Clients</div>
+                </div>
+                <!-- Stat Card 3 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 text-center glow-border">
+                    <div class="text-3xl sm:text-5xl font-black text-accent mb-2" id="stat-3-val">0+</div>
+                    <div class="text-sm font-semibold text-white uppercase tracking-wider" id="stat-3-label">Years Experience</div>
+                </div>
+                <!-- Stat Card 4 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 text-center glow-border">
+                    <div class="text-3xl sm:text-5xl font-black text-accent mb-2" id="stat-4-val">0%</div>
+                    <div class="text-sm font-semibold text-white uppercase tracking-wider" id="stat-4-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-Do not add Firebase, databases, external backend code, or separate files. If the reference website cannot be accessed, create a polished approximation instead of pretending you inspected it.
+    <section id="process" class="py-24 bg-surface/30 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">How We Work</span>
+                <h2 id="process-section-title" class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">The process of creating a clickable thumbnail.</h2>
+            </div>
 
-### FINAL INSTRUCTION
-Return the **complete, ready-to-run `index.html` source code only**. No explanations, no separate files, no incomplete code, and no placeholder buttons. Include the complete public website and functional admin dashboard in the same HTML file.
+            <div id="process-steps-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 relative group hover:border-accent/50 transition-all">
+                    <div class="text-5xl font-black text-accent/20 absolute top-6 right-6 group-hover:text-accent/40 transition-colors">01</div>
+                    <div class="w-14 h-14 rounded-2xl bg-accent text-white flex items-center justify-center text-xl font-bold mb-6 shadow-lg shadow-accent/30">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white step-title-1">Contact Us</h3>
+                    <p class="text-textMuted text-sm leading-relaxed step-desc-1">
+                        Get in touch via email, WhatsApp, or X. We discuss your video topic, audience, references, and creative direction.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 relative group hover:border-accent/50 transition-all">
+                    <div class="text-5xl font-black text-accent/20 absolute top-6 right-6 group-hover:text-accent/40 transition-colors">02</div>
+                    <div class="w-14 h-14 rounded-2xl bg-accent text-white flex items-center justify-center text-xl font-bold mb-6 shadow-lg shadow-accent/30">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white step-title-2">Generating an Idea/Concept</h3>
+                    <p class="text-textMuted text-sm leading-relaxed step-desc-2">
+                        We research the topic, angle, title, and competitors, then build a clickable visual concept around attention and clarity.
+                    </p>
+                </div>
+                <!-- Step 3 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 relative group hover:border-accent/50 transition-all">
+                    <div class="text-5xl font-black text-accent/20 absolute top-6 right-6 group-hover:text-accent/40 transition-colors">03</div>
+                    <div class="w-14 h-14 rounded-2xl bg-accent text-white flex items-center justify-center text-xl font-bold mb-6 shadow-lg shadow-accent/30">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white step-title-3">Final Version</h3>
+                    <p class="text-textMuted text-sm leading-relaxed step-desc-3">
+                        We polish the thumbnail with strong composition, bold type, color, and final export files ready for upload.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="featured-section" class="py-24 bg-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Top Tier Work</span>
+                    <h2 id="featured-heading" class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">Featured Thumbnails</h2>
+                    <p class="text-textMuted text-sm mt-1">Check out some of our best thumbnail designs that helped creators stand out.</p>
+                </div>
+                <div class="flex gap-3 mt-4 md:mt-0">
+                    <button id="feat-prev" class="w-12 h-12 rounded-full bg-surface border border-white/10 flex items-center justify-center hover:border-accent text-white transition-all">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button id="feat-next" class="w-12 h-12 rounded-full bg-surface border border-white/10 flex items-center justify-center hover:border-accent text-white transition-all">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Carousel Grid / Track -->
+            <div id="featured-carousel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-surface/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Our Portfolio</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">A gallery built for clicks, views, and visual trust.</h2>
+                <p class="text-textMuted text-sm mt-2">Browse published Thumbrush designs by category. New admin uploads appear here automatically.</p>
+            </div>
+
+            <!-- Category Filter Buttons & Search -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
+                <div id="portfolio-filters" class="flex flex-wrap justify-center gap-2">
+                    <button data-filter="all" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-bold bg-accent text-white transition-all shadow-md shadow-accent/20">All</button>
+                    <button data-filter="Thumbnails" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface text-textMuted hover:text-white border border-white/10 transition-all">Thumbnails</button>
+                    <button data-filter="Posters" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface text-textMuted hover:text-white border border-white/10 transition-all">Posters</button>
+                    <button data-filter="Social Posts" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface text-textMuted hover:text-white border border-white/10 transition-all">Social Posts</button>
+                    <button data-filter="Logos" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface text-textMuted hover:text-white border border-white/10 transition-all">Logos</button>
+                    <button data-filter="Branding" class="portfolio-filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface text-textMuted hover:text-white border border-white/10 transition-all">Branding</button>
+                </div>
+                <div class="w-full md:w-72 relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-textMuted">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input type="text" id="portfolio-search" placeholder="Search portfolio..." class="w-full pl-10 pr-4 py-2.5 bg-surface border border-white/10 rounded-custom text-sm text-white focus:outline-none focus:border-accent">
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="portfolio-empty" class="hidden text-center py-16 bg-surface/50 rounded-custom border border-white/10 mt-6">
+                <i class="fa-solid fa-folder-open text-4xl text-textMuted mb-3"></i>
+                <h3 class="text-lg font-bold text-white">No portfolio items found</h3>
+                <p class="text-sm text-textMuted mt-1">Try selecting a different category or upload items from the admin panel.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">What We Offer</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">Thumbnail-first creative support for creators and businesses.</h2>
+            </div>
+
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between hover:border-accent/50 transition-all group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-accent/20 text-accent flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">YouTube Thumbnail Design</h3>
+                        <p class="text-textMuted text-sm leading-relaxed mb-6">Readable, dramatic thumbnails crafted for better click-through.</p>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-accent font-bold text-sm hover:text-accentHover">
+                        Start a Project <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between hover:border-accent/50 transition-all group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-accent/20 text-accent flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-panorama"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Poster Design</h3>
+                        <p class="text-textMuted text-sm leading-relaxed mb-6">Event, promo, and campaign posters with bold visual hierarchy.</p>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-accent font-bold text-sm hover:text-accentHover">
+                        Start a Project <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between hover:border-accent/50 transition-all group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-accent/20 text-accent flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Social Media Post Design</h3>
+                        <p class="text-textMuted text-sm leading-relaxed mb-6">Platform-ready posts for launches, offers, announcements, and carousels.</p>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-accent font-bold text-sm hover:text-accentHover">
+                        Start a Project <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                <!-- Service 4 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between hover:border-accent/50 transition-all group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-accent/20 text-accent flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Logo Design</h3>
+                        <p class="text-textMuted text-sm leading-relaxed mb-6">Clean marks and identity starters that make brands easier to remember.</p>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-accent font-bold text-sm hover:text-accentHover">
+                        Start a Project <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                <!-- Service 5 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between hover:border-accent/50 transition-all group md:col-span-2 lg:col-span-1">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-accent/20 text-accent flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Branding / Featured Graphics</h3>
+                        <p class="text-textMuted text-sm leading-relaxed mb-6">Featured graphics, brand kits, and design systems for premium presence.</p>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-accent font-bold text-sm hover:text-accentHover">
+                        Start a Project <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="py-24 bg-surface/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">The Advantage</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Why Choose Thumbrush</h2>
+                    <p class="text-textMuted text-base">Premium visuals built for the pace of YouTube and social feeds.</p>
+                    
+                    <div id="selling-points-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-center gap-3 bg-surface p-4 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-circle-check text-accent"></i>
+                            <span class="text-sm font-semibold text-white">Scroll-stopping visuals</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-surface p-4 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-circle-check text-accent"></i>
+                            <span class="text-sm font-semibold text-white">Modern design style</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-surface p-4 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-circle-check text-accent"></i>
+                            <span class="text-sm font-semibold text-white">Social media optimized</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-surface p-4 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-circle-check text-accent"></i>
+                            <span class="text-sm font-semibold text-white">Creator and business focused</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-surface p-4 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-circle-check text-accent"></i>
+                            <span class="text-sm font-semibold text-white">Professional brand identity</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-surface p-4 rounded-xl border border-white/10">
+                            <i class="fa-solid fa-circle-check text-accent"></i>
+                            <span class="text-sm font-semibold text-white">High-quality export-ready</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Booking Box -->
+                <div class="lg:col-span-6">
+                    <div class="bg-surface p-8 sm:p-10 rounded-custom border border-white/15 shadow-2xl relative overflow-hidden glow-accent">
+                        <div class="absolute -top-12 -right-12 w-48 h-48 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-white">Ready to Elevate Your Channel?</h3>
+                        <p class="text-textMuted text-sm mb-8 leading-relaxed">
+                            Stop losing clicks to poorly designed thumbnails. Secure your priority spot today and let our design experts craft your next viral visual.
+                        </p>
+                        <a id="book-thumbrush-btn" href="https://wa.me/923710221411?text=Hi%20Thumbrush,%20I%20want%20to%20discuss%20a%20new%20thumbnail%20project!" target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-custom flex items-center justify-center gap-3 transition-all shadow-xl shadow-green-600/20 text-base">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Book Thumbrush via WhatsApp
+                        </a>
+                        <div class="mt-4 text-center text-xs text-textMuted">
+                            Typically replies within 15 minutes during business hours.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Client Love</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">Hear it from the clients.</h2>
+            </div>
+
+            <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-textMuted text-sm italic leading-relaxed mb-6">"The thumbnails instantly looked more premium and easier to click."</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-accent/20 text-accent font-bold flex items-center justify-center">CC</div>
+                        <div>
+                            <div class="text-sm font-bold text-white client-label-1">Creator Client</div>
+                            <div class="text-xs text-textMuted">YouTube Creator</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-textMuted text-sm italic leading-relaxed mb-6">"Thumbrush understood the brand direction and delivered clean campaign visuals fast."</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-accent/20 text-accent font-bold flex items-center justify-center">SF</div>
+                        <div>
+                            <div class="text-sm font-bold text-white client-label-2">Startup Founder</div>
+                            <div class="text-xs text-textMuted">Tech Startup</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-surface p-8 rounded-custom border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-textMuted text-sm italic leading-relaxed mb-6">"The logo and post designs gave our page a much more professional look."</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-accent/20 text-accent font-bold flex items-center justify-center">BO</div>
+                        <div>
+                            <div class="text-sm font-bold text-white client-label-3">Business Owner</div>
+                            <div class="text-xs text-textMuted">E-Commerce Brand</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faqs" class="py-24 bg-surface/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Got Questions?</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight">Frequently asked questions.</h2>
+            </div>
+
+            <div id="faq-accordion" class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-surface rounded-custom border border-white/10 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-base sm:text-lg flex justify-between items-center focus:outline-none">
+                        <span>How long does it take to create a thumbnail?</span>
+                        <i class="fa-solid fa-chevron-down text-accent transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-textMuted text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Most thumbnails are delivered within 24–48 hours. Rush delivery can be discussed for urgent uploads.
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="bg-surface rounded-custom border border-white/10 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-base sm:text-lg flex justify-between items-center focus:outline-none">
+                        <span>Do you offer discounts for bulk orders?</span>
+                        <i class="fa-solid fa-chevron-down text-accent transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-textMuted text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Yes! We offer customized monthly creator packages and bulk discount rates for regular channel uploads and brand campaigns. Contact us for details.
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="bg-surface rounded-custom border border-white/10 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-base sm:text-lg flex justify-between items-center focus:outline-none">
+                        <span>Can you work with my style guide?</span>
+                        <i class="fa-solid fa-chevron-down text-accent transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-textMuted text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Absolutely. We can strictly adhere to your existing brand colors, typography, and visual guidelines or help you establish a fresh new visual identity.
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="bg-surface rounded-custom border border-white/10 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-bold text-base sm:text-lg flex justify-between items-center focus:outline-none">
+                        <span>What file formats do you deliver?</span>
+                        <i class="fa-solid fa-chevron-down text-accent transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-textMuted text-sm leading-relaxed border-t border-white/5 pt-4">
+                        We deliver high-resolution source-layered Photoshop (.PSD) files alongside optimized high-res PNG/JPG files ready for direct YouTube upload.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-darkBg relative">
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[160px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent font-bold text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full border border-accent/20">Let's Connect</span>
+                <h2 id="contact-heading" class="text-3xl sm:text-5xl font-extrabold mt-4 tracking-tight">Ready to make your next upload impossible to ignore?</h2>
+                <p id="contact-desc" class="text-textMuted text-base mt-3">Send the project details and the message will be directed to Thumbrush email.</p>
+            </div>
+
+            <!-- Direct Contact Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-16">
+                <a id="contact-btn-email" href="mailto:contact.thumbrush1@gmail.com" class="bg-surface hover:bg-surfaceHover text-white px-8 py-4 rounded-custom font-bold text-sm border border-white/10 hover:border-accent flex items-center gap-3 transition-all shadow-lg">
+                    <i class="fa-solid fa-envelope text-accent text-lg"></i> Email Thumbrush
+                </a>
+                <a id="contact-btn-whatsapp" href="https://wa.me/923710221411" target="_blank" class="bg-surface hover:bg-surfaceHover text-white px-8 py-4 rounded-custom font-bold text-sm border border-white/10 hover:border-accent flex items-center gap-3 transition-all shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i> WhatsApp Now
+                </a>
+                <a id="contact-btn-x" href="https://twitter.com" target="_blank" class="bg-surface hover:bg-surfaceHover text-white px-8 py-4 rounded-custom font-bold text-sm border border-white/10 hover:border-accent flex items-center gap-3 transition-all shadow-lg">
+                    <i class="fa-brands fa-x-twitter text-accent text-lg"></i> Visit X Profile
+                </a>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="max-w-3xl mx-auto bg-surface p-8 sm:p-12 rounded-custom border border-white/15 shadow-2xl glow-border">
+                <form id="contact-form" action="https://formsubmit.co/contact.thumbrush1@gmail.com" method="POST" class="space-y-6">
+                    <!-- FormSubmit Configuration Hidden Fields -->
+                    <input type="hidden" name="_subject" value="New Project Inquiry from Thumbrush Website!">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-textMuted uppercase mb-2">Your Name</label>
+                            <input type="text" name="name" id="form-name" required placeholder="MrBeast / Creator" class="w-full px-4 py-3.5 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-textMuted uppercase mb-2">Your Email</label>
+                            <input type="email" name="email" id="form-email" required placeholder="creator@gmail.com" class="w-full px-4 py-3.5 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted uppercase mb-2">Project Type</label>
+                        <select name="project_type" id="form-project-type" class="w-full px-4 py-3.5 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent">
+                            <option value="YouTube Thumbnail">YouTube Thumbnail</option>
+                            <option value="Poster Design">Poster Design</option>
+                            <option value="Social Media Post">Social Media Post</option>
+                            <option value="Logo Design">Logo Design</option>
+                            <option value="Branding">Branding</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-textMuted uppercase mb-2">Project Details & Message</label>
+                        <textarea name="message" id="form-message" rows="5" required placeholder="Tell us about your channel, style references, or deadline..." class="w-full px-4 py-3.5 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent"></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <button type="submit" class="bg-accent hover:bg-accentHover text-white px-8 py-4 rounded-custom font-bold text-base transition-all shadow-xl shadow-accent/30 hover:shadow-accent/50 w-full sm:w-auto">
+                            Send Message
+                        </button>
+                        <div id="form-success-msg" class="hidden text-green-400 font-semibold text-sm">
+                            <i class="fa-solid fa-check-circle"></i> Message sent successfully!
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-surface border-t border-white/10 py-16 text-textMuted text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-black">
+                        <i class="fa-solid fa-bolt text-xs"></i>
+                    </div>
+                    <span class="text-xl font-extrabold text-white">THUMB<span class="text-accent">BRUSH</span></span>
+                </div>
+                <p id="footer-desc" class="text-xs leading-relaxed">Scroll-stopping graphics for creators, brands, and businesses that want to look premium online.</p>
+                <div class="flex gap-4 text-lg text-white pt-2">
+                    <a href="#" id="footer-social-x" class="hover:text-accent transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" id="footer-social-wa" class="hover:text-accent transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" id="footer-social-mail" class="hover:text-accent transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Quick Links</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#home" class="hover:text-accent transition-colors">Home</a></li>
+                    <li><a href="#process" class="hover:text-accent transition-colors">Process</a></li>
+                    <li><a href="#portfolio" class="hover:text-accent transition-colors">Portfolio</a></li>
+                    <li><a href="#services" class="hover:text-accent transition-colors">Services</a></li>
+                    <li><a href="#testimonials" class="hover:text-accent transition-colors">Testimonials</a></li>
+                    <li><a href="#faqs" class="hover:text-accent transition-colors">FAQs</a></li>
+                    <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Services</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#services" class="hover:text-accent transition-colors">YouTube Thumbnails</a></li>
+                    <li><a href="#services" class="hover:text-accent transition-colors">Poster Design</a></li>
+                    <li><a href="#services" class="hover:text-accent transition-colors">Social Posts</a></li>
+                    <li><a href="#services" class="hover:text-accent transition-colors">Logo Design</a></li>
+                    <li><a href="#services" class="hover:text-accent transition-colors">Branding Kits</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-wider">Newsletter</h4>
+                <p class="text-xs mb-4">Get top thumbnail design tips and conversion secrets delivered to your inbox.</p>
+                <form onsubmit="event.preventDefault(); showToast('Subscribed successfully!');" class="flex gap-2">
+                    <input type="email" placeholder="Your email" required class="bg-darkBg border border-white/10 rounded-custom px-3 py-2 text-xs text-white w-full focus:outline-none focus:border-accent">
+                    <button type="submit" class="bg-accent text-white px-4 py-2 rounded-custom font-bold text-xs">Join</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div id="footer-copyright">© 2026 Thumbrush. All rights reserved.</div>
+            <!-- Subtle Admin Access Link at the absolute bottom -->
+            <div>
+                <button id="admin-access-btn" class="text-textMuted/40 hover:text-accent text-[11px] underline tracking-wider transition-colors">Admin Access</button>
+            </div>
+        </div>
+    </footer>
+
+    <div id="lightbox-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white text-3xl p-2 hover:text-accent focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl w-full bg-surface rounded-custom overflow-hidden border border-white/20 shadow-2xl">
+            <div class="max-h-[60vh] overflow-hidden bg-black flex items-center justify-center">
+                <img id="lightbox-img" src="" alt="Preview" class="max-h-[60vh] object-contain">
+            </div>
+            <div class="p-6 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span id="lightbox-cat" class="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">Category</span>
+                    <a id="lightbox-link" href="#" target="_blank" class="hidden text-accent text-sm font-bold hover:underline items-center gap-1">
+                        View Project <i class="fa-solid fa-external-link text-xs"></i>
+                    </a>
+                </div>
+                <h3 id="lightbox-title" class="text-2xl font-bold text-white">Title</h3>
+                <p id="lightbox-desc" class="text-textMuted text-sm">Description</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-login-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-surface w-full max-w-md p-8 rounded-custom border border-white/20 shadow-2xl relative">
+            <button id="admin-login-close" class="absolute top-4 right-4 text-textMuted hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-xl bg-accent text-white flex items-center justify-center text-xl font-black mx-auto mb-3 shadow-lg shadow-accent/30">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Admin Control Center</h3>
+                <p class="text-xs text-textMuted mt-1">Enter password to access dashboard</p>
+            </div>
+            <form id="admin-login-form" class="space-y-4">
+                <div>
+                    <input type="password" id="admin-password-input" required placeholder="Enter password (infi2121)" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent">
+                </div>
+                <button type="submit" class="w-full bg-accent hover:bg-accentHover text-white py-3 rounded-custom font-bold text-sm shadow-lg shadow-accent/20">
+                    Login to Control Center
+                </button>
+                <div id="admin-login-error" class="hidden text-red-400 text-xs text-center font-semibold">
+                    Incorrect password. Hint: infi2121
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-dashboard" class="hidden fixed inset-0 z-50 bg-darkBg flex flex-col overflow-hidden">
+        <!-- Admin Top Navigation Bar -->
+        <header class="bg-surface border-b border-white/10 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-accent flex items-center justify-center text-white font-black">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-extrabold text-white">THUMBRUSH CONTROL CENTER</h2>
+                    <p class="text-[11px] text-textMuted">Static browser-based admin dashboard</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="admin-preview-btn" class="bg-surface hover:bg-surfaceHover text-white border border-white/10 px-4 py-2 rounded-custom text-xs font-bold transition-all">
+                    <i class="fa-solid fa-eye mr-2"></i> Preview Website
+                </button>
+                <button id="admin-logout-btn" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 px-4 py-2 rounded-custom text-xs font-bold transition-all">
+                    <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Admin Body with Sidebar -->
+        <div class="flex-1 flex overflow-hidden">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-surface/50 border-r border-white/10 p-4 space-y-1 overflow-y-auto hidden md:block">
+                <button data-tab="overview" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-bold bg-accent text-white transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-chart-pie w-5"></i> Dashboard Overview
+                </button>
+                <button data-tab="portfolio-mgr" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-textMuted hover:text-white hover:bg-surface transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-images w-5"></i> Portfolio Manager
+                </button>
+                <button data-tab="upload-mgr" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-textMuted hover:text-white hover:bg-surface transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-cloud-arrow-up w-5"></i> Image Upload Manager
+                </button>
+                <button data-tab="content-editor" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-textMuted hover:text-white hover:bg-surface transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-pen-to-square w-5"></i> Content Editor
+                </button>
+                <button data-tab="contact-settings" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-textMuted hover:text-white hover:bg-surface transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-address-book w-5"></i> Contact & Social
+                </button>
+                <button data-tab="design-customization" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-textMuted hover:text-white hover:bg-surface transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-palette w-5"></i> Design Customization
+                </button>
+                <button data-tab="section-mgmt" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-textMuted hover:text-white hover:bg-surface transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-layer-group w-5"></i> Section Management
+                </button>
+                <button data-tab="backup-restore" class="admin-tab-btn w-full text-left px-4 py-3 rounded-custom text-sm font-medium text-textMuted hover:text-white hover:bg-surface transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-database w-5"></i> Backup & Restore
+                </button>
+            </aside>
+
+            <!-- Main Tab Content Area -->
+            <main class="flex-1 p-6 md:p-8 overflow-y-auto bg-darkBg">
+                <!-- Notice Banner -->
+                <div class="mb-6 bg-surface border border-accent/30 p-4 rounded-custom flex items-start gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-accent text-lg mt-0.5"></i>
+                    <div class="text-xs text-textMuted">
+                        <strong class="text-white">Static Browser Storage Notice:</strong> Changes are saved in browser localStorage & IndexedDB. For permanent multi-device sync, connect a backend database. Password <code class="bg-darkBg px-1 py-0.5 rounded text-accent">infi2121</code> is for demo access.
+                    </div>
+                </div>
+
+                <!-- TAB 1: OVERVIEW -->
+                <div id="tab-overview" class="admin-tab-content space-y-6">
+                    <h3 class="text-2xl font-extrabold text-white">Dashboard Overview</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-surface p-6 rounded-custom border border-white/10">
+                            <div class="text-textMuted text-xs font-bold uppercase mb-2">Total Portfolio Items</div>
+                            <div id="stat-total-portfolio" class="text-3xl font-black text-white">0</div>
+                        </div>
+                        <div class="bg-surface p-6 rounded-custom border border-white/10">
+                            <div class="text-textMuted text-xs font-bold uppercase mb-2">Published Items</div>
+                            <div id="stat-published-portfolio" class="text-3xl font-black text-green-400">0</div>
+                        </div>
+                        <div class="bg-surface p-6 rounded-custom border border-white/10">
+                            <div class="text-textMuted text-xs font-bold uppercase mb-2">Featured Thumbnails</div>
+                            <div id="stat-featured-portfolio" class="text-3xl font-black text-accent">0</div>
+                        </div>
+                        <div class="bg-surface p-6 rounded-custom border border-white/10">
+                            <div class="text-textMuted text-xs font-bold uppercase mb-2">Services & Testimonials</div>
+                            <div id="stat-services-testimonials" class="text-3xl font-black text-white">8</div>
+                        </div>
+                    </div>
+                    <div class="bg-surface p-8 rounded-custom border border-white/10 space-y-4">
+                        <h4 class="text-lg font-bold text-white">Quick Management Shortcuts</h4>
+                        <p class="text-xs text-textMuted">Use the sidebar tabs to upload new portfolio items, customize hero text, update WhatsApp phone numbers, or export backups.</p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <button onclick="switchAdminTab('portfolio-mgr')" class="bg-accent text-white px-5 py-2.5 rounded-custom text-xs font-bold">Manage Portfolio</button>
+                            <button onclick="switchAdminTab('content-editor')" class="bg-surface hover:bg-surfaceHover text-white border border-white/10 px-5 py-2.5 rounded-custom text-xs font-bold">Edit Content</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: PORTFOLIO MANAGER -->
+                <div id="tab-portfolio-mgr" class="admin-tab-content hidden space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl font-extrabold text-white">Portfolio Manager</h3>
+                        <button onclick="openNewPortfolioModal()" class="bg-accent text-white px-4 py-2.5 rounded-custom text-xs font-bold">
+                            <i class="fa-solid fa-plus mr-2"></i> Add New Item
+                        </button>
+                    </div>
+                    <div class="bg-surface rounded-custom border border-white/10 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-darkBg border-b border-white/10 text-xs text-textMuted uppercase">
+                                    <tr>
+                                        <th class="p-4">Image</th>
+                                        <th class="p-4">Title</th>
+                                        <th class="p-4">Category</th>
+                                        <th class="p-4">Featured</th>
+                                        <th class="p-4">Status</th>
+                                        <th class="p-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-portfolio-table-body" class="divide-y divide-white/5">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: IMAGE UPLOAD MANAGER -->
+                <div id="tab-upload-mgr" class="admin-tab-content hidden space-y-6">
+                    <h3 class="text-2xl font-extrabold text-white">Image Upload Manager (IndexedDB)</h3>
+                    <p class="text-xs text-textMuted">Drag and drop images or select files to store them reliably in IndexedDB for the portfolio and hero showcase.</p>
+                    
+                    <div class="bg-surface p-8 rounded-custom border border-white/10 border-dashed text-center space-y-4" id="drop-zone">
+                        <i class="fa-solid fa-cloud-arrow-up text-4xl text-accent"></i>
+                        <h4 class="text-lg font-bold text-white">Drag & Drop images here or click to browse</h4>
+                        <input type="file" id="admin-file-input" multiple accept="image/*" class="hidden">
+                        <button onclick="document.getElementById('admin-file-input').click()" class="bg-accent text-white px-6 py-2.5 rounded-custom text-xs font-bold">Select Files</button>
+                    </div>
+
+                    <div id="upload-preview-container" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <!-- Previews -->
+                    </div>
+                </div>
+
+                <!-- TAB 4: CONTENT EDITOR -->
+                <div id="tab-content-editor" class="admin-tab-content hidden space-y-6">
+                    <h3 class="text-2xl font-extrabold text-white">Website Content Editor</h3>
+                    <form id="content-editor-form" class="space-y-6 bg-surface p-8 rounded-custom border border-white/10">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Hero Heading</label>
+                                <input type="text" id="edit-hero-heading" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Hero Button 1 Label</label>
+                                <input type="text" id="edit-hero-btn1" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-textMuted uppercase mb-2">Hero Description</label>
+                            <textarea id="edit-hero-desc" rows="3" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm focus:outline-none focus:border-accent"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Stat 1 Value</label>
+                                <input type="text" id="edit-stat-1-val" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Stat 1 Label</label>
+                                <input type="text" id="edit-stat-1-label" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Stat 2 Value</label>
+                                <input type="text" id="edit-stat-2-val" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Stat 2 Label</label>
+                                <input type="text" id="edit-stat-2-label" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                            </div>
+                        </div>
+                        <button type="submit" class="bg-accent text-white px-8 py-3 rounded-custom font-bold text-sm">Save Content Changes</button>
+                    </form>
+                </div>
+
+                <!-- TAB 5: CONTACT & SOCIAL SETTINGS -->
+                <div id="tab-contact-settings" class="admin-tab-content hidden space-y-6">
+                    <h3 class="text-2xl font-extrabold text-white">Contact & Social Settings</h3>
+                    <form id="contact-settings-form" class="space-y-6 bg-surface p-8 rounded-custom border border-white/10">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Contact Email / Recipient</label>
+                                <input type="email" id="setting-email" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">WhatsApp Phone Number</label>
+                                <input type="text" id="setting-whatsapp" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm" placeholder="923710221411">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-textMuted uppercase mb-2">X (Twitter) Profile URL</label>
+                            <input type="text" id="setting-x-url" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-textMuted uppercase mb-2">WhatsApp Default Message</label>
+                            <textarea id="setting-whatsapp-msg" rows="2" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="bg-accent text-white px-8 py-3 rounded-custom font-bold text-sm">Save Contact Settings</button>
+                    </form>
+                </div>
+
+                <!-- TAB 6: DESIGN CUSTOMIZATION -->
+                <div id="tab-design-customization" class="admin-tab-content hidden space-y-6">
+                    <h3 class="text-2xl font-extrabold text-white">Design Customization</h3>
+                    <form id="design-customization-form" class="space-y-6 bg-surface p-8 rounded-custom border border-white/10">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Accent Color</label>
+                                <input type="color" id="design-accent-color" value="#FF5500" class="w-full h-12 bg-darkBg border border-white/10 rounded-custom cursor-pointer">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Background Color</label>
+                                <input type="color" id="design-bg-color" value="#0A0A0A" class="w-full h-12 bg-darkBg border border-white/10 rounded-custom cursor-pointer">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-textMuted uppercase mb-2">Surface Card Color</label>
+                                <input type="color" id="design-surface-color" value="#141414" class="w-full h-12 bg-darkBg border border-white/10 rounded-custom cursor-pointer">
+                            </div>
+                        </div>
+                        <button type="submit" class="bg-accent text-white px-8 py-3 rounded-custom font-bold text-sm">Apply Theme Colors</button>
+                    </form>
+                </div>
+
+                <!-- TAB 7: SECTION MANAGEMENT -->
+                <div id="tab-section-mgmt" class="admin-tab-content hidden space-y-6">
+                    <h3 class="text-2xl font-extrabold text-white">Section Management</h3>
+                    <p class="text-xs text-textMuted">Toggle visibility or reorder website sections.</p>
+                    <div id="section-toggles-list" class="space-y-4">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- TAB 8: BACKUP & RESTORE -->
+                <div id="tab-backup-restore" class="admin-tab-content hidden space-y-6">
+                    <h3 class="text-2xl font-extrabold text-white">Backup & Restore</h3>
+                    <div class="bg-surface p-8 rounded-custom border border-white/10 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Export JSON Backup</h4>
+                            <p class="text-xs text-textMuted mb-4">Download all website settings and configuration as a JSON backup file.</p>
+                            <button onclick="exportJSONBackup()" class="bg-surface hover:bg-surfaceHover text-white border border-white/10 px-6 py-3 rounded-custom text-xs font-bold">
+                                <i class="fa-solid fa-download mr-2"></i> Export Backup JSON
+                            </button>
+                        </div>
+                        <hr class="border-white/10">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-2">Import JSON Backup</h4>
+                            <p class="text-xs text-textMuted mb-4">Restore settings from a previously exported JSON file.</p>
+                            <input type="file" id="import-json-file" accept=".json" class="block w-full text-xs text-textMuted file:mr-4 file:py-2 file:px-4 file:rounded-custom file:border-0 file:text-xs file:font-semibold file:bg-accent file:text-white hover:file:bg-accentHover">
+                        </div>
+                        <hr class="border-white/10">
+                        <div>
+                            <h4 class="text-lg font-bold text-red-400 mb-2">Reset to Factory Defaults</h4>
+                            <p class="text-xs text-textMuted mb-4">Erase all custom saved settings and restore default sample data.</p>
+                            <button onclick="resetToDefaults()" class="bg-red-600/20 text-red-400 border border-red-500/30 px-6 py-3 rounded-custom text-xs font-bold hover:bg-red-600/30">
+                                <i class="fa-solid fa-triangle-exclamation mr-2"></i> Reset Website Defaults
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="admin-portfolio-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-surface w-full max-w-lg p-8 rounded-custom border border-white/20 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAdminPortfolioModal()" class="absolute top-4 right-4 text-textMuted hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 id="admin-modal-title" class="text-xl font-bold text-white mb-6">Add Portfolio Item</h3>
+            <form id="admin-portfolio-form" class="space-y-4">
+                <input type="hidden" id="modal-item-id">
+                <div>
+                    <label class="block text-xs font-bold text-textMuted uppercase mb-1">Title</label>
+                    <input type="text" id="modal-item-title" required class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-textMuted uppercase mb-1">Category</label>
+                    <select id="modal-item-cat" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm">
+                        <option value="Thumbnails">Thumbnails</option>
+                        <option value="Posters">Posters</option>
+                        <option value="Social Posts">Social Posts</option>
+                        <option value="Logos">Logos</option>
+                        <option value="Branding">Branding</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-textMuted uppercase mb-1">Image URL (or upload below)</label>
+                    <input type="text" id="modal-item-img" required class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm" placeholder="https://images.unsplash.com/...">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-textMuted uppercase mb-1">Description</label>
+                    <textarea id="modal-item-desc" rows="3" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-textMuted uppercase mb-1">External Project Link (optional)</label>
+                    <input type="text" id="modal-item-link" class="w-full px-4 py-3 bg-darkBg border border-white/10 rounded-custom text-white text-sm" placeholder="https://youtube.com/...">
+                </div>
+                <div class="flex items-center gap-6 pt-2">
+                    <label class="flex items-center gap-2 text-sm text-white cursor-pointer">
+                        <input type="checkbox" id="modal-item-featured" class="w-4 h-4 rounded text-accent focus:ring-accent"> Mark as Featured
+                    </label>
+                    <label class="flex items-center gap-2 text-sm text-white cursor-pointer">
+                        <input type="checkbox" id="modal-item-published" checked class="w-4 h-4 rounded text-accent focus:ring-accent"> Published
+                    </label>
+                </div>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeAdminPortfolioModal()" class="bg-surface hover:bg-surfaceHover text-white px-5 py-2.5 rounded-custom text-xs font-bold border border-white/10">Cancel</button>
+                    <button type="submit" class="bg-accent text-white px-6 py-2.5 rounded-custom text-xs font-bold">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div id="toast-notification" class="hidden fixed bottom-6 right-6 z-50 bg-surface border border-accent text-white px-6 py-3 rounded-custom shadow-2xl flex items-center gap-3 animate-bounce">
+        <i class="fa-solid fa-circle-check text-accent"></i>
+        <span id="toast-message" class="text-sm font-bold">Success!</span>
+    </div>
+
+    <script>
+        // Default Sample Portfolio Data
+        const defaultPortfolio = [
+            {
+                id: '1',
+                title: 'High CTR Gaming Masterpiece',
+                category: 'Thumbnails',
+                image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
+                description: 'Crafted for a top 1M gaming channel, resulting in 18.4% CTR.',
+                featured: true,
+                published: true,
+                link: 'https://youtube.com'
+            },
+            {
+                id: '2',
+                title: 'Tech Podcast Viral Thumbnail',
+                category: 'Thumbnails',
+                image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+                description: 'Bold expressive faces, high contrast typography, and vibrant glows.',
+                featured: true,
+                published: true,
+                link: 'https://youtube.com'
+            },
+            {
+                id: '3',
+                title: 'Cyberpunk Music Festival Poster',
+                category: 'Posters',
+                image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80',
+                description: 'Futuristic event poster with heavy visual hierarchy and neon accents.',
+                featured: true,
+                published: true,
+                link: '#'
+            },
+            {
+                id: '4',
+                title: 'Crypto Launch Social Carousel',
+                category: 'Social Posts',
+                image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80',
+                description: 'Clean modern financial graphics designed for high engagement on X & LinkedIn.',
+                featured: false,
+                published: true,
+                link: '#'
+            },
+            {
+                id: '5',
+                title: 'Minimalist Creator Logo Identity',
+                category: 'Logos',
+                image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80',
+                description: 'Memorable geometric wordmark and avatar kit for online personality.',
+                featured: false,
+                published: true,
+                link: '#'
+            },
+            {
+                id: '6',
+                title: 'Complete Brand Kit & Visuals',
+                category: 'Branding',
+                image: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=800&q=80',
+                description: 'Comprehensive design systems, banner graphics, and brand asset pack.',
+                featured: false,
+                published: true,
+                link: '#'
+            }
+        ];
+
+        // Default Website Settings
+        const defaultSettings = {
+            heroHeading: "Make Every Scroll Stop With Stunning Thumbnails",
+            heroDesc: "We create scroll-stopping thumbnails, posters, social media posts, logos, and brand visuals that help creators and businesses stand out online.",
+            heroBtn1: "Get Started",
+            heroBtn2: "View Portfolio",
+            stat1Val: "1,450+",
+            stat1Label: "Thumbnails Created",
+            stat2Val: "380+",
+            stat2Label: "Happy Clients",
+            stat3Val: "5+",
+            stat3Label: "Years Experience",
+            stat4Val: "99%",
+            stat4Label: "Client Satisfaction",
+            contactEmail: "contact.thumbrush1@gmail.com",
+            whatsappNum: "923710221411",
+            xUrl: "https://twitter.com",
+            whatsappMsg: "Hi Thumbrush, I want to discuss a new thumbnail project!",
+            accentColor: "#FF5500",
+            bgColor: "#0A0A0A",
+            surfaceColor: "#141414"
+        };
+
+        // IndexedDB Helper for Large Images
+        let db;
+        const request = indexedDB.open('ThumbrushDB', 1);
+        request.onerror = (event) => console.error("IndexedDB error:", event);
+        request.onsuccess = (event) => {
+            db = event.target.result;
+            loadStoredData();
+        };
+        request.onupgradeneeded = (event) => {
+            db = event.target.result;
+            if (!db.objectStoreNames.contains('images')) {
+                db.createObjectStore('images', { keyPath: 'id', autoIncrement: true });
+            }
+        };
+
+        function saveToIndexedDB(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const tx = db.transaction(['images'], 'readwrite');
+                const store = tx.objectStore('images');
+                const req = store.add({ data: e.target.result, name: file.name, timestamp: Date.now() });
+                req.onsuccess = (evt) => {
+                    callback(evt.target.result);
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // State Management
+        let portfolio = JSON.parse(localStorage.getItem('thumbrush_portfolio')) || defaultPortfolio;
+        let settings = JSON.parse(localStorage.getItem('thumbrush_settings')) || defaultSettings;
+
+        function saveState() {
+            localStorage.setItem('thumbrush_portfolio', JSON.stringify(portfolio));
+            localStorage.setItem('thumbrush_settings', JSON.stringify(settings));
+        }
+
+        // Initialize UI on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            applySettings();
+            renderPortfolioGrid('all');
+            renderFeaturedCarousel();
+            renderLiveMarquee();
+            renderAdminPortfolioTable();
+            initEventListeners();
+        });
+
+        function applySettings() {
+            document.getElementById('hero-heading').innerHTML = settings.heroHeading.replace('Stunning Thumbnails', '<span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-orange-400">Stunning Thumbnails</span>');
+            document.getElementById('hero-description').textContent = settings.heroDesc;
+            document.getElementById('hero-btn-1').textContent = settings.heroBtn1;
+            document.getElementById('hero-btn-2').textContent = settings.heroBtn2;
+
+            document.getElementById('stat-1-val').textContent = settings.stat1Val;
+            document.getElementById('stat-1-label').textContent = settings.stat1Label;
+            document.getElementById('stat-2-val').textContent = settings.stat2Val;
+            document.getElementById('stat-2-label').textContent = settings.stat2Label;
+            document.getElementById('stat-3-val').textContent = settings.stat3Val;
+            document.getElementById('stat-3-label').textContent = settings.stat3Label;
+            document.getElementById('stat-4-val').textContent = settings.stat4Val;
+            document.getElementById('stat-4-label').textContent = settings.stat4Label;
+
+            document.getElementById('contact-btn-email').href = `mailto:${settings.contactEmail}`;
+            document.getElementById('contact-btn-whatsapp').href = `https://wa.me/${settings.whatsappNum}`;
+            document.getElementById('book-thumbrush-btn').href = `https://wa.me/${settings.whatsappNum}?text=${encodeURIComponent(settings.whatsappMsg)}`;
+            document.getElementById('contact-btn-x').href = settings.xUrl;
+            document.getElementById('footer-social-x').href = settings.xUrl;
+            document.getElementById('footer-social-wa').href = `https://wa.me/${settings.whatsappNum}`;
+            document.getElementById('footer-social-mail').href = `mailto:${settings.contactEmail}`;
+
+            // Apply CSS variables
+            document.documentElement.style.setProperty('--accent-color', settings.accentColor);
+            document.documentElement.style.setProperty('--bg-color', settings.bgColor);
+            document.documentElement.style.setProperty('--surface-color', settings.surfaceColor);
+        }
+
+        // Render Portfolio Grid
+        function renderPortfolioGrid(filter = 'all', searchQuery = '') {
+            const grid = document.getElementById('portfolio-grid');
+            const empty = document.getElementById('portfolio-empty');
+            grid.innerHTML = '';
+
+            const published = portfolio.filter(item => item.published);
+            const filtered = published.filter(item => {
+                const matchesCat = filter === 'all' || item.category === filter;
+                const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                empty.classList.remove('hidden');
+                return;
+            } else {
+                empty.classList.add('hidden');
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-surface rounded-custom overflow-hidden border border-white/10 group hover:border-accent/50 transition-all shadow-xl';
+                card.innerHTML = `
+                    <div class="relative aspect-video overflow-hidden cursor-pointer" onclick="openLightbox('${item.id}')">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/141414/FF5500?text=Thumbrush'">
+                        <div class="absolute top-3 left-3 bg-darkBg/80 backdrop-blur border border-white/10 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            ${item.category}
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-xl font-bold text-white group-hover:text-accent transition-colors cursor-pointer" onclick="openLightbox('${item.id}')">${item.title}</h3>
+                        <p class="text-textMuted text-sm line-clamp-2">${item.description}</p>
+                        <div class="flex items-center justify-between pt-2">
+                            <button onclick="openLightbox('${item.id}')" class="text-accent font-bold text-xs hover:underline">
+                                Quick Preview <i class="fa-solid fa-eye ml-1"></i>
+                            </button>
+                            ${item.link && item.link !== '#' ? `<a href="${item.link}" target="_blank" class="text-textMuted hover:text-white text-xs"><i class="fa-solid fa-external-link"></i></a>` : ''}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Render Featured Carousel
+        function renderFeaturedCarousel() {
+            const container = document.getElementById('featured-carousel');
+            container.innerHTML = '';
+            const featuredItems = portfolio.filter(item => item.published && item.featured);
+            
+            if (featuredItems.length === 0) {
+                container.innerHTML = `<div class="col-span-3 text-center py-12 text-textMuted text-sm">No featured items selected. Mark items as featured in the admin panel.</div>`;
+                return;
+            }
+
+            featuredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-surface rounded-custom overflow-hidden border border-white/10 group hover:border-accent transition-all shadow-2xl';
+                card.innerHTML = `
+                    <div class="relative aspect-video overflow-hidden cursor-pointer" onclick="openLightbox('${item.id}')">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/141414/FF5500?text=Featured'">
+                        <div class="absolute top-3 right-3 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                            FEATURED
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <h3 class="text-lg font-bold text-white">${item.title}</h3>
+                        <p class="text-textMuted text-xs line-clamp-2">${item.description}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Render Live Marquee
+        function renderLiveMarquee() {
+            const container = document.getElementById('live-marquee-container');
+            container.innerHTML = '';
+            const published = portfolio.filter(item => item.published);
+            // Duplicate for smooth infinite scroll loop
+            const itemsToDisplay = [...published, ...published, ...published];
+
+            itemsToDisplay.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'w-72 sm:w-80 h-44 sm:h-48 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 relative group shadow-lg cursor-pointer';
+                el.onclick = () => openLightbox(item.id);
+                el.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/141414/FF5500?text=Thumbrush'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkBg/90 via-transparent to-transparent flex flex-col justify-end p-4">
+                        <span class="text-xs font-bold text-accent">${item.category}</span>
+                        <h4 class="text-sm font-bold text-white truncate">${item.title}</h4>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        // Lightbox Functions
+        function openLightbox(id) {
+            const item = portfolio.find(p => p.id === id);
+            if (!item) return;
+            document.getElementById('lightbox-img').src = item.image;
+            document.getElementById('lightbox-cat').textContent = item.category;
+            document.getElementById('lightbox-title').textContent = item.title;
+            document.getElementById('lightbox-desc').textContent = item.description;
+            const linkEl = document.getElementById('lightbox-link');
+            if (item.link && item.link !== '#') {
+                linkEl.href = item.link;
+                linkEl.classList.remove('hidden');
+                linkEl.classList.add('inline-flex');
+            } else {
+                linkEl.classList.add('hidden');
+                linkEl.classList.remove('inline-flex');
+            }
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        // Event Listeners Setup
+        function initEventListeners() {
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+
+            // Portfolio filter buttons
+            document.querySelectorAll('.portfolio-filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.portfolio-filter-btn').forEach(b => {
+                        b.classList.remove('bg-accent', 'text-white', 'shadow-md', 'shadow-accent/20');
+                        b.classList.add('bg-surface', 'text-textMuted');
+                    });
+                    e.target.classList.add('bg-accent', 'text-white', 'shadow-md', 'shadow-accent/20');
+                    e.target.classList.remove('bg-surface', 'text-textMuted');
+                    renderPortfolioGrid(e.target.getAttribute('data-filter'), document.getElementById('portfolio-search').value);
+                });
+            });
+
+            // Portfolio search input
+            document.getElementById('portfolio-search').addEventListener('input', (e) => {
+                const activeFilter = document.querySelector('.portfolio-filter-btn.bg-accent').getAttribute('data-filter');
+                renderPortfolioGrid(activeFilter, e.target.value);
+            });
+
+            // Lightbox close
+            document.getElementById('lightbox-close').addEventListener('click', () => {
+                document.getElementById('lightbox-modal').classList.add('hidden');
+            });
+            document.getElementById('lightbox-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'lightbox-modal') {
+                    document.getElementById('lightbox-modal').classList.add('hidden');
+                }
+            });
+
+            // FAQ Accordion
+            document.querySelectorAll('.faq-toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('i');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+
+            // Admin Access modal trigger
+            document.getElementById('admin-access-btn').addEventListener('click', () => {
+                document.getElementById('admin-login-modal').classList.remove('hidden');
+            });
+            document.getElementById('admin-login-close').addEventListener('click', () => {
+                document.getElementById('admin-login-modal').classList.add('hidden');
+            });
+
+            // Admin Login Form
+            document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const pass = document.getElementById('admin-password-input').value;
+                if (pass === 'infi2121') {
+                    document.getElementById('admin-login-modal').classList.add('hidden');
+                    document.getElementById('admin-dashboard').classList.remove('hidden');
+                    document.getElementById('admin-password-input').value = '';
+                    document.getElementById('admin-login-error').classList.add('hidden');
+                    updateAdminOverviewStats();
+                } else {
+                    document.getElementById('admin-login-error').classList.remove('hidden');
+                }
+            });
+
+            // Admin Logout
+            document.getElementById('admin-logout-btn').addEventListener('click', () => {
+                document.getElementById('admin-dashboard').classList.add('hidden');
+            });
+            document.getElementById('admin-preview-btn').addEventListener('click', () => {
+                document.getElementById('admin-dashboard').classList.add('hidden');
+            });
+
+            // Admin Sidebar Tabs
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const tabName = btn.getAttribute('data-tab');
+                    switchAdminTab(tabName);
+                });
+            });
+
+            // Admin Portfolio Form Submit
+            document.getElementById('admin-portfolio-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const id = document.getElementById('modal-item-id').value;
+                const title = document.getElementById('modal-item-title').value;
+                const category = document.getElementById('modal-item-cat').value;
+                const image = document.getElementById('modal-item-img').value;
+                const description = document.getElementById('modal-item-desc').value;
+                const link = document.getElementById('modal-item-link').value;
+                const featured = document.getElementById('modal-item-featured').checked;
+                const published = document.getElementById('modal-item-published').checked;
+
+                if (id) {
+                    // Edit existing
+                    const item = portfolio.find(p => p.id === id);
+                    if (item) {
+                        item.title = title;
+                        item.category = category;
+                        item.image = image;
+                        item.description = description;
+                        item.link = link;
+                        item.featured = featured;
+                        item.published = published;
+                    }
+                } else {
+                    // Add new
+                    const newItem = {
+                        id: Date.now().toString(),
+                        title, category, image, description, link, featured, published
+                    };
+                    portfolio.unshift(newItem);
+                }
+
+                saveState();
+                renderPortfolioGrid();
+                renderFeaturedCarousel();
+                renderLiveMarquee();
+                renderAdminPortfolioTable();
+                closeAdminPortfolioModal();
+                showToast('Portfolio item saved successfully!');
+            });
+
+            // Content Editor Form
+            document.getElementById('content-editor-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                settings.heroHeading = document.getElementById('edit-hero-heading').value;
+                settings.heroDesc = document.getElementById('edit-hero-desc').value;
+                settings.heroBtn1 = document.getElementById('edit-hero-btn1').value;
+                settings.stat1Val = document.getElementById('edit-stat-1-val').value;
+                settings.stat1Label = document.getElementById('edit-stat-1-label').value;
+                settings.stat2Val = document.getElementById('edit-stat-2-val').value;
+                settings.stat2Label = document.getElementById('edit-stat-2-label').value;
+                saveState();
+                applySettings();
+                showToast('Content updated successfully!');
+            });
+
+            // Contact Settings Form
+            document.getElementById('contact-settings-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                settings.contactEmail = document.getElementById('setting-email').value;
+                settings.whatsappNum = document.getElementById('setting-whatsapp').value;
+                settings.xUrl = document.getElementById('setting-x-url').value;
+                settings.whatsappMsg = document.getElementById('setting-whatsapp-msg').value;
+                saveState();
+                applySettings();
+                showToast('Contact settings updated successfully!');
+            });
+
+            // Design Customization Form
+            document.getElementById('design-customization-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                settings.accentColor = document.getElementById('design-accent-color').value;
+                settings.bgColor = document.getElementById('design-bg-color').value;
+                settings.surfaceColor = document.getElementById('design-surface-color').value;
+                saveState();
+                applySettings();
+                showToast('Theme colors applied successfully!');
+            });
+
+            // File upload drag & drop
+            const dropZone = document.getElementById('drop-zone');
+            dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-accent'); });
+            dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-accent'); });
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('border-accent');
+                handleFiles(e.dataTransfer.files);
+            });
+            document.getElementById('admin-file-input').addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-btn').forEach(b => {
+                b.classList.remove('bg-accent', 'text-white');
+                b.classList.add('text-textMuted', 'hover:bg-surface');
+            });
+            const activeBtn = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-accent', 'text-white');
+                activeBtn.classList.remove('text-textMuted', 'hover:bg-surface');
+            }
+            document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+
+            if (tabName === 'overview') updateAdminOverviewStats();
+            if (tabName === 'content-editor') populateContentEditorForm();
+            if (tabName === 'contact-settings') populateContactSettingsForm();
+        }
+
+        function updateAdminOverviewStats() {
+            document.getElementById('stat-total-portfolio').textContent = portfolio.length;
+            document.getElementById('stat-published-portfolio').textContent = portfolio.filter(p => p.published).length;
+            document.getElementById('stat-featured-portfolio').textContent = portfolio.filter(p => p.featured).length;
+        }
+
+        function renderAdminPortfolioTable() {
+            const tbody = document.getElementById('admin-portfolio-table-body');
+            tbody.innerHTML = '';
+            portfolio.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-white/5 hover:bg-surface/50';
+                tr.innerHTML = `
+                    <td class="p-4"><img src="${item.image}" class="w-16 h-10 object-cover rounded" onerror="this.src='https://placehold.co/100x60/141414/FF5500?text=Img'"></td>
+                    <td class="p-4 font-bold text-white">${item.title}</td>
+                    <td class="p-4"><span class="bg-darkBorder px-2.5 py-1 rounded text-xs">${item.category}</span></td>
+                    <td class="p-4">${item.featured ? '<span class="text-accent font-bold">Yes</span>' : 'No'}</td>
+                    <td class="p-4">${item.published ? '<span class="text-green-400 font-bold">Published</span>' : '<span class="text-amber-400">Draft</span>'}</td>
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="editPortfolioItem('${item.id}')" class="text-textMuted hover:text-white px-2 py-1"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deletePortfolioItem('${item.id}')" class="text-red-400 hover:text-red-300 px-2 py-1"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openNewPortfolioModal() {
+            document.getElementById('admin-modal-title').textContent = 'Add Portfolio Item';
+            document.getElementById('modal-item-id').value = '';
+            document.getElementById('modal-item-title').value = '';
+            document.getElementById('modal-item-img').value = '';
+            document.getElementById('modal-item-desc').value = '';
+            document.getElementById('modal-item-link').value = '';
+            document.getElementById('modal-item-featured').checked = false;
+            document.getElementById('modal-item-published').checked = true;
+            document.getElementById('admin-portfolio-modal').classList.remove('hidden');
+        }
+
+        function editPortfolioItem(id) {
+            const item = portfolio.find(p => p.id === id);
+            if (!item) return;
+            document.getElementById('admin-modal-title').textContent = 'Edit Portfolio Item';
+            document.getElementById('modal-item-id').value = item.id;
+            document.getElementById('modal-item-title').value = item.title;
+            document.getElementById('modal-item-cat').value = item.category;
+            document.getElementById('modal-item-img').value = item.image;
+            document.getElementById('modal-item-desc').value = item.description;
+            document.getElementById('modal-item-link').value = item.link || '';
+            document.getElementById('modal-item-featured').checked = item.featured;
+            document.getElementById('modal-item-published').checked = item.published;
+            document.getElementById('admin-portfolio-modal').classList.remove('hidden');
+        }
+
+        function closeAdminPortfolioModal() {
+            document.getElementById('admin-portfolio-modal').classList.add('hidden');
+        }
+
+        function deletePortfolioItem(id) {
+            if (confirm('Are you sure you want to delete this portfolio item?')) {
+                portfolio = portfolio.filter(p => p.id !== id);
+                saveState();
+                renderPortfolioGrid();
+                renderFeaturedCarousel();
+                renderLiveMarquee();
+                renderAdminPortfolioTable();
+                showToast('Portfolio item deleted.');
+            }
+        }
+
+        function handleFiles(files) {
+            const previewContainer = document.getElementById('upload-preview-container');
+            for (let file of files) {
+                if (!file.type.startsWith('image/')) continue;
+                saveToIndexedDB(file, (id) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const div = document.createElement('div');
+                        div.className = 'bg-surface p-3 rounded-custom border border-white/10 space-y-2';
+                        div.innerHTML = `
+                            <img src="${e.target.result}" class="w-full h-24 object-cover rounded">
+                            <div class="text-xs font-bold truncate text-white">${file.name}</div>
+                            <button onclick="publishUploadedImage('${e.target.result}', '${file.name}')" class="w-full bg-accent text-white py-1.5 rounded text-xs font-bold">Publish to Portfolio</button>
+                        `;
+                        previewContainer.appendChild(div);
+                        showToast('Image stored in IndexedDB!');
+                    }
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+        function publishUploadedImage(dataUrl, filename) {
+            const newItem = {
+                id: Date.now().toString(),
+                title: filename.substring(0, filename.lastIndexOf('.')) || 'Uploaded Design',
+                category: 'Thumbnails',
+                image: dataUrl,
+                description: 'Uploaded directly via admin image manager.',
+                featured: false,
+                published: true,
+                link: '#'
+            };
+            portfolio.unshift(newItem);
+            saveState();
+            renderPortfolioGrid();
+            renderFeaturedCarousel();
+            renderLiveMarquee();
+            renderAdminPortfolioTable();
+            showToast('Published image to portfolio!');
+            switchAdminTab('portfolio-mgr');
+        }
+
+        function populateContentEditorForm() {
+            document.getElementById('edit-hero-heading').value = settings.heroHeading;
+            document.getElementById('edit-hero-desc').value = settings.heroDesc;
+            document.getElementById('edit-hero-btn1').value = settings.heroBtn1;
+            document.getElementById('edit-stat-1-val').value = settings.stat1Val;
+            document.getElementById('edit-stat-1-label').value = settings.stat1Label;
+            document.getElementById('edit-stat-2-val').value = settings.stat2Val;
+            document.getElementById('edit-stat-2-label').value = settings.stat2Label;
+        }
+
+        function populateContactSettingsForm() {
+            document.getElementById('setting-email').value = settings.contactEmail;
+            document.getElementById('setting-whatsapp').value = settings.whatsappNum;
+            document.getElementById('setting-x-url').value = settings.xUrl;
+            document.getElementById('setting-whatsapp-msg').value = settings.whatsappMsg;
+        }
+
+        function exportJSONBackup() {
+            const data = { portfolio, settings };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'thumbrush_backup.json';
+            a.click();
+            showToast('Backup JSON exported successfully!');
+        }
+
+        function resetToDefaults() {
+            if (confirm('Are you sure you want to reset all website data and settings to factory defaults?')) {
+                localStorage.removeItem('thumbrush_portfolio');
+                localStorage.removeItem('thumbrush_settings');
+                portfolio = defaultPortfolio;
+                settings = defaultSettings;
+                saveState();
+                applySettings();
+                renderPortfolioGrid();
+                renderFeaturedCarousel();
+                renderLiveMarquee();
+                renderAdminPortfolioTable();
+                showToast('Website reset to defaults.');
+                document.getElementById('admin-dashboard').classList.add('hidden');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
