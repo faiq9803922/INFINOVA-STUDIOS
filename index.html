@@ -78,9 +78,6 @@
         .floating-badge {
             animation: float 4s ease-in-out infinite;
         }
-        .floating-badge-delayed {
-            animation: float 5s ease-in-out 2s infinite;
-        }
         .glow-accent {
             box-shadow: 0 0 30px rgba(245, 216, 94, 0.15);
         }
@@ -98,9 +95,9 @@
 
     <header id="navbar-section" class="sticky top-0 z-50 backdrop-blur-md bg-[#0B0B08]/90 border-b border-[#39371C] transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo & Admin Top-Left Trigger -->
+            <!-- Brand Logo & Admin Top-Left Trigger (Shifted further left) -->
             <div class="flex items-center gap-3">
-                <button id="top-admin-trigger" title="Admin Control Center" class="w-8 h-8 rounded-lg bg-[#191A0B] border border-[#39371C] flex items-center justify-center text-[#F5D85E] hover:bg-[#23250F] hover:border-[#F5D85E] transition-all">
+                <button id="top-admin-trigger" title="Admin Control Center" class="w-8 h-8 rounded-lg bg-[#191A0B] border border-[#39371C] flex items-center justify-center text-[#F5D85E] hover:bg-[#23250F] hover:border-[#F5D85E] transition-all -ml-3 sm:-ml-4">
                     <i class="fa-solid fa-lock text-xs"></i>
                 </button>
                 <a href="#" class="flex items-center gap-3 group">
@@ -117,17 +114,9 @@
                 <a href="#process" class="hover:text-[#F5D85E] transition-colors nav-link">Process</a>
                 <a href="#portfolio" class="hover:text-[#F5D85E] transition-colors nav-link">Portfolio</a>
                 <a href="#services" class="hover:text-[#F5D85E] transition-colors nav-link">Services</a>
-                <a href="#testimonials" class="hover:text-[#F5D85E] transition-colors nav-link">Testimonials</a>
                 <a href="#faqs" class="hover:text-[#F5D85E] transition-colors nav-link">FAQs</a>
                 <a href="#contact" class="hover:text-[#F5D85E] transition-colors nav-link">Contact</a>
             </nav>
-
-            <!-- CTA Button -->
-            <div class="hidden md:flex items-center gap-4">
-                <a href="#contact" class="bg-[#F5D85E] hover:bg-[#D4B943] text-[#080906] px-6 py-2.5 rounded-custom font-semibold text-sm transition-all shadow-lg shadow-[#F5D85E]/10 hover:shadow-[#F5D85E]/30 hover:-translate-y-0.5">
-                    Get Started
-                </a>
-            </div>
 
             <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn" class="md:hidden text-[#FFFFFF] text-2xl p-2 focus:outline-none" aria-label="Toggle Navigation">
@@ -141,12 +130,8 @@
             <a href="#process" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Process</a>
             <a href="#portfolio" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Portfolio</a>
             <a href="#services" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Services</a>
-            <a href="#testimonials" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Testimonials</a>
             <a href="#faqs" class="block text-lg font-medium text-[#B8B8AE] mobile-link">FAQs</a>
             <a href="#contact" class="block text-lg font-medium text-[#B8B8AE] mobile-link">Contact</a>
-            <div class="pt-4">
-                <a href="#contact" class="block text-center bg-[#F5D85E] text-[#080906] py-3 rounded-custom font-semibold mobile-link">Get Started</a>
-            </div>
         </div>
     </header>
 
@@ -166,9 +151,6 @@
                         We create scroll-stopping thumbnails, posters, social media posts, logos, and brand visuals that help creators and businesses stand out online.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#contact" class="w-full sm:w-auto bg-[#F5D85E] hover:bg-[#D4B943] text-[#080906] px-8 py-4 rounded-custom font-bold text-base transition-all shadow-xl shadow-[#F5D85E]/20 hover:shadow-[#F5D85E]/40 hover:-translate-y-1 text-center">
-                            Get Started
-                        </a>
                         <a href="#portfolio" class="w-full sm:w-auto bg-[#191A0B] hover:bg-[#23250F] text-[#FFFFFF] px-8 py-4 rounded-custom font-bold text-base transition-all border border-[#39371C] hover:border-[#F5D85E] text-center">
                             View Portfolio
                         </a>
@@ -314,7 +296,7 @@
                         <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">YouTube Thumbnails</h3>
                         <p class="text-[#B8B8AE] text-sm leading-relaxed mb-6">Readable, dramatic thumbnails crafted for maximum click-through rates.</p>
                     </div>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Start a Project <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Contact Us <i class="fa-solid fa-arrow-right text-xs"></i></a>
                 </div>
                 <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between hover:border-[#F5D85E] transition-all group">
                     <div>
@@ -324,7 +306,7 @@
                         <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">Poster Design</h3>
                         <p class="text-[#B8B8AE] text-sm leading-relaxed mb-6">Event, promo, and campaign posters featuring clean visual hierarchy.</p>
                     </div>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Start a Project <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Contact Us <i class="fa-solid fa-arrow-right text-xs"></i></a>
                 </div>
                 <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between hover:border-[#F5D85E] transition-all group">
                     <div>
@@ -334,55 +316,13 @@
                         <h3 class="text-xl font-bold mb-3 text-[#FFFFFF]">Logo Design</h3>
                         <p class="text-[#B8B8AE] text-sm leading-relaxed mb-6">Memorable marks and identity starters that make brands instantly recognizable.</p>
                     </div>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Start a Project <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-[#F5D85E] font-bold text-sm hover:text-[#D4B943]">Contact Us <i class="fa-solid fa-arrow-right text-xs"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="testimonials" class="py-24 bg-[#080906]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">Client Love</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 tracking-tight text-[#FFFFFF]">Hear it from the clients.</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-[#F5D85E] gap-1 mb-4 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p class="text-[#B8B8AE] text-sm italic leading-relaxed mb-6">"The visuals instantly looked more premium and easier to click."</p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-[#39371C]">
-                        <div class="w-10 h-10 rounded-full bg-[#F5D85E]/20 text-[#F5D85E] font-bold flex items-center justify-center">CC</div>
-                        <div><div class="text-sm font-bold text-[#FFFFFF]">Creator Client</div><div class="text-xs text-[#B8B8AE]">YouTube Creator</div></div>
-                    </div>
-                </div>
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-[#F5D85E] gap-1 mb-4 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p class="text-[#B8B8AE] text-sm italic leading-relaxed mb-6">"Infinova Studio understood our brand direction and delivered clean graphics fast."</p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-[#39371C]">
-                        <div class="w-10 h-10 rounded-full bg-[#F5D85E]/20 text-[#F5D85E] font-bold flex items-center justify-center">SF</div>
-                        <div><div class="text-sm font-bold text-[#FFFFFF]">Startup Founder</div><div class="text-xs text-[#B8B8AE]">Tech Startup</div></div>
-                    </div>
-                </div>
-                <div class="bg-[#191A0B] p-8 rounded-custom border border-[#39371C] flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-[#F5D85E] gap-1 mb-4 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p class="text-[#B8B8AE] text-sm italic leading-relaxed mb-6">"The logo and social graphics gave our page a much more professional look."</p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-[#39371C]">
-                        <div class="w-10 h-10 rounded-full bg-[#F5D85E]/20 text-[#F5D85E] font-bold flex items-center justify-center">BO</div>
-                        <div><div class="text-sm font-bold text-[#FFFFFF]">Business Owner</div><div class="text-xs text-[#B8B8AE]">E-Commerce Brand</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faqs" class="py-24 bg-[#191A0B]/30">
+    <section id="faqs" class="py-24 bg-[#080906]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">Got Questions?</span>
@@ -412,8 +352,8 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION (Form Removed as requested) -->
-    <section id="contact" class="py-24 bg-[#080906] relative">
+    <!-- CONTACT SECTION (Form completely removed) -->
+    <section id="contact" class="py-24 bg-[#191A0B]/30 relative">
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#F5D85E]/10 rounded-full blur-[160px] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span class="text-[#F5D85E] font-bold text-xs uppercase tracking-widest bg-[#F5D85E]/10 px-3 py-1 rounded-full border border-[#F5D85E]/20">Let's Connect</span>
@@ -530,7 +470,7 @@
         </div>
     </div>
 
-    <!-- Admin Dashboard (Full Manager) -->
+    <!-- Admin Dashboard -->
     <div id="admin-dashboard" class="hidden fixed inset-0 z-50 bg-[#080906] flex flex-col overflow-hidden">
         <header class="bg-[#191A0B] border-b border-[#39371C] px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -585,28 +525,28 @@
                     </div>
                 </div>
 
-                <!-- Contact & Socials Settings Tab -->
+                <!-- Contact & Socials Settings Tab (Fully Fixed & Functional) -->
                 <div id="tab-contact-settings" class="admin-tab-content hidden space-y-6">
                     <h3 class="text-2xl font-extrabold text-[#FFFFFF]">Contact & Social Settings</h3>
                     <form id="contact-settings-form" class="space-y-6 bg-[#191A0B] p-8 rounded-custom border border-[#39371C]">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">Gmail Address</label>
-                                <input type="email" id="setting-email" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm">
+                                <input type="email" id="setting-email" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">WhatsApp Number (with country code)</label>
-                                <input type="text" id="setting-whatsapp" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="923710221411">
+                                <input type="text" id="setting-whatsapp" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="923710221411">
                             </div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">Instagram Profile URL</label>
-                                <input type="text" id="setting-insta" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://instagram.com/...">
+                                <input type="url" id="setting-insta" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://instagram.com/...">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-[#B8B8AE] uppercase mb-2">X (Twitter) Profile URL</label>
-                                <input type="text" id="setting-x" class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://twitter.com/...">
+                                <input type="url" id="setting-x" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://twitter.com/...">
                             </div>
                         </div>
                         <button type="submit" class="bg-[#F5D85E] text-[#080906] px-8 py-3 rounded-custom font-bold text-sm hover:bg-[#D4B943]">Save Settings</button>
@@ -802,6 +742,22 @@
                 });
             });
 
+            // Admin sidebar tabs switching
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabName = btn.getAttribute('data-tab');
+                    document.querySelectorAll('.admin-tab-btn').forEach(b => {
+                        b.classList.remove('bg-[#F5D85E]', 'text-[#080906]', 'font-bold');
+                        b.classList.add('text-[#B8B8AE]', 'font-medium');
+                    });
+                    btn.classList.add('bg-[#F5D85E]', 'text-[#080906]', 'font-bold');
+                    btn.classList.remove('text-[#B8B8AE]', 'font-medium');
+
+                    document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+                    document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+                });
+            });
+
             // Admin top-left icon and footer link triggers
             const openAdminModal = () => document.getElementById('admin-login-modal').classList.remove('hidden');
             document.getElementById('top-admin-trigger').addEventListener('click', openAdminModal);
@@ -855,7 +811,7 @@
                 showToast('Portfolio item saved successfully!');
             });
 
-            // Contact & Social Settings Form
+            // Contact & Social Settings Form (Fixed & Working)
             document.getElementById('contact-settings-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 settings.email = document.getElementById('setting-email').value;
@@ -864,7 +820,7 @@
                 settings.x = document.getElementById('setting-x').value;
                 saveState();
                 applySettings();
-                showToast('Contact & social settings updated!');
+                showToast('Contact & social settings updated successfully!');
             });
         }
 
