@@ -493,7 +493,7 @@
                 </div>
                 <div>
                     <h2 class="text-lg font-extrabold text-[#FFFFFF]">INFINOVA STUDIO ADMIN</h2>
-                    <p class="text-[11px] text-[#B8B8AE]">Manage Social Links, Contacts & Portfolio Items</p>
+                    <p class="text-[11px] text-[#B8B8AE]">Manage Social Links, Contacts & Portfolio Items (Firebase Connected)</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -559,7 +559,7 @@
                                 <input type="url" id="setting-insta" required class="w-full px-4 py-3 bg-[#080906] border border-[#39371C] rounded-custom text-[#FFFFFF] text-sm" placeholder="https://instagram.com/...">
                             </div>
                         </div>
-                        <button type="submit" class="bg-[#F5D85E] text-[#080906] px-8 py-3 rounded-custom font-bold text-sm hover:bg-[#D4B943]">Save Settings</button>
+                        <button type="submit" class="bg-[#F5D85E] text-[#080906] px-8 py-3 rounded-custom font-bold text-sm hover:bg-[#D4B943]">Save Settings to Firebase</button>
                     </form>
                 </div>
             </main>
@@ -610,7 +610,38 @@
         <span id="toast-message" class="text-sm font-bold">Success!</span>
     </div>
 
-    <script>
+    <!-- Firebase & App Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { 
+            getFirestore, 
+            collection, 
+            getDocs, 
+            addDoc, 
+            updateDoc, 
+            deleteDoc, 
+            doc, 
+            setDoc, 
+            getDoc 
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-6gTctQC0jfmrC2mOYjKpsbbb6cIiLxU",
+            authDomain: "infinova-studio.firebaseapp.com",
+            projectId: "infinova-studio",
+            storageBucket: "infinova-studio.firebasestorage.app",
+            messagingSenderId: "779976621454",
+            appId: "1:779976621454:web:186928ee7253e30d84f8df",
+            measurementId: "G-7N07Y7L4FM"
+        };
+
+        // Initialize Firebase & Firestore
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
         const defaultPortfolio = [
             { id: '1', title: 'High CTR Gaming Masterpiece', category: 'Thumbnails', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80', description: 'Crafted for a top gaming channel.' },
             { id: '2', title: 'Tech Podcast Viral Thumbnail', category: 'Thumbnails', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', description: 'Bold expressive visuals and high contrast typography.' },
@@ -623,19 +654,53 @@
             insta: 'https://instagram.com'
         };
 
-        let portfolio = JSON.parse(localStorage.getItem('infinova_portfolio')) || defaultPortfolio;
-        let settings = JSON.parse(localStorage.getItem('infinova_settings')) || defaultSettings;
+        let portfolio = [];
+        let settings = defaultSettings;
 
-        function saveState() {
-            localStorage.setItem('infinova_portfolio', JSON.stringify(portfolio));
-            localStorage.setItem('infinova_settings', JSON.stringify(settings));
-        }
+        // Load data from Firestore on startup
+        async function loadDataFromFirebase() {
+            try {
+                // Fetch portfolio collection
+                const querySnapshot = await getDocs(collection(db, "portfolio"));
+                if (querySnapshot.empty) {
+                    // Seed defaults if empty
+                    for (const item of defaultPortfolio) {
+                        await addDoc(collection(db, "portfolio"), {
+                            title: item.title,
+                            category: item.category,
+                            image: item.image,
+                            description: item.description
+                        });
+                    }
+                    const freshSnapshot = await getDocs(collection(db, "portfolio"));
+                    portfolio = freshSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                } else {
+                    portfolio = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                }
 
-        window.addEventListener('DOMContentLoaded', () => {
+                // Fetch settings document
+                const settingsDocRef = doc(db, "settings", "config");
+                const settingsSnap = await getDoc(settingsDocRef);
+                if (settingsSnap.exists()) {
+                    settings = settingsSnap.data();
+                } else {
+                    await setDoc(settingsDocRef, defaultSettings);
+                    settings = defaultSettings;
+                }
+            } catch (error) {
+                console.error("Error loading data from Firestore, using local defaults:", error);
+                portfolio = defaultPortfolio;
+                settings = defaultSettings;
+            }
+
             applySettings();
             renderPortfolioGrid('all');
             renderLiveMarquee();
             renderAdminTable();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDataFromFirebase();
             initListeners();
         });
 
@@ -687,6 +752,7 @@
         function renderLiveMarquee() {
             const container = document.getElementById('live-marquee-container');
             container.innerHTML = '';
+            if (portfolio.length === 0) return;
             const itemsToDisplay = [...portfolio, ...portfolio];
 
             itemsToDisplay.forEach(item => {
@@ -704,7 +770,7 @@
             });
         }
 
-        function openLightbox(id) {
+        window.openLightbox = function(id) {
             const item = portfolio.find(p => p.id === id);
             if (!item) return;
             document.getElementById('lightbox-img').src = item.image;
@@ -799,8 +865,8 @@
                 document.getElementById('admin-dashboard').classList.add('hidden');
             });
 
-            // Portfolio Form Submission
-            document.getElementById('admin-portfolio-form').addEventListener('submit', (e) => {
+            // Portfolio Form Submission (Saves to Firestore)
+            document.getElementById('admin-portfolio-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const id = document.getElementById('modal-item-id').value;
                 const title = document.getElementById('modal-item-title').value;
@@ -808,30 +874,43 @@
                 const image = document.getElementById('modal-item-img').value;
                 const description = document.getElementById('modal-item-desc').value;
 
-                if (id) {
-                    const item = portfolio.find(p => p.id === id);
-                    if (item) { item.title = title; item.category = category; item.image = image; item.description = description; }
-                } else {
-                    portfolio.unshift({ id: Date.now().toString(), title, category, image, description });
-                }
+                try {
+                    if (id) {
+                        const docRef = doc(db, "portfolio", id);
+                        await updateDoc(docRef, { title, category, image, description });
+                        const item = portfolio.find(p => p.id === id);
+                        if (item) { item.title = title; item.category = category; item.image = image; item.description = description; }
+                    } else {
+                        const docRef = await addDoc(collection(db, "portfolio"), { title, category, image, description });
+                        portfolio.unshift({ id: docRef.id, title, category, image, description });
+                    }
 
-                saveState();
-                renderPortfolioGrid();
-                renderLiveMarquee();
-                renderAdminTable();
-                closeAdminPortfolioModal();
-                showToast('Portfolio item saved successfully!');
+                    renderPortfolioGrid();
+                    renderLiveMarquee();
+                    renderAdminTable();
+                    closeAdminPortfolioModal();
+                    showToast('Portfolio item saved to Firebase!');
+                } catch (error) {
+                    console.error("Error saving to Firebase:", error);
+                    showToast('Error saving item. Check console.');
+                }
             });
 
-            // Contact & Social Settings Form
-            document.getElementById('contact-settings-form').addEventListener('submit', (e) => {
+            // Contact & Social Settings Form (Saves to Firestore)
+            document.getElementById('contact-settings-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 settings.email = document.getElementById('setting-email').value;
                 settings.whatsapp = document.getElementById('setting-whatsapp').value;
                 settings.insta = document.getElementById('setting-insta').value;
-                saveState();
-                applySettings();
-                showToast('Contact & social settings updated successfully!');
+
+                try {
+                    await setDoc(doc(db, "settings", "config"), settings);
+                    applySettings();
+                    showToast('Contact & social settings updated on Firebase!');
+                } catch (error) {
+                    console.error("Error updating settings:", error);
+                    showToast('Error saving settings to Firebase.');
+                }
             });
         }
 
@@ -854,7 +933,7 @@
             });
         }
 
-        function openNewPortfolioModal() {
+        window.openNewPortfolioModal = function() {
             document.getElementById('admin-modal-title').textContent = 'Add Portfolio Item';
             document.getElementById('modal-item-id').value = '';
             document.getElementById('modal-item-title').value = '';
@@ -863,7 +942,7 @@
             document.getElementById('admin-portfolio-modal').classList.remove('hidden');
         }
 
-        function editPortfolioItem(id) {
+        window.editPortfolioItem = function(id) {
             const item = portfolio.find(p => p.id === id);
             if (!item) return;
             document.getElementById('admin-modal-title').textContent = 'Edit Portfolio Item';
@@ -875,18 +954,23 @@
             document.getElementById('admin-portfolio-modal').classList.remove('hidden');
         }
 
-        function closeAdminPortfolioModal() {
+        window.closeAdminPortfolioModal = function() {
             document.getElementById('admin-portfolio-modal').classList.add('hidden');
         }
 
-        function deletePortfolioItem(id) {
-            if (confirm('Are you sure you want to delete this portfolio item?')) {
-                portfolio = portfolio.filter(p => p.id !== id);
-                saveState();
-                renderPortfolioGrid();
-                renderLiveMarquee();
-                renderAdminTable();
-                showToast('Portfolio item deleted.');
+        window.deletePortfolioItem = async function(id) {
+            if (confirm('Are you sure you want to delete this portfolio item from Firebase?')) {
+                try {
+                    await deleteDoc(doc(db, "portfolio", id));
+                    portfolio = portfolio.filter(p => p.id !== id);
+                    renderPortfolioGrid();
+                    renderLiveMarquee();
+                    renderAdminTable();
+                    showToast('Portfolio item deleted from Firebase.');
+                } catch (error) {
+                    console.error("Error deleting from Firebase:", error);
+                    showToast('Error deleting item.');
+                }
             }
         }
 
